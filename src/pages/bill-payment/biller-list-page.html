@@ -1,0 +1,19 @@
+<div class="{{pageStyle}}">
+    <div class="clearfix"></div>
+    <h3 class="page-title">{{ 'label.billerList' | translate }}</h3>
+    <div class="button-panel">
+        <div class="toggler">
+            <a class="btn btn-circle btn-default btn-pib-rib" (click)="gotoAddBillPaymentPage()" *ngIf="isShowAddBiller"><i class="fa fa-plus"></i>{{'lbl.addbiller' | translate}}</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <alert-message #alertMessage [title]="alertConfig.title" [type]="alertConfig.type" [message]="alertConfig.message" [option]="alertConfig.option"></alert-message>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <biller-accordian></biller-accordian>
+        </div>
+    </div>
+</div>

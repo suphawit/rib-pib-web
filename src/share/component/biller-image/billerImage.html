@@ -1,0 +1,11 @@
+<div class="icon-circle">
+<img 
+    class="user-pic rounded" 
+    [ngClass]="{ 'biller-hidden': success }"
+    [src]="defaultpath" />
+<img 
+    class="user-pic rounded" 
+    [ngClass]="{ 'biller-hidden': !success }" 
+    (load)="loadSuccess()" 
+    [src]="srcpath" />
+</div>

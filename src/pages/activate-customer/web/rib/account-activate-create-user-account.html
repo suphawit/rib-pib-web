@@ -1,0 +1,82 @@
+<form [formGroup]="createUserAccountForm" class="form-horizontal" ><!--autocomplete="off" -->
+    
+    <div class="form-group">
+        <div class="row">
+            <div class="col-sm-12">
+                <label>
+                    {{'input.username' | translate}}
+                </label>
+                <span class="required" aria-required="true"> * </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <input type="text" formControlName="username" class="form-control input-xlarge" autofocus name="username" id="username" placeholder="" autocomplete="off" />
+            </div>
+        </div>
+    </div>
+    
+    <div *ngIf="isShowSuggest" class="form-group">
+        <div class="row">
+            <div class="col-md-offset-7 col-md-5">
+                <div class="control-label">{{'label.usernameSuggestion' | translate}}</div>
+                <ul>
+                    <li *ngFor="let nameEach of nameSuggestion">
+                        <label> <input type="radio" value="{{nameEach}}" (click)="onclickNameSuggestion(nameEach)" name="username"/> {{nameEach}} </label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="form-group" formControlValidator [control]="createUserAccountForm.controls.password" [submitted]="submitted">
+        <div class="row">
+            <div class="col-sm-12">
+                <label>
+                    {{'input.password' | translate}}
+                </label>
+                <span class="required" aria-required="true"> * </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <input type="password" class="form-control input-xlarge" id="password" formControlName="password" placeholder="" /> 
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="form-group " [ngClass]="{'has-error' : createUserAccountForm.hasError('mismatchedPasswords')}">
+        <div class="row">
+            <div class="col-sm-12">
+                <label>
+                    {{'input.confirmPassword' | translate}}
+                </label>
+                <span class="required" aria-required="true"> * </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <input type="password" class="form-control input-xlarge" id="confirmPassword" 
+                    formControlName="confirmPassword" placeholder="" />
+                <div class="help-block with-errors"></div>
+                <div class="help-block with-errors" *ngIf="createUserAccountForm.hasError('mismatchedPasswords')">{{'validation.compareTo'|translate}}</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="form-actions">
+        <div class="col-md-offset-3 col-md-9">
+            <div class="web-btn-section">
+                <button type="button" class="btn btn-outline kkppurple button-next" [disabled]="isDisableSubmitBtn" (click)="onClickSubmitCreateUserAccount()"> {{'button.confirm' | translate}} <i class="fa fa-angle-right"></i></button><!--(click)="onClickSubmitCreateUserAccount()""-->
+            </div>
+        </div>
+    </div>
+
+    <!--<div class="row">
+        <div class="col-sm-4 offset-sm-4">
+            <pre>{{createUserAccountForm.value | json}}, {{isShowSuggest | json}}, {{username | json}}</pre>
+        </div>
+    </div>-->
+</form>
+<bs-modal-message #messageModal [body]="messageModalData.body" [title]="messageModalData.title" [size]="messageModalData.size" [config]="messageModalData.config" (onHidden)="onModalHidden($event)"></bs-modal-message>

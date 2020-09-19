@@ -1,0 +1,56 @@
+language-settings-selector {
+    $primary-color:#7170B3;
+    $color-white:#fff;
+    $color-gray:#F8F8F8;
+    $color-textgray:#333;
+    $background-color:#009ac7;
+    $textblue-color:#0073b7;
+
+    .title {
+        font-size:20px;
+        font-style:bold
+    }
+
+    .web-panel-heading {
+        color:$color-white;
+        font-size:18px;
+        background-color:$color-kk-blue
+    }
+
+    .padding-top {
+        padding:30px
+    }
+
+    .padding-buttom {
+        padding-bottom:10px
+    }
+
+    .ft-btn-date {
+        background:$background-color;
+        border:3px solid $background-color;
+        width:49%;
+        height:25px;
+        color:#fff;
+        display:inline-block;
+        font-weight:400;
+        text-align:center;
+        vertical-align:middle;
+        touch-action:manipulation;
+        cursor:pointer;
+        border-radius:25px!important;
+        overflow:hidden
+    }
+
+    .ft-btn-date:hover {
+        background:#9CCEDE;
+        border:3px solid #9CCEDE
+    }
+
+    .ft-btn-date.active {
+        background:$textblue-color;
+        border:3px solid $textblue-color;
+        color:#fff;
+        width:49%;
+        height:25px
+    }
+}

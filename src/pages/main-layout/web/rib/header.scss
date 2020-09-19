@@ -1,0 +1,47 @@
+header-web-rib {
+    .dropdown-language {
+        background-color: $color-kk-blue!important;
+        color: #fff!important;
+        height: 65px!important;
+        display: inline-block!important;
+        padding: 20px 3px 25px 7px!important;
+    }
+
+    .dropdown-language:hover,.dropdown-language:active,.dropdown-language:focus {
+        background-color: none!important;
+    }
+
+    .title {
+        color: #fff;
+        font-family: 'Quark-light';
+        font-size: 50px;
+        font-style: bold;
+        color: red;
+    }
+
+    select {
+        border-width: 0!important;
+    }
+
+    .dropdown-style {
+        color: white;
+        padding-top: 20px;
+    }
+
+    .dropdown-menu-style {
+        max-width: 55px;
+        min-width: 50px;
+    }
+
+    .dropdown-menu > li > a {
+        padding:none;
+    }
+
+    .notification-highlight{
+        background-color: #f4f8ff;
+    }
+    .page-header.navbar .page-logo .logo-default {
+        margin: 0;
+        height: 65px;
+    }
+}

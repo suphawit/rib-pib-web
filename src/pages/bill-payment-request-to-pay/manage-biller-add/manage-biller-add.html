@@ -1,0 +1,261 @@
+<div class="clearfix"></div>
+<h3 class="page-title">{{ titlePageBiller | translate}}</h3>
+<div class="portlet" [style.padding.px]="5">
+    <div class="row">
+        <div class="col-md-12">
+            <alert-message #alertMessage [type]="alertConfig.type" [message]="alertConfig.message"></alert-message>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <step-wizard [data]="stepWizard.input.data" [style]="stepWizard.input.style" [step]="stepWizard.input.step"></step-wizard>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="portlet light " id="form_wizard_1">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class=" icon-layers font-kkppurple"></i>
+                        <span class="caption-subject font-kkppurple sbold uppercase">{{ stepPageBiller | translate}}</span>
+
+                    </div>
+                </div>
+                <div class="portlet-body form">
+                    <div class="col-md-12">
+                        <form class="form-horizontal" [formGroup]="form" novalidate>
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <label>
+                                            {{ 'label.accAliasName' | translate}}
+                                        </label>
+                                        <span class="required" aria-required="true"> * </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12" [ngClass]="{ 'has-error': formErrors.aliasName && submitted }">
+                                        <input 
+                                            type="text" 
+                                            formControlName="aliasName"
+                                            [(ngModel)]="aliasName"
+                                            class="form-control input-xlarge" 
+                                            placeholder=""
+                                            maxlength="20" 
+                                            required autocomplete="off" />
+                                        <span *ngIf="formErrors.aliasName && submitted" class="help-block">
+                                            <label>
+                                                {{formErrors.aliasName}}
+                                            </label>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <label>
+                                            {{ 'label.rightPanelbillerList' | translate}}
+                                        </label>
+                                        <span class="required" aria-required="true"> * </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12" [ngClass]="{ 'has-error': formErrors.billerSearch && submitted}">
+                                        <div class="input-group adv-search col-md-5 col-sm-8">
+                                            <input
+                                                (click)="collapsedSearch()"
+                                                formControlName="billerSearch"
+                                                [(ngModel)]="selectedBillerName" 
+                                                type="text" class="form-control" 
+                                                placeholder="{{'label.selectBiller' | translate}}" readonly/>
+                                            <div class="input-group-btn">
+                                                <div class="btn-group" role="group">
+                                                    <div class="dropdown dropdown-lg" dropdown>
+                                                        <button dropdownToggle type="button" class="btn btn-default dropdown-toggle" [ngClass]="{'disabled': isFromAddNewAfterPayBill}"(click)="collapsedSearch()">
+                                                            <span class="caret"></span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="isCollapsed && !isFromAddNewAfterPayBill" class="well well-sm">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-md-11 col-sm-11">
+                                                        <label>
+                                                            {{'label.filterCategory' | translate}}
+                                                        </label>
+                                                        <span class="required" aria-required="true"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-11 col-sm-11">
+                                                        <ng-select 
+                                                            [multiple]="true" 
+                                                            [items]="categories" 
+                                                            (selected)="selectedCategory($event)" 
+                                                            (removed)="removedCategory($event)"
+                                                            (typed)="typed($event)"
+                                                            placeholder="{{'label.select' | translate}}">
+                                                        </ng-select>
+                                                        <span *ngIf="categoryNoResult===true" class="help-block" style="color: #e73d4a;">
+                                                            <label>
+                                                                {{ 'label.billerNotFoundSearchAgain' | translate }}
+                                                            </label>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-md-11 col-sm-11">
+                                                        <label>
+                                                            {{ 'label.rightPanelbillerList' | translate}}
+                                                        </label>
+                                                        <span class="required" aria-required="true"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-11 col-sm-11">
+                                                        <input 
+                                                            class="form-control searchbill"
+                                                            [(ngModel)]="billerToken"
+                                                            [typeahead]="biller$"
+                                                            [typeaheadItemTemplate]="billerlistTemplate"
+                                                            [ngModelOptions]="{standalone: true}"
+                                                            (typeaheadOnSelect)="billerSelected($event)"
+                                                            (typeaheadNoResults)="changeBillerNoResult($event)"
+                                                            [typeaheadMinLength]="0"
+                                                            typeaheadOptionField="qname"
+                                                            typeaheadWaitMs="300"
+                                                            typeaheadOptionsLimit="500"
+                                                            placeholder="{{ 'label.searchbillername' | translate }}">
+                                                        <template #billerlistTemplate let-model="item" let-index="index" style="height: 250px !important" >
+                                                            <span *ngIf="translate.currentLang == 'en'">
+                                                                <h5 class="biller-profile-list-style">{{model.billerNameEn}}</h5>
+                                                                <h5 class="biller-profile-list-style">{{model.billerNameTh}}</h5>
+                                                            </span>
+                                                            <span *ngIf="translate.currentLang == 'th'">
+                                                                <h5 class="biller-profile-list-style">{{model.billerNameTh}}</h5>
+                                                                <h5 class="biller-profile-list-style">{{model.billerNameEn}}</h5>
+                                                            </span>
+                                                        </template>
+                                                        <span *ngIf="billerNoResult===true" class="help-block" style="color: #e73d4a;">
+                                                            <label>
+                                                                {{ 'label.billerNotFoundSearchAgain' | translate }}
+                                                            </label>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" *ngIf="showBillerCategory">
+                                <div class="row">
+                                    <div class="col-sm-12 ">
+                                        <label>
+                                            {{ 'label.billerCategory' | translate}}
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12" >
+                                        <input *ngIf="translate.currentLang == 'th'"
+                                            type="text" 
+                                            class="form-control input-xlarge" 
+                                            placeholder=""
+                                            value="{{selectedBillerProfile.categoryTh}}"
+                                            maxlength="20" 
+                                            disabled
+                                            required autocomplete="off" />
+                                        <input *ngIf="translate.currentLang == 'en'"
+                                            type="text" 
+                                            class="form-control input-xlarge" 
+                                            placeholder=""
+                                            value="{{selectedBillerProfile.categoryEn}}"
+                                            maxlength="20" 
+                                            disabled
+                                            required autocomplete="off" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" *ngIf="(showBillerCategory && selectedBillerProfile.promptPayBillerId)">
+                                <div class="row">
+                                    <div class="col-sm-12 ">
+                                        <label>
+                                            {{ 'label.billerId' | translate}}
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12" >
+                                        <input
+                                            type="text" 
+                                            class="form-control input-xlarge" 
+                                            placeholder=""
+                                            value="{{selectedBillerProfile.promptPayBillerId}}"
+                                            maxlength="20" 
+                                            disabled
+                                            required autocomplete="off" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" 
+                                *ngFor="let refno of form.get('refNos').controls; let i = index"
+                                formArrayName="refNos">
+                                <div class="row">
+                                    <div class="col-sm-12 ">
+                                        <label *ngIf="translate.currentLang == 'th'">
+                                            {{ selectedBillerProfile.refNoList[i].refTextTh }}
+                                        </label>
+                                        <label *ngIf="translate.currentLang == 'en'">
+                                            {{ selectedBillerProfile.refNoList[i].refTextEn }}
+                                        </label>
+                                        <span class="required" aria-required="true"> * </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 " 
+                                        [ngClass]="{ 'has-error': !refno.valid && submitted && !isFromAddNewAfterPayBill}" 
+                                        formGroupName="{{ i }}">
+                                        <input
+                                            type="text"
+                                            class="form-control input-xlarge" 
+                                            formControlName = "refinfo"
+                                            placeholder=""
+                                            [(ngModel)]="selectedBillerProfile.refNoList[i].value"
+                                            (keyup)="onKeyupRefno($event)" 
+                                            required trim autocomplete="off"/>
+                                        <span *ngIf="!refno.valid && submitted && !isFromAddNewAfterPayBill" class="help-block">
+                                            <label>
+                                                {{ 'label.Required' | translate }}
+                                            </label>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <div class="row">
+                                    <div class="col-md-offset-3 col-sm-offset-3 col-md-9 col-sm-9">
+                                        <button type="button" class="btn btn-outline btn-default" (click)="onClickBack()">
+                                            <i class="fa fa-angle-left"></i> {{ 'button.back' | translate}}</button>
+                                        <button type="submit" class="btn btn-outline kkppurple button-next" (click)="onClickSubmit(form.value, form.valid)"> {{'button.next' | translate}}
+                                            <i class="fa fa-angle-right"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

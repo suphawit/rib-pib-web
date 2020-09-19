@@ -1,0 +1,10 @@
+biller-list{
+    .rib-web {
+        biller-accordian{
+            .panel-heading {
+                @include gradient-radial($color-kkp-purple, $color-kkp-purple);
+                border-color: $color-kkp-purple;
+            }
+        }
+    }
+}

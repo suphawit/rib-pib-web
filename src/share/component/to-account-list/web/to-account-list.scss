@@ -1,0 +1,52 @@
+.panel-custom {
+    .panel-body {
+        padding:0!important
+    }
+
+    .panel-default > .panel-heading a {
+        color:#fff
+    }
+
+    .panel-heading .panel-title {
+        font-size:15px!important
+    }
+
+    .panel-title .glyphicon {
+        font-size:14px!important;
+        top:3px!important
+    }
+
+    .panel-group .panel {
+        margin-bottom:5px
+    }
+
+    .panel-default > .panel-heading {
+        background-image:none;
+        color:#fff;
+        padding-top:6px!important;
+        padding-bottom:6px!important
+    }
+
+    .table {
+        margin-bottom:0!important
+    }
+}
+
+.pib-web {
+    .panel-default > .panel-heading {
+        background-color:#6e6e6e!important
+    }
+}
+
+.rib-web {
+    .panel-default > .panel-heading {
+        background-color:#594F74!important;
+        border-color:#594F74!important;
+    }
+}
+to-account-list{
+    .icon-c20:before {
+        line-height: 31px;
+        margin-left: 2px;
+    }
+}

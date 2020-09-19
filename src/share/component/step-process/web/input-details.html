@@ -1,0 +1,179 @@
+<div class="portlet light nopadding">
+    <div class="portlet-body form">
+        <form class="input-details-form {{ settings.styleClass }}" #form="ngForm" novalidate>
+            <input type="hidden" id="txnId" name="txnId" [(ngModel)]="model.txnId" #txnId="ngModel" />
+            <input type="hidden" id="txnMasId" name="txnMasId" [(ngModel)]="model.txnMasId" #txnMasId="ngModel" />
+            <input type="hidden" id="editType" name="editType" [(ngModel)]="model.editType" #editType="ngModel" />
+            <div class="form-group col-md-12" [ngClass]="{ 'has-error': fromAccount.accNo === undefined && submitted }">
+			    <label>{{ 'lbl.transferFrom' | translate }} <span class="required"> * </span> </label>
+                <div>
+                    <input type="text" class="form-control" name="fromAccount" placeholder="{{ fromAccount.accNo !== undefined ? fromAccount.getShortDescDisplay() : '' }}" disabled="">
+                    <span *ngIf="fromAccount.accNo === undefined && submitted" class="help-block">{{ 'label.Required' | strformat:['lbl.transferFrom'] }}</span>
+                </div>
+            </div>
+	        <div class="form-group col-md-12" [ngClass]="{ 'has-error': toAccount.accNo === undefined && submitted }">
+			    <label>{{ 'lbl.transferTo' | translate }} <span class="required"> * </span> </label>
+			    <div>
+				    <input type="text" class="form-control" name="toAccount" placeholder="{{ toAccount.accNo !== undefined ? toAccount.getShortDescDisplay() : '' }}" disabled="">
+				    <span *ngIf="toAccount.accNo === undefined && submitted" class="help-block">{{ 'label.Required' | strformat:['lbl.transferTo'] }}</span> 
+				</div>
+		    </div>
+		    <div class="form-group col-md-12" [ngClass]="{ 'has-error': amount.errors && (amount.dirty || amount.touched || submitted) }">
+			    <label>{{ 'lbl.amount' | translate }} <span class="required"> * </span> </label>
+			    <div>
+			        <div class="input-group">
+					    <input type="text" id="amount" name="amount" class="form-control text-right" [(ngModel)]="model.amount" #amount="ngModel" [min]="0.01" autocomplete="off" currencyFormatter required />
+					    <span class="input-group-addon">
+					        {{ 'lbl.baht' | translate }}
+						</span>
+				    </div>
+                    <span *ngIf="amount.errors && (amount.dirty || amount.touched || submitted)" class="help-block">
+                        <label *ngIf="amount.errors.required || amount.errors.min">
+                            {{ 'label.Required' | strformat:['lbl.amount'] }}
+                        </label>
+                    </span>
+		        </div>
+			</div>
+		    <div *ngIf="(fromAccount.accNo === undefined || fromAccount.allowSchedule)" class="form-group col-md-12" [ngClass]="{ 'has-error': transferDate.errors && (transferDate.dirty || transferDate.touched || submitted) }"> 
+                <label>{{ 'lbl.transactionDate' | translate }} </label>
+                <div>
+				    <div class="input-group input-large date date-picker" [ngClass]="{'removeDatePicker' : isTodayOnly}">
+						<input type="hidden" class="form-control" name="transferDate" [(ngModel)]="model.transferDate" #transferDate="ngModel" />
+                        <ng2-datepicker [(date)]="dt" (onSelect)="onSelect($event)" dateFormat="dddd D MMMM YYYY" [rangeStart]="minDate" 
+                            [rangeEnd]="maxDate" [disabled]="true" [accentColor]="'#594F74'" [placeholder]="''" [dayNames]="dateOptions.dayShortNames | multiTranslate"
+                            [months]="dateOptions.monthNames | multiTranslate" [defaultLang]="translate.currentLang" [cancelText]="'btn.close' | translate">
+                        </ng2-datepicker>
+                        <span *ngIf="transferDate.errors && (transferDate.dirty || transferDate.touched || submitted)" class="help-block">
+                             <label *ngIf="transferDate.errors.required">
+                                {{ 'label.Required' | strformat:['lbl.transferDate'] }}
+                            </label>
+                        </span>
+					</div>
+			    </div>
+            </div>
+
+            <div class="form-group col-md-12" *ngIf="fromAccount.accNo !== undefined && !fromAccount.allowSchedule">    
+                <label>{{ 'lbl.recvDate' | translate }} </label>   
+                <div>
+                    {{ model.transferDate }}
+                </div>
+            </div>
+
+		    <div *ngIf="(fromAccount.accNo === undefined || fromAccount.allowSchedule ) && isShowRecurring" class="form-group col-md-12">
+			    <label>{{ 'lbl.recurringType' | translate }}</label>
+		        <div>
+			        <div class="mt-radio-inline">                        
+					    <label class="mt-radio" *ngFor="let recType of recurringTypes;trackBy: trackById">
+						    <input type="radio" name="recurringType" [(ngModel)]="model.recurringType" [value]="recType.value" [disabled]="model.editType == '0'"
+                                (change)="onRecTypeChange(model.recurringType)" #recurringType="ngModel">&nbsp;{{ recType.display | translate}}
+                            <span></span>
+					    </label>
+			        </div>
+                    <div *ngIf="isReccuring" class="form-group col-md-12" style="margin-bottom:0px!important;padding-bottom:0px!important">
+                        <div class="row">
+                            <div class="form-group col-md-6" [ngClass]="{ 'has-error': scheduleType.errors && (scheduleType.dirty || scheduleType.touched || submitted) }">
+                                <label>{{ 'lbl.frequency' | translate }}</label>
+                                <div>
+                                    <select class="form-control" name="scheduleType" [(ngModel)]="model.scheduleType" #scheduleType="ngModel" [min]="1">
+                                        <option *ngFor="let schedType of scheduleTypes;trackBy: trackById" [value]="schedType.schedTypeId" [selected]="model.scheduleType == schedType.schedTypeId">{{ schedType.desc }}</option>
+                                    </select>
+                                    <span *ngIf="scheduleType.errors && (scheduleType.dirty || scheduleType.touched || submitted)" class="help-block">
+                                        <label *ngIf="scheduleType.errors?.min">{{ 'label.Required' | strformat:['lbl.frequency'] }}</label>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6" [ngClass]="{ 'has-error': recurringTime.errors && (recurringTime.dirty || recurringTime.touched || submitted) }">
+                                <label>{{ 'lbl.recurringTime' | translate }}</label>
+                                <div>
+                                    <select class="form-control" name="recurringTime" [(ngModel)]="model.recurringTime" #recurringTime="ngModel" [min]="1">
+                                        <option *ngFor="let recTime of recurringTimes;trackBy: trackById" [value]="recTime.time" [selected]="model.recurringTime == recTime.time">
+                                            {{ recTime.desc }}
+                                        </option>                                        
+                                    </select>
+                                    <span *ngIf="recurringTime.errors && (recurringTime.dirty || recurringTime.touched || submitted)" class="help-block">
+                                        <label *ngIf="recurringTime.errors?.min">{{ 'label.Required' | strformat:['lbl.recurringTime'] }}</label>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>						
+			    </div>
+	        </div>
+            <div *ngIf="toAccount?.category?.catId !== 0">
+                <div class="form-group col-md-12">
+                    <label>{{ 'lbl.notifyReceiver' | translate }}</label>
+                </div>
+                <div class="form-group col-md-12" [ngClass]="{ 'has-error': emailAddress.errors && (emailAddress.dirty || emailAddress.touched || submitted) }">
+                    <label>{{ 'lbl.notifyEmailAddress' | translate }}</label>
+                    <div>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <input type="checkbox" id="cbEmail" (click)="onEmailCheckedChanged($event)" [checked]="!disabledEmail"/>
+                                <span></span>
+                            </span>
+                            <input type="text" id="emailAddress" class="form-control" maxlength="255" name="emailAddress" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                                [(ngModel)]="model.emailAddress" (blur)="onEmailTextChanged($event)" #emailAddress="ngModel" [disabled]="disabledEmail" [required]="!disabledEmail" autocomplete="off" />
+                        </div>
+                        <span *ngIf="emailAddress.errors && (emailAddress.dirty || emailAddress.touched || submitted)" class="help-block">
+                            <label *ngIf="emailAddress.errors.required">
+                                {{ 'label.Required' | strformat:['lbl.notifyEmailAddress'] }}
+                            </label>
+                            <label *ngIf="emailAddress.errors.pattern">
+                                {{ 'valErr.invalid' | strformat:['lbl.notifyEmailAddress'] }}
+                            </label>
+                        </span>
+                    </div>
+	            </div>
+                <div class="form-group col-md-12" [ngClass]="{ 'has-error': mobileNumber.errors && (mobileNumber.dirty || mobileNumber.touched || submitted) }">
+                    <label>{{ 'lbl.notifySMS' | translate }}</label>
+                    <div>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <input type="checkbox" id="cbMobile" (click)="onMobileCheckedChanged($event)" [checked]="!disabledMobile"/>
+                                <span></span>
+                            </span>
+                            <input type="text" id="mobileNumber" class="form-control" maxlength="10" name="mobileNumber" [(ngModel)]="model.mobileNumber" 
+                                (blur)="onMobileTextChanged($event)" #mobileNumber="ngModel" [disabled]="disabledMobile" [required]="!disabledMobile" 
+                                onlyNumber="true" pattern="^\(?([0]{1}[0-9]{2})\)?([0-9]{3})([0-9]{4})$" autocomplete="off" />
+                            <input type="hidden" name="notifyLanguage" [(ngModel)]="model.notifyLanguage" #notifyLanguage="ngModel" />
+                            <div class="input-group-btn" dropdown>
+                                <button id="btnLanguage" type="button" class="btn kkp-purple" style="width:80px!important" dropdownToggle>
+                                    {{ model.notifyLanguageDisplay | translate }}
+                                    <i class="fa fa-angle-down"></i>
+                                </button>
+                                <ul *dropdownMenu role="menu" class="dropdown-menu pull-right" aria-labelledby="btnLanguage">
+                                    <li role="menuitem">
+                                        <a>{{ 'lbl.notifyLanguage' | translate }}</a>
+                                    </li>
+                                    <li class="divider dropdown-divider"></li>
+                                    <li role="menuitem" *ngFor="let lang of notifyLanguages" (click)="onLanguageSelected(lang.value)">
+                                        <a href="javascript:;"> {{ lang.display | translate }} </a>
+                                    </li>
+                                </ul>
+                            </div>                        
+                        </div>	
+                        <span *ngIf="mobileNumber.errors && (mobileNumber.dirty || mobileNumber.touched || submitted)" class="help-block">
+                            <label *ngIf="mobileNumber.errors.required">
+                                {{ 'label.Required' | strformat:['lbl.notifySMS'] }}
+                            </label>
+                            <label *ngIf="mobileNumber.errors.pattern">
+                                {{ 'valErr.invalid' | strformat:['lbl.mobileNumber'] }}
+                            </label>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-md-12">
+                <label>{{ 'lbl.note' | translate }}</label>
+                <div>
+                    <textarea class="form-control" rows="3" id="note" maxlength="40" name="note" [(ngModel)]="model.note" #note="ngModel"></textarea>
+                </div>
+            </div>
+            <div class="col-md-offset-3 col-md-12">
+                <button class="btn btn-outline kkppurple button-next" (click)="goToNextStep(form.value, form.valid)"> {{ 'btn.next' | translate }}
+                    <i class="fa fa-angle-right"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

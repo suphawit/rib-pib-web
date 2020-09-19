@@ -1,0 +1,98 @@
+<div *ngIf="confirmAddExtAccountData != null">
+	<div class="clearfix"></div>
+	<h3 class="page-title">{{ titlePage | translate }}</h3>
+	<div class="row">
+		<div lass="col-md-12">
+			<alert-message #alertMessage [type]="type" [message]="message"></alert-message>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<step-wizard [data]="stepWizard.input.data" [style]="stepWizard.input.style" [step]="stepWizard.input.step"></step-wizard>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="portlet light " style="margin-top: 20px;">
+				<div class="portlet-title">
+					<div class="caption">
+						<i class=" icon-layers font-kkppurple"></i>
+						<span class="caption-subject font-kkppurple sbold uppercase">{{ otherAccountStep | translate}}</span>
+					</div>
+				</div>
+				<div class="portlet-body form">
+					<div class="blog-post-content">
+						<div class="portlet-body">
+							<div class="table-scrollable table-scrollable-borderless">
+								<table class="table table-light">
+									<tbody>
+										<tr>
+											<td class="col-md-3">{{'label.tdAliasName'|translate}}</td>
+											<td> {{confirmAddExtAccountData.acctAliasName}}</td>
+										</tr>
+										<tr>
+											<td class="col-md-3">{{'lbl.category'|translate}}</td>
+											<td> {{confirmAddExtAccountData.categoryName}}</td>
+										</tr>
+										<tr>
+											<td class="col-md-3">{{'label.type'|translate}}</td>
+											<td> {{confirmAddExtAccountData.anyIDTypeDesc}} </td>
+										</tr>
+										<tr *ngIf="confirmAddExtAccountData.bankName != null && confirmAddExtAccountData.bankName != '' ">
+											<td class="col-md-3">{{'lbl.bankName'|translate}}</td>
+											<td>
+												<table>
+													<tbody>
+														<tr>
+															<td class="fit">
+																<div class="icon-circle" [style.background-color]="bankCodeDataService.getBankCodeImagePropertiesByField(confirmAddExtAccountData.bankCode,'color')">
+																	<img class="user-pic rounded" style="width:30px" src="{{'assets/' + bankCodeDataService.getBankCodeImagePropertiesByField(confirmAddExtAccountData.bankCode,'url')}}">
+																</div>
+															</td>
+															<td style="padding-left: 10px">
+																{{confirmAddExtAccountData.bankName}}
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</td>
+										</tr>
+										<tr *ngIf="confirmAddExtAccountData.acctNo != null && confirmAddExtAccountData.acctNo != '' ">
+											<td class="col-md-3">{{confirmAddExtAccountData.anyIDTypeLabel}}</td>
+											<td>{{confirmAddExtAccountData.acctNo}}</td>
+										</tr>
+										<tr *ngIf="confirmAddExtAccountData.acctName != null && confirmAddExtAccountData.acctName != '' ">
+											<td class="col-md-3">{{'label.accName'|translate}}</td>
+											<td>{{confirmAddExtAccountData.acctName}}</td>
+										</tr>
+										<tr>
+											<td *ngIf="confirmAddExtAccountData.email != '' || confirmAddExtAccountData.mobile != '' ">{{'lbl.notifyReceiver'|translate}}</td>
+											<td>
+												<p class="no-gap" *ngIf="confirmAddExtAccountData.email != null && confirmAddExtAccountData.email != '' ">{{'lbl.notifyEmail'|translate}} : {{confirmAddExtAccountData.email}} </p>
+												<p class="no-gap" *ngIf="confirmAddExtAccountData.mobile != null && confirmAddExtAccountData.mobile != '' ">{{'lbl.notifySMS'|translate}} : {{confirmAddExtAccountData.mobile}} </p>
+												<p class="no-gap" *ngIf="confirmAddExtAccountData.mobile != null && confirmAddExtAccountData.mobile != '' ">{{'lbl.notifyLanguage'|translate}} : {{msgLangStr}}</p>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12" *ngIf="editOtherAcc === false && isRequireOtp === true">
+							<verify-otp [style]="verifyOTPStyle" [actionOTP]="verifyOTPAction" [responseCodeMainService]="responseCodeMainService" (requestOTPChanged)="requestOTPChanged($event)"
+							 (otpPass)="otpPass($event)"></verify-otp>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-offset-3 col-sm-offset-3 col-md-9 col-sm-9">
+							<a class="btn  btn-default" (click)="navigateBack()" [ngClass]="{'btn-outline ': pageStyle == 'rib-web'}"><i class="fa fa-angle-left"></i> {{'button.back'|translate}} </a>
+							<button type="button" class="btn btn-outline kkppurple button-next" [disabled]="(editOtherAcc === false && isRequireOtp === true) && (!isRequestOTP || OTPData.pin == '')"
+							 (click)="submitOTP()"> {{'button.confirm' | translate}} <i class="fa fa-angle-right"></i></button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

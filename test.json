@@ -1,0 +1,259 @@
+{
+    "version": 2,
+    "name": "RIB EDGE gateway",
+    "port": 8000,
+    "cache_ttl": "300s",
+    "timeout": "15000ms",
+    "timeout_as": "6000ms",
+    "host_as": "http://10.3.105.122:8090",
+    "path_as": "/FaceAPI/services/header",
+    "context_path": "/api",
+    "extra_config": {
+        "sssssgithub_com/utrack/gin-csrf": {
+            "cookie_store": "store",
+            "secret_key": "3333",
+            "path": "/",
+            "allow_domain": "http://localhost:8000"
+        },
+        "github_com/devopsfaith/krakend-httpsecure": {
+            "allowed_hosts": [],
+            "ssl_proxy_headers": {},
+            "browser_xss_filter": true,
+            "content_security_policy": "https://ebanking.kiatnakin.co.th/"
+        },
+        "github_com/devopsfaith/krakend-gologging": {
+            "level": "INFO",
+            "prefix": "[RIB]",
+            "syslog": false,
+            "stdout": true
+        },
+        "github_com/devopsfaith/krakend-metrics": {
+            "collection_time": "60s",
+            "proxy_disabled": false,
+            "router_disabled": false,
+            "backend_disabled": false,
+            "endpoint_disabled": false,
+            "listen_address": ":8090"
+        },
+        "github_com/devopsfaith/krakend-cors": {
+            "allow_origins": [
+                "*",
+                "http://192.168.99.100:3000",
+                "http://localhost:3000"
+            ],
+            "allow_methods": [
+                "POST",
+                "GET"
+            ],
+            "allow_headers": [
+                "Origin",
+                "Authorization",
+                "Content-Type",
+                "kk-application-id",
+                "kk-application-version",
+                "x-test-krakend",
+                "X-CSRF-TOKEN",
+                "X-Martian"
+            ],
+            "expose_headers": [
+                "Content-Length"
+            ],
+            "max_age": "12h",
+            "allow_credentials": false
+        }
+    },
+    "endpoints": [
+        {
+            "endpoint": "/v1/utility-service/{service_name}",
+            "method": "POST",
+            "headers_to_pass": [
+                "Authorization",
+                "Content-Type",
+                "X-CSRF-TOKEN",
+                "X-Martian"
+            ],
+            "output_encoding": "json",
+            "concurrent_calls": 1,
+            "backend": [
+                {
+                    "url_pattern": "/utility-service/{service_name}/",
+                    "encoding": "json",
+                    "extra_config": {
+                        "kkscm.kiatnakinbank.com/edge-service/devopsfaith/krakend/http": {
+                            "return_error_details": "response"
+                        },
+                        "kkscm.kiatnakinbank.com/edge-service/devopsfaith/krakend-ratelimit/juju/proxy": {
+                            "maxRate": 91,
+                            "capacity": 91
+                        }
+                    },
+                    "sd": "static",
+                    "host_as": "",
+                    "path_as": "",
+                    "secure": "none",
+                    "host": [
+                        "http://utility-service.rib:11111"
+                    ],
+                    "disable_host_sanitize": false,
+                    "is_collection": false,
+                    "target": ""
+                }
+            ],
+            "extra_config": {},
+            "querystring_params": [
+                "params"
+            ]
+        },
+        {
+            "endpoint": "/v1/utility-service/{service_name}",
+            "method": "POST",
+            "headers_to_pass": [
+                "Authorization",
+                "Content-Type",
+                "X-CSRF-TOKEN",
+                "X-Martian"
+            ],
+            "output_encoding": "json",
+            "concurrent_calls": 1,
+            "backend": [
+                {
+                    "url_pattern": "/utility-service/{service_name}/",
+                    "encoding": "json",
+                    "extra_config": {
+                        "kkscm.kiatnakinbank.com/edge-service/devopsfaith/krakend/http": {
+                            "return_error_details": "response"
+                        },
+                        "kkscm.kiatnakinbank.com/edge-service/devopsfaith/krakend-ratelimit/juju/proxy": {
+                            "maxRate": 91,
+                            "capacity": 91
+                        }
+                    },
+                    "sd": "static",
+                    "host_as": "",
+                    "path_as": "",
+                    "secure": "none",
+                    "host": [
+                        "http://utility-service.rib:11111"
+                    ],
+                    "disable_host_sanitize": false,
+                    "is_collection": false,
+                    "target": ""
+                }
+            ],
+            "extra_config": {},
+            "querystring_params": [
+                "params"
+            ]
+        },
+        {
+            "endpoint": "/v2/utility-service/{service_name}",
+            "method": "POST",
+            "headers_to_pass": [
+                "Authorization",
+                "Content-Type"
+            ],
+            "output_encoding": "json",
+            "concurrent_calls": 1,
+            "backend": [
+                {
+                    "url_pattern": "/utility-service/{service_name}/",
+                    "encoding": "json",
+                    "extra_config": {
+                        "kkscm.kiatnakinbank.com/edge-service/devopsfaith/krakend/http": {
+                            "return_error_details": "response"
+                        },
+                        "kkscm.kiatnakinbank.com/edge-service/devopsfaith/krakend-ratelimit/juju/proxy": {
+                            "maxRate": 91,
+                            "capacity": 91
+                        }
+                    },
+                    "sd": "static",
+                    "authen_server": "http://10.3.105.122:8090",
+                    "host": [
+                        "http://10.3.104.211:11111"
+                    ],
+                    "disable_host_sanitize": false,
+                    "is_collection": false,
+                    "target": ""
+                }
+            ],
+            "extra_config": {
+                "kkscm.kiatnakinbank.com/edge-service/devopsfaith/krakend/proxy": {
+                    "sequential": true
+                }
+            },
+            "querystring_params": [
+                "params"
+            ]
+        },
+        {
+            "endpoint": "/v3/FaceAPI",
+            "method": "POST",
+            "headers_to_pass": [
+                "Authorization",
+                "Content-Type"
+            ],
+            "output_encoding": "json",
+            "concurrent_calls": 1,
+            "backend": [
+                {
+                    "url_pattern": "/FaceAPI/services/recognition_test/",
+                    "encoding": "json",
+                    "extra_config": {
+                        "kkscm.kiatnakinbank.com/edge-service/devopsfaith/krakend/http": {
+                            "return_error_details": "response"
+                        },
+                        "kkscm.kiatnakinbank.com/edge-service/devopsfaith/krakend-ratelimit/juju/proxy": {
+                            "maxRate": 91,
+                            "capacity": 91
+                        }
+                    },
+                    "sd": "static",
+                    "authen_server": "http://10.3.105.122:8090",
+                    "host": [
+                        "http://localhost:8091/"
+                    ],
+                    "secure": "none",
+                    "disable_host_sanitize": false,
+                    "is_collection": false,
+                    "target": ""
+                }
+            ],
+            "extra_config": {
+                "kkscm.kiatnakinbank.com/edge-service/devopsfaith/krakend/proxy": {
+                    "sequential": true
+                }
+            },
+            "querystring_params": [
+                "params"
+            ]
+        },
+        {
+            "endpoint": "/auth",
+            "method": "POST",
+            "output_encoding": "json",
+            "concurrent_calls": 1,
+            "extra_config": {
+                "kkscm.kiatnakinbank.com/edge-service/devopsfaith/krakend/proxy": {
+                    "sequential": false
+                }
+            },
+            "backend": [
+                {
+                    "url_pattern": "/login",
+                    "encoding": "json",
+                    "extra_config": {},
+                    "sd": "static",
+                    "host": [
+                        "http://localhost:9096"
+                    ],
+                    "disable_host_sanitize": false
+                }
+            ]
+        }
+    ],
+    "output_encoding": "json",
+    "read_timeout": "100s",
+    "write_timeout": "100s",
+    "idle_timeout": "100s"
+}

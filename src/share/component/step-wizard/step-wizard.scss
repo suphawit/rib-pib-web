@@ -1,0 +1,149 @@
+step-wizard {
+    $border-pib-mobile: 2px solid $color-pib-purple;
+    $border-rib-web: 1px solid $color-kk-blue;
+    position: relative;
+
+    /*** Media query **/
+    // Phone
+    @media only screen and (max-width: 768px) {
+        .rib-web.stepWizard-label {
+            display: none;
+        }
+    }
+    /*** End Media query **/
+
+    .text-center {
+        text-align: center;
+    }
+    .stepWizard-row {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    .stepWizard-col {
+        display: inline-block;
+        position: relative;
+        width: auto;
+    }
+    .stepsActive, .stepsActive:hover {
+        border: none;
+        cursor: pointer;
+    }
+    .stepWizard-label {
+        margin-top: 10px;
+    }
+    [id^="stepWizardCanvasLine"]{
+        position: absolute;
+    }
+
+    /**** RIB web custom ****/
+    .rib-web{
+        .btn-circle {
+            margin: 0 auto;
+            padding: 6px 0;
+            width: 45px;
+            height: 45px;
+            font-size: 16px;
+            line-height: 2;
+            border-radius: 25px;
+        }
+        .stepWizard-col.active > .btn-circle, .stepWizard-col.active > .btn-circle:hover {
+            background-color: $color-kk-blue;
+            color: $color-white;
+        }
+        [id^="stepWizardCanvasLine"]{
+            background-color: $color-kk-blue;
+            top: 23px;
+            border-bottom: $border-rib-web;
+        }
+        .stepWizard-label {
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+        .stepWizard-label.active {
+            color: $color-kk-blue;
+        }
+        .fa-check {
+            display: none;
+        }
+    }
+    
+    /**** End RIB web custom ****/
+
+    /**** PIB mobile custom ****/
+    .pib-mobile {
+        .btn-circle {
+            width: 15px;
+            height: 15px;
+            counter-increment: step;
+            line-height: 5px;
+            border: $border-pib-mobile;
+            text-align: center;
+            margin: 0 auto;
+            border-radius: 100%;
+            background-color: $color-white;
+        }
+        .stepWizard-col.active > .btn-circle, .stepWizard-col.active > .btn-circle:hover {
+            background-color: $color-pib-purple;
+        }
+        [id^="stepWizardCanvasLine"]{
+            background-color: $color-pib-purple;
+            top: 7px;
+            border-bottom: $border-pib-mobile;
+        }
+        .stepWizard-label {
+            font-size: 1.2rem;
+            color: #999;
+            text-transform: uppercase;
+            /*font-family:'HelveticaNeue-Medium';*/
+            font-family:'Kiatnakin'
+        }
+        .fa-check {
+            display: none;
+        }
+        .stepWizard-label.active {
+            color: $color-pib-purple;
+        }
+    }
+    /**** End PIB mobile custom ****/
+
+    /**** PIB web custom ****/
+    .pib-web {
+        .btn-circle {
+            font-weight: 400;
+            font-size: 28px;
+            display: inline-block;
+            border-radius: 0;
+            width: auto;
+            height: auto;
+            border: 0;
+            background-color: $color-white;
+            padding: 0;
+            height: 31px;
+        }
+        [id^="stepWizardCanvasLine"]{
+            display: none;
+        }
+        .th .stepWizard-label {
+            font-size: 2.0rem;
+            display: inline-block;
+            text-transform: uppercase;
+        }
+        .en .stepWizard-label {
+            font-size: 1.6rem;
+            display: inline-block;
+            text-transform: uppercase;
+        }
+        .stepWizard-col {
+            text-align: left;
+            color: $color-pib-web-inactive;
+            border-bottom: 4px solid $color-pib-web-inactive;
+        }
+        .stepWizard-col.active {
+            color: $color-pib-web;
+            border-bottom: 4px solid $color-pib-web;
+        }
+    }
+    /**** End PIB web custom ****/
+
+}

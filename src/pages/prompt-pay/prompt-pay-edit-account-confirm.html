@@ -1,0 +1,63 @@
+<div  class="portlet">
+	<div class="clearfix"></div>
+	<h3 class="margin-bottom">{{'lbl.editKKpromptPay'|translate}}</h3>
+	<div class="row">
+		<div class="col-md-12">
+			<alert-message #alertMessage [type]="type" [message]="message" [option]="option"></alert-message>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col">
+			<step-wizard [data]="stepWizard.input.data" [style]="stepWizard.input.style" [step]="stepWizard.input.step"></step-wizard>
+		</div>
+	</div>
+	<div class="portlet light margin-top">
+		<div class="portlet-title">
+			<div class="caption">
+				<i class=" icon-layers font-kkppurple"></i>
+				<span class="caption-subject font-kkppurple sbold uppercase">{{'lbl.editKKPromptPaystep2of3'|translate}}</span>
+			</div>
+		</div>
+		<div class="portlet-body form">
+			<div class="blog-post-content">
+				<div class="portlet-body">
+					<div class="table-scrollable table-scrollable-borderless">
+						<table class="table table-light">
+							<tbody>
+								<tr>
+									<td class="col-md-3"> {{'lbl.connectBy'|translate}}</td>
+									<td>
+									<span>{{confirmEditPromptPayAccount.anyIDType?.desc}}</span> - {{confirmEditPromptPayAccount.anyIDValue}}</td>
+								</tr>
+								<tr>
+									<td class="col-md-3">{{'lbl.currentKKPromptPayAccount'|translate}}</td>
+									<td>{{confirmEditPromptPayAccount.fromAccountName}} - {{confirmEditPromptPayAccount.fromAccountNo}}</td>
+								</tr>
+								<tr>
+									<td class="col-md-3">{{'lbl.newKKPromptPayAccount'|translate}}</td>
+									<td>{{confirmEditPromptPayAccount.toAccountAliasName}} | {{confirmEditPromptPayAccount.toAccountNo}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="form-group form-group-control">
+				<div class="row">
+					<div class="col-md-Zoffset-3 col-md-12">
+						<verify-otp [style]="verifyOTPStyle" [actionOTP]="verifyOTPAction" [responseCodeMainService]="responseCodeMainService" (requestOTPChanged)="requestOTPChanged($event)"
+						(otpPass)="otpPass($event)"></verify-otp>
+					</div>
+				</div>
+			</div>
+			<div class="form-actions">
+				<div class="row">
+					<div class="col-md-Zoffset-3 col-md-9 text-align">
+						<a class="btn  btn-default" (click)="backToEditAccountPage()" [ngClass]="{'btn-outline ': stepwizardStyle == 'rib-web'}"><i class="fa fa-angle-left"></i> {{'button.back'|translate}} </a>
+						<button type="button" class="btn btn-outline kkppurple button-next" [disabled]="(!isRequestOTP || OTPData.pin == '')" (click)="goToEditAccountCompletePage()"> {{'button.confirm' | translate}} <i class="fa fa-angle-right"></i></button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,206 @@
+/* here you can put your own css to customize and override the theme */
+.bank-logo {
+max-width:30px;
+max-height:30px;
+margin-left:3px
+}
+
+.anyid-logo {
+width:30px;
+height:30px;
+text-align:center;
+font-size:20px;
+margin-left:3px;
+background-color:#009bc9;
+color:#fff
+}
+
+.margin-bottom-2 {
+margin-bottom:2px!important
+}
+
+.margin-bottom-5 {
+margin-bottom:5px!important
+}
+
+.margin-bottom-10 {
+margin-bottom:10px!important
+}
+
+.margin-bottom-15 {
+margin-bottom:15px!important
+}
+
+.margin-top-10 {
+margin-top:10px!important
+}
+
+.margin-top-15 {
+margin-top:15px!important
+}
+
+.margin-top-20 {
+margin-top:20px!important
+}
+
+.margin-top-30 {
+margin-top:30px!important
+}
+
+.margin-right-5 {
+margin-right:5px!important
+}
+
+.margin-right-15 {
+margin-right:15px!important
+}
+
+.margin-left-8 {
+margin-left:8px!important
+}
+
+.padding-top-2 {
+padding-top:2px!important
+}
+
+.padding-top-5 {
+padding-top:5px!important
+}
+
+.padding-top-10 {
+padding-top:10px!important
+}
+
+.padding-top-15 {
+padding-top:15px!important
+}
+
+.padding-top-20 {
+padding-top:20px!important
+}
+
+.padding-bottom-5 {
+padding-bottom:5px!important
+}
+
+.padding-left-2 {
+padding-left:2px!important
+}
+
+.padding-left-10 {
+padding-left:10px!important
+}
+
+.padding-left-15 {
+padding-left:15px!important
+}
+
+.padding-left-20 {
+padding-left:20px!important
+}
+
+.padding-right-5 {
+padding-right:5px!important
+}
+
+.panel-body.ghostwhite {
+background:#F8F8FF
+}
+
+.table-clickable tbody tr {
+cursor:hand;
+cursor:pointer
+}
+
+.table tbody tr.highlight td {
+background-color:#f9fcfe;
+color:#666;
+cursor:pointer!important
+}
+
+.table-fixed thead {
+width:97%
+}
+
+.wrap {
+margin:0;
+position:relative;
+max-height:310px;
+overflow:hidden;
+padding:0;
+width:100%
+}
+
+.inner {
+padding:0;
+max-height:310px;
+overflow-x:hidden;
+overflow-y:auto
+}
+
+.table-fixed thead,.table-fixed tbody,.table-fixed tr,.table-fixed td,.table-fixed th {
+display:block
+}
+
+.table-fixed.tb-category table {
+border-top:0 none
+}
+
+.table-fixed.tb-category tbody {
+border-top:0 none;
+max-height:280px
+}
+
+.table-condensed {
+margin-bottom:0
+}
+
+.table-condensed th,.table-condensed td {
+padding:8px!important
+}
+
+.border-bottom {
+border-bottom:1px solid #ddd
+}
+
+.nowrap {
+white-space:nowrap!important
+}
+
+.wordwrap {
+display:block;
+white-space:pre-wrap;
+white-space:-moz-pre-wrap;
+white-space:-pre-wrap;
+white-space:-o-pre-wrap;
+word-wrap:break-word
+}
+
+.nopadding {
+padding-top:0!important;
+padding-bottom:0!important;
+margin-top:0!important;
+margin-bottom:0!important
+}
+
+.input-details-form .form-group {
+margin-bottom:10px!important
+}
+
+.input-details-form .mt-checkbox-inline, .mt-radio-inline {
+padding:5px 0!important
+}
+
+.help-block {
+font-size:12px!important;
+margin-top:0;
+margin-bottom:0
+}
+
+.max-width-134 {
+width:134px!important
+}
+
+.datepicker .datepicker__float__left > button {
+padding:8px 12px!important;
+}

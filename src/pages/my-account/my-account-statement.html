@@ -1,0 +1,71 @@
+<!-- BEGIN Portlet PORTLET-->
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-file-text-o font-purple"></i>
+            <span class="bold font-purple uppercase">{{'lbl.transaction' | translate}}</span>
+        </div>	
+    </div>
+    <div class="portlet-body" >
+        <div class="table-toolbar">
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <div class="pull-right">
+                        <a class="btn btn-outline kkppurple" *ngIf="myAcctType !== constants.ACCOUNT_TYPE_TD && permissionManage.viewStatement == true" (click)="viewStatement()">
+                            {{'btn.view' | translate}}
+                        </a>
+                        <span *ngIf="isDesktop && !noData">
+                            <a class="btn btn-outline kkppurple"   *ngIf="permissionManage.printStatement == true" (click)="downloadStatement()">
+                                {{'btn.print' | translate}}
+                            </a>
+                         </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="table-toolbar" *ngIf="myAcctType !== constants.ACCOUNT_TYPE_TD">
+            <div class="row">
+                <div class="col-md-7 col-sm-7">
+                    <div class="input-group" style="max-width: 600px;">
+                        <span class="input-group-addon"> From </span>
+                        <ng2-datepicker [inline]="true" [(date)]="datepicker.dtFrom" (onSelect)="onChange('datefrom', $event)" dateFormat="DD/MM/YYYY" [rangeStart]="datepicker.fromMinDate" 
+                            [rangeEnd]="datepicker.fromMaxDate" [placeholder]="''" [dayNames]="dateOptions.dayShortNames | multiTranslate"
+                            [months]="dateOptions.monthNames | multiTranslate" [defaultLang]="translate.currentLang" [cancelText]="'btn.close' | translate">
+                        </ng2-datepicker>
+                        <span class="input-group-addon"> To </span>
+                        <ng2-datepicker [inline]="true" [(date)]="datepicker.dtTo" (onSelect)="onChange('dateto', $event)" dateFormat="DD/MM/YYYY" [rangeStart]="datepicker.toMinDate" 
+                            [rangeEnd]="datepicker.toMaxDate" [placeholder]="''" [dayNames]="dateOptions.dayShortNames | multiTranslate"
+                            [months]="dateOptions.monthNames | multiTranslate" [defaultLang]="translate.currentLang" [cancelText]="'btn.close' | translate">
+                        </ng2-datepicker>
+                    </div>
+                </div>
+                <div class="col-md-5 col-sm-5">
+                    <label class="pull-right"> 
+                        show
+                        <select [(ngModel)]="pagination.pageSizeLabel" (ngModelChange)="onChangePageSize($event)" class="form-control input-inline">
+                            <option *ngFor="let page of pagination.pageSize;trackBy: trackByFn" [value]="page">{{page}}</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped dataTable no-footer">
+                <thead>
+                    <tr>
+                        <th *ngFor="let columnName of statementLayout[myAcctType].columnName;trackBy: trackByFn"><a *ngIf="columnName === 'lbl.description'" (click)="clickToShowTransactionInfo()"><i class="fa fa-info-circle font-purple"></i>&nbsp;</a>{{columnName | translate | uppercase}}</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="!noData">
+                    <tr *ngFor="let statement of statements?.data">
+                        <td *ngFor="let fieldName of statementLayout[myAcctType].fieldName;trackBy: trackByFn">{{statement[fieldName]}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="center" *ngIf="noData">{{'lbl.transactionNotFound'| translate}}</div>
+        </div>
+        <pagination *ngIf="myAcctType !== constants.ACCOUNT_TYPE_TD" totalItem="{{pagination.totalItem}}" ItemPerPage="{{pagination.itemPerPage}}" currentPage="{{pagination.currentPage}}" (onCurrentPage)="onCurrentPage($event)"></pagination>
+    </div>
+</div>
+<transcode-info-modal #transactionModalComp></transcode-info-modal>
+<!-- END Portlet PORTLET-->

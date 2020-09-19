@@ -1,0 +1,71 @@
+<div class="panel-custom {{ settings.styleClass }}">
+   <accordion [closeOthers]="true" activeIds="0">
+        <accordion-group #group [isOpen]="accountGroup.show" *ngFor="let accountGroup of otherAccounts; let i = index;"  (click)="autoScaleHeight()">
+            <div accordion-heading>
+                {{ accountGroup.name }}
+                <i class="pull-right float-xs-right glyphicon" 
+                    [ngClass]="{'glyphicon-chevron-down': group?.isOpen, 'glyphicon-chevron-up': !group?.isOpen}">
+                </i>
+            </div>
+            <div *ngIf="accountGroup.index > 0" class="wrap">
+                <div class="inner" style="position: inherit !important;">                    
+                    <table class="table table-hover table-light">
+                        <tbody>
+                            <tr [class.highlight]="isHighlighted(account, currentAccount)" 
+                                *ngFor="let account of accountGroup.items" (click)="onSelectChanged(account,accountGroup.catId)">
+							    <td class="fit">
+                                    <div class="icon-circle" style.background-color="{{ account.anyIDType?.iconObj?.iconColor }}">
+                                        <img src="{{ account.anyIDType?.iconObj?.icon }}" title="{{ account.anyIDType?.desc }}" alt="{{ account.anyIDType?.desc }}" 
+                                            onerror="this.style.display='none';" class="user-pic rounded" />
+                                    </div>
+                                </td>    
+							    <td>
+                                    <a href="javascript:;" aria-expanded="false" class="primary-link">{{ account.aliasName }}</a><br />{{ account.accNo }}
+							    </td>
+                            </tr>
+                        </tbody>
+                    </table>                    
+                </div>
+            </div>
+            <div *ngIf="accountGroup.index == 0">
+                <form #accForm="ngForm" novalidate>
+                    <div class="form-group col-md-12" style="margin-top:10px!important">
+                        <label>
+                            {{ 'lbl.accTypeAnyID' | translate }} <span class="required"> * </span>
+                        </label>
+                        <div>
+                            <select class="form-control" name="anyIDType" [(ngModel)]="model.anyIDType" #anyIDType="ngModel" (ngModelChange)="onAnyIDTypeChange($event)">                                
+                                <option *ngFor="let type of getAnyIDTypes();trackBy: trackById" [value]="type" [selected]="model.anyIDType == type">{{ anyIDTypes[type].desc }}</option>
+                            </select>                            
+                        </div>
+                    </div>	
+                    <div class="form-group col-md-12" [ngClass]="{ 'has-error': accountNo.errors && (accountNo.dirty || accountNo.touched || submitted) }">
+                        <label>
+                            {{ anyIDTypes[model.anyIDType].label }} <span class="required"> * </span>
+                        </label>
+                        <div>
+                            <input type="text" id="accountNo" class="form-control" name="accountNo" [(ngModel)]="model.accountNo" #accountNo="ngModel" 
+                                [rangeLength]="rangeLength" [attr.maxlength]="rangeLength[1]" pattern="{{ inputPattern }}" required />
+                            <span *ngIf="accountNo.errors && (accountNo.dirty || accountNo.touched || submitted)" class="help-block">
+                                <label *ngIf="accountNo.errors.required">
+                                    {{ 'label.Required' | strformat:[anyIDTypes[model.anyIDType].label] }}
+                                </label>
+                                <label *ngIf="accountNo.errors.pattern || accountNo.errors.rangeLength">
+                                    {{ 'valErr.invalid' | strformat:[anyIDTypes[model.anyIDType].label] }}
+                                </label>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <a href="javascript:;" class="btn btn-outline kkppurple button-next" (click)="addAccount(accForm.value, accForm.valid)"> 
+                            {{ 'btn.addAccount' | translate }}
+                        </a>
+                        <a href="javascript:;" class="btn btn-outline red button-next" (click)="clearForm(accForm)"> 
+                            {{ 'btn.clear' | translate }}
+                        </a>
+                    </div>	
+                </form>	
+            </div>
+        </accordion-group>
+    </accordion>
+</div>

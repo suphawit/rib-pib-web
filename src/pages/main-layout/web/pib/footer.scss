@@ -1,0 +1,140 @@
+footer-pib{
+    #footer {
+        position: relative;
+        height: 90px!important;
+        width: 100%!important;
+        margin-top: 20px!important;
+    }
+    #footer .detail {
+        border-bottom: 1px solid #e1e1e1;
+        padding-bottom: 2px;
+    }
+    #footer .info {
+        padding-top: 15px;
+    }
+    #footer ul li {
+        display: inline-block;
+    }
+    #footer .copyright {
+        color: #999;
+        padding-bottom: 10px;
+    }
+    .nav-footer a {
+        color: #333;
+        cursor: pointer;
+    }
+    .pull-left {
+        float: left!important;
+    }
+
+    .icon-dot:before {
+        content:"•";
+    }
+    li [class^="icon-"], li [class*=" icon-"] {
+        font-style: normal;
+    }
+
+    #logo-kkb {
+        width: 125px;
+        height: 44px;
+        display: block;
+        margin-top: 3px;
+        background: url($base_url+'/assets/images/logo-kkb.png') no-repeat;
+    }
+
+    ul, ol {
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+    ol, ul {
+        margin-top: 0;
+        margin-bottom: 10px;
+    }
+    a:hover, a:focus {
+        text-decoration: none;
+    }
+
+    /* Cuntactus*/
+    .web-panel-heading{
+        margin: 25px 5px;
+        font-size: 24px;
+        color: #666;
+        display: none;
+    }
+
+    .body-pannel{
+        padding: 30px 20px 30px 20px;
+    }
+
+    .marginTop-13px{
+        margin-top: -13px;
+    }
+
+    .textalignh3 {
+        margin-top: -1px;
+        color: #594F74;
+        font-weight: bold;
+    }
+
+    .border-hcolor {
+        border-top: 2px solid #eee;
+        border-color: #594F74;
+    }
+    .hilightText{
+        color:#594F74;
+        padding-bottom:10px;
+    }
+
+    .web-panel {
+        margin-bottom: 20px;
+        font-family: 'Tahoma';
+    }
+
+     /* disclaimer*/
+    .div-pannel {
+        margin-left:10px; 
+        margin-top:20px;
+        color: gray;
+    }
+    .font-bold{
+        font-weight: bold;
+        color : #594F74;
+    }
+    .magin-bottom4px{
+        margin-bottom:4px;
+    }
+    .margin-left20px{
+        margin-left: -24px;
+    }
+    .paddingParagraph{
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+    .paddingHeader{
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+
+    .magin-bottom7px{
+        margin-bottom:7px;
+    }
+    .pannel{
+        font-weight: bold;
+        color : #594F74;
+        padding-right: 2px;
+    }
+
+    /* policy*/
+    .paddingParagraph{
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+    .margin-left24px{
+        margin-left: 0px;
+    }
+    .paddingHeader{
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+
+}

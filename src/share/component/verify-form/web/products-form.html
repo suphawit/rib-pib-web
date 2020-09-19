@@ -1,0 +1,70 @@
+<form class="form-horizontal" [formGroup]="verifyProductsForm" (ngSubmit)="onSubmit()" novalidate>
+    <div class="form-group">
+        <label>{{'label.cardType'|translate}} <span class="required">*</span></label>
+        <div class="row">
+            <div class="col-sm-5">
+                <card-type (onChangeCardType)="onChangeCardType($event)"></card-type>
+            </div>
+        </div>
+    </div>
+    <div class="form-group" formControlValidator [control]="verifyProductsForm.controls.idNo" [submitted]="submitted">
+        <label>{{'label.cardNumber'|translate}} <span class="required">*</span></label>
+        <div class="row">
+            <div class="col-sm-5"> 
+                <input type="text" class="form-control" id="idNo" placeholder="" formControlName="idNo" [maxLength]="20" autocomplete="off" />
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group" *ngIf="selectCardType && issueCountryList.length > 0">
+        <label>{{'label.issueCountry'|translate}} <span class="required">*</span></label>
+        <div class="row">
+            <div class="col-sm-5">
+                <select class="form-control" name="countryCode" (change)="onChangeCountry($event.target.value)">
+                    <option value="{{country.countryCode}}" [selected]="countrySelected" *ngFor="let country of issueCountryList;trackBy: trackById">{{(descLang ? country.descTh : country.descEn)}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <!--<div class="form-group" formControlValidator [control]="verifyProductsForm.controls.birthDate" [submitted]="submitted">
+        <label>{{'label.dateOfBirth'|translate}} <span class="required">*</span></label>
+        <div class="row">
+            <div class="col-sm-5"> 
+                <div class="input-group input-large date date-picker">
+                    <ng2-datepicker [(date)]="datepicker.date" (onSelect)="onSelectDate($event)" dateFormat="dddd D MMMM YYYY" [rangeStart]="datepicker.minDate" 
+                        [rangeEnd]="datepicker.maxDate" [disabled]="true" [placeholder]="''" [dayNames]="dateOptions.dayShortNames | multiTranslate"
+                        [months]="dateOptions.monthNames | multiTranslate" [defaultLang]="translate.currentLang" [cancelText]="'btn.close' | translate">
+                    </ng2-datepicker>
+                </div>
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+    </div>-->
+    <div class="form-group">
+        <label>{{'label.selectAccTypeList'|translate}} <span class="required">*</span></label>
+        <div class="row">
+            <div class="col-sm-5">
+                <select class="form-control" name="productType" (change)="onChangeProductType($event.target.value)">
+                    <option value="{{productType.value}}" [selected]="productType.selected" *ngFor="let productType of productTypeList;trackBy: trackById">{{productType.name | translate}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="form-group" formControlValidator [control]="verifyProductsForm.controls.productId" [submitted]="submitted">
+        <label>{{'label.accNumber'|translate}} <span class="required">*</span></label>
+        <div class="row">
+            <div class="col-sm-5"> 
+                <input type="text" class="form-control" id="productId" placeholder="" formControlName="productId" [maxLength]="20" autocomplete="off" />
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+    </div>
+    <div class="form-actions"> 
+        <div class="row">
+            <div class="col-sm-offset-3 col-sm-9">
+                <!--<button type="button" class="btn btn-outline btn-default" (click)="onBack()"><i class="fa fa-angle-left"></i> {{ 'button.back' | translate}}</button>-->
+                <button type="submit" class="btn btn-outline kkppurple button-next">{{'button.next'|translate}}&nbsp;<i class="fa fa-angle-right"></i></button>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,84 @@
+<div class="clearfix"></div>
+<h3 class="page-title">{{ 'btn.addRTP' | translate }}</h3>
+<alert-message #alertMessage [type]="type" [message]="message"></alert-message>
+<div *ngIf="isShowRegisterKKPromptPayLink">{{message}} <a (click)="permissionChangeRoute.changeRoute('KK_PRODUCT_SERVICE.REGISTER_KK_PROMPT_PAY')">{{'btn.clickToRegisterKK'|translate}}</a></div>
+<div  *ngIf="isMyAccountHasData" class="portlet portlet-fit">
+    <div class="row">
+        <div class="portlet portlet-fit">
+            <step-wizard [data]="stepWizard.input.data" [style]="stepWizard.input.style" [step]="stepWizard.input.step"></step-wizard>
+        </div>
+        <div class="portlet portlet-fit">
+            <div class="col-lg-4 col-sm-4">
+                <rtp-from-account-list [settings]="settings" [currentAccount]="fromAccount" (accountChanged)="updateMyAccount($event)" [accounts]="myAccountLists"></rtp-from-account-list>
+            </div>
+            <div class="col-md-5 col-sm-5">
+                <div class="portlet light nopadding">
+                    <div class="portlet-body form">
+                        <form class="input-details-form {{ settings.styleClass }}" #form="ngForm" novalidate>
+                            <div class="form-group col-md-12" [ngClass]="{ 'has-error': toAccount.accNo === '' && submitted }">
+                                <label>{{ 'lbl.RequestTo' | translate }} <span class="required"> * </span> </label>
+                                <div>
+                                    <input type="text" class="form-control" name="toAccount" placeholder="{{ toAccount.accNo !== '' ? getShortDescDisplay(toAccount,'toAccount') : '' }}" disabled="">
+                                    <span *ngIf="toAccount.accNo === '' && submitted" class="help-block">{{ 'label.Required' | strformat:['lbl.RequestTo'] }}</span>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-12" [ngClass]="{ 'has-error': fromAccount.accNo === '' && submitted }">
+                                <label>{{ 'lbl.myPromptPay' | translate }} <span class="required"> * </span> </label>
+                                <div>
+                                    <input type="text" class="form-control" name="fromAccount"  placeholder="{{ fromAccount.accNo !== '' ? getShortDescDisplay(fromAccount,'fromAccount') : '' }}" disabled="" >
+                                    <span *ngIf="fromAccount.accNo === '' && submitted" class="help-block">{{ 'label.Required' | strformat:['lbl.myPromptPay'] }}</span> 
+                                </div>
+                            </div>
+                            <div class="form-group col-md-12" [ngClass]="{ 'has-error': amount.errors && (amount.dirty || amount.touched || submitted) }">
+                                <label>{{ 'lbl.amount' | translate }} <span class="required"> * </span> </label>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="amount" name="amount" class="form-control text-right" [(ngModel)]="model.amount" #amount="ngModel" [min]="0.01" [disabled]="false" currencyFormatter required />
+                                        <span class="input-group-addon">
+                                            {{ 'lbl.baht' | translate }}
+                                        </span>
+                                    </div>
+                                    <span *ngIf="amount.errors && (amount.dirty || amount.touched || submitted)" class="help-block">
+                                        <label *ngIf="amount.errors.required || amount.errors.min">
+                                            {{ 'label.Required' | strformat:['lbl.amount'] }}
+                                        </label>
+                                    </span>
+                                </div>
+                            </div>
+                                <div class="form-group col-md-12" [ngClass]="{ 'has-error': createRTPDate.errors && (createRTPDate.dirty || createRTPDate.touched || submitted) }">
+                                    <label>{{ 'lbl.transactionDate' | translate }}</label>
+                                    <div class="input-group input-large date date-picker removeDatePicker">
+                                        <input type="hidden" class="form-control" name="createRTPDate" [(ngModel)]="model.createRTPDate" #createRTPDate="ngModel" />
+                                        <ng2-datepicker [(date)]="dt" (onSelect)="onSelect($event)" dateFormat="dddd D MMMM YYYY" [rangeStart]="minDate" 
+                                            [rangeEnd]="maxDate" [disabled]="true" [placeholder]="''" [dayNames]="dateOptions.dayShortNames | multiTranslate"
+                                            [months]="dateOptions.monthNames | multiTranslate" [defaultLang]="translate.currentLang" [cancelText]="'btn.close' | translate">
+                                        </ng2-datepicker>
+                                        <span *ngIf="createRTPDate.errors && (createRTPDate.dirty || createRTPDate.touched || submitted)" class="help-block">
+                                            <label *ngIf="createRTPDate.errors.required">
+                                                {{ 'label.Required' | strformat:['lbl.createRTPDate'] }}
+                                            </label>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label>{{ 'lbl.note' | translate }}</label>
+                                    <div>
+                                        <textarea class="form-control hide-overflow" rows="3" id="note" maxlength="40" name="note" [(ngModel)]="model.note" #note="ngModel"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-offset-3 col-md-12">
+                                    <button class="btn btn-outline kkppurple button-next" (click)="goToNextStep(form.value, form.valid)"> {{ 'btn.next' | translate }}
+                                        <i class="fa fa-angle-right"></i>
+                                    </button>
+                                </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-3">
+                <rtp-to-account-list [settings]="settings" [anyIDTypes]="AnyIDTypeForToAccount"[currentAccount]="toAccount" (accountChanged)="updateOtherAccount($event)" 
+                [otherAccounts]="otherAccountLists" ></rtp-to-account-list>
+            </div>
+        </div>
+    </div>
+</div>

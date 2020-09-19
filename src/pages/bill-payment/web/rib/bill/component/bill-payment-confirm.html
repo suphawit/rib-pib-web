@@ -1,0 +1,138 @@
+<div class="portlet light" style="padding-top:0px!important">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class=" icon-layers font-kkppurple"></i>
+            <span class="caption-subject font-kkppurple sbold uppercase">{{ 'lbl.billPaymentSecondStep' | translate }}</span>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <div class="form-group">
+            <div class="row">                
+                <div class="col-md-offset-2 col-md-7">
+                        <div class="portlet-body">
+                        <div class="table-scrollable table-scrollable-borderless">
+                            <table class="table table-light">
+                                <tbody>
+                                    <tr>
+                                        <td> {{ 'lbl.transferFrom' | translate }} </td>
+                                        <td>
+                                            <table>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="fit">
+                                                            <!--<div>
+                                                                <img class="user-pic rounded" src="assets/images/kk_logo.png" />
+                                                            </div>-->
+                                                            <div class="icon-circle" style="background-color: #594F74">
+                                                                <img class="user-pic rounded" src="assets/images/banks/069.png?v={{BUILD_NUM}}" />
+                                                            </div>
+                                                        </td>
+                                                        <td [innerHTML]="billPaymentObj.fromAccount?.getAccountDisplay() 
+                                                                    + '<br />' + ('lbl.availableBalance' | translate)
+                                                                    + '&nbsp;' + (billPaymentObj.availableBalance | formatCurrency) 
+                                                                    + '&nbsp;' + ('lbl.baht' | translate) | sanitizeHtml" style="padding-left:5px!important">
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td> {{ 'lbl.toBiller' | translate }} </td>
+                                        <td>
+                                            <table>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="fit" *ngIf="!isEDonationCategory(billPaymentObj.toBiller.categoryId)">
+                                                            <biller-image class="user-pic rounded"
+                                                                [srcpath]= "utilService.getBillerIcon(billPaymentObj.toBiller)" 
+                                                                [defaultpath]="utilService.getDefaultBillerIconPath()">
+                                                            </biller-image>
+                                                        </td>
+                                                        <td class="fit" *ngIf="isEDonationCategory(billPaymentObj.toBiller.categoryId)">
+                                                            <biller-image class="user-pic rounded"
+                                                                [srcpath]= "utilService.getEDonateIcon(billPaymentObj.toBiller)"
+                                                                [defaultpath]="utilService.getDefaultEDonateIconPath()">
+                                                            </biller-image>
+                                                        </td>
+                                                        <td style="padding-left:5px!important">
+                                                            {{billPaymentObj.toBiller.billerAliasName}}<br/>
+                                                            {{billPaymentObj.toBiller.billerName}}<br/>
+                                                            {{getDisplayLabel(billPaymentObj.toBiller, 1) || 'lbl.ref1' | translate}}: {{billPaymentObj.toBiller.ref1}}<br/>
+                                                        <span *ngIf="!isEDonationCategory(billPaymentObj.toBiller.categoryId) && (billPaymentObj.toBiller.ref2!=undefined)&&(billPaymentObj.toBiller.ref2!='')">
+                                                            {{getDisplayLabel(billPaymentObj.toBiller, 2) || 'lbl.ref2' | translate}}: {{billPaymentObj.toBiller.ref2}}
+                                                        </span>
+                                                        <span *ngIf="isEDonationCategory(billPaymentObj.toBiller.categoryId) && isCitizenCardType() && (billPaymentObj.toBiller.ref2!=undefined)&&(billPaymentObj.toBiller.ref2!='')">
+                                                            {{'label.eDonation.card' | translate}}: {{billPaymentObj.refInfos[1].value}}
+                                                        </span><br/>
+                                                        <span *ngIf="billPaymentObj.toBiller.ref3!=undefined&&(billPaymentObj.toBiller.ref3!='')">
+                                                            {{getDisplayLabel(billPaymentObj.toBiller, 3) || 'lbl.ref3' | translate}}: {{billPaymentObj.toBiller.ref3}}
+                                                        </span><br/>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>                                     
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td> {{ 'lbl.amount' | translate }} </td>
+                                        <td> {{ billPaymentObj.payAmount | formatCurrency }} &nbsp; {{ 'lbl.baht' | translate }} </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td> {{ 'lbl.fee' | translate }} </td>
+                                        <td> {{ billPaymentObj.feeAmount | formatCurrency }} &nbsp; {{ 'lbl.baht' | translate }} </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td> {{ 'lbl.transactionDate' | translate }} </td>
+                                        <td> {{ billPaymentObj?.transactionDate | dateFormat }} </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr *ngIf="billPaymentObj?.rtpReferenceNo!=''&& billPaymentObj?.rtpReferenceNo">
+                                        <td> {{ 'lbl.RTPRefCode' | translate }} </td>
+                                        <td> {{ billPaymentObj?.rtpReferenceNo }} </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td *ngIf="!isEDonationCategory(billPaymentObj.toBiller.categoryId)"> {{ 'lbl.paymentDate' | translate }} </td>
+                                        <td *ngIf="isEDonationCategory(billPaymentObj.toBiller.categoryId)"> {{ 'lbl.donateDate' | translate }} </td>
+                                        <td> {{ billPaymentObj?.paymentDate | dateFormat}} </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr *ngIf="billPaymentObj?.recurringType === constants.RECURRING_TYPE_YES">
+                                        <td> {{ 'lbl.recurringType.paybill' | translate }} </td>
+                                        <td> {{ billPaymentObj?.scheduleType?.desc }}&#44;&nbsp;{{ billPaymentObj?.recurringTime?.desc }} </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td> {{ 'lbl.note' | translate }} </td>
+                                        <td> {{ billPaymentObj?.memo }} </td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <verify-otp [style]="verifyOTPStyle" [actionOTP]="verifyOTPAction" [verifyTransactionId]="billPaymentObj?.verifyTransactionID" [responseCodeMainService]="responseCodeMainService" (requestOTPChanged)="onRequestOTP($event)" (otpPass)="onOtpChanged($event)"></verify-otp>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-offset-3 col-sm-offset-3 col-md-9 col-sm-9">
+                    <a href="javascript:;" (click)="goToPrevStep()" class="btn btn-outline btn-default">
+                            <i class="fa fa-angle-left"></i> {{ 'btn.back' | translate }}
+                    </a>
+                    <button class="btn btn-outline kkppurple button-next" (click)="goToNextStep()" [disabled]="isDisableSubmit || (!isRequestOTP || model.otpPin == '')"> 
+                        {{ 'btn.confirm' | translate }} <i class="fa fa-angle-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

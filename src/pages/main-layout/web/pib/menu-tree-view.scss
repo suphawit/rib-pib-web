@@ -1,0 +1,46 @@
+tree-view{
+    /*
+        Override bootstrap css
+    */
+    .navbar-default .navbar-nav > li > a {
+        color:#333;
+        font-family: Kiatnakin,Thonburi, Tahoma;
+        font-size: 14px !important;
+    }
+    .pib-nav-font-size{
+        color:#333;
+        font-size:13px;
+    }
+    .navbar{
+        min-height:40px;
+    }
+    .navbar-nav > li > a{
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    
+    .sub-menu-horizontal{
+        // width:960px;
+        height: 40px;
+    }
+
+    .nav > li{
+        position:static;
+    }
+
+    .sub-menu-horizontal > li {display: inline-block;}
+
+    .dropdown-menu > li > a{
+        border-bottom-style: none;
+    }
+
+    .sub-menu-horizontal > li > a {
+        font-family: Kiatnakin, Thonburi, Tahoma;
+        font-size: 14px !important;
+    }
+
+    .nav > li > a{
+        padding: 10px 10px;
+    }
+
+}

@@ -1,0 +1,72 @@
+<div *ngIf="confirmAddBillerData != undefined" class="container">
+	<div class="clearfix"></div>
+    <h3 class="page-title">{{ labelTitle | translate }}</h3>
+	<div class="row">
+		<div lass="col-md-12">
+			<alert-message #alertMessage [type]="alertConfig.type" [message]="alertConfig.message"></alert-message>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<step-wizard [data]="stepWizard.input.data" [style]="stepWizard.input.style" [step]="stepWizard.input.step"></step-wizard>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="portlet light " id="form_wizard_1">
+				<div class="portlet-title">
+					<div class="caption">
+						<i class=" icon-layers font-kkppurple"></i>
+						<span class="caption-subject font-kkppurple sbold uppercase" *ngIf="isAdd">{{'label.stepAddBiller2' | translate}}</span>
+						<span class="caption-subject font-kkppurple sbold uppercase" *ngIf="!isAdd">{{'label.stepEditBiller2' | translate}}</span>
+					</div>
+				</div>
+				<div class="portlet-body form">
+					<div class="table-scrollable table-scrollable-borderless">
+						<table class="table table-light">
+							<tbody>
+								<tr>
+									<td class="col-md-3">{{'lbl.billerAliasName' | translate}}</td>
+									<td> {{confirmAddBillerData.billerAliasName}} </td>
+								</tr>
+								<tr>
+									<td class="col-md-3">{{'lbl.billerName'|translate}}</td>
+									<td>
+										<img class="user-pic rounded addbilerbankimg" style="width: 30px" src="assets/images/kk_logo.png?v={{BUILD_NUM}}" />
+										<strong><span class="padding-left10px">{{'label.kiatnakin'|translate}}</span></strong><br>
+										<span class="padding-left10px">{{'label.kkAutoLoan'|translate}}</span>
+									</td>
+								</tr>
+								<tr>
+									<td class="col-md-3">{{'label.billRefNo1' | translate}}</td>
+									<td> {{confirmAddBillerData.ref1}} </td>
+								</tr>
+								<tr>
+									<td class="col-md-3">{{'label.billRefNo2' | translate}}</td>
+									<td> {{confirmAddBillerData.ref2}} </td>
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="row form-group" *ngIf="isAdd">
+						<verify-otp [style]="verifyOTPStyle" [actionOTP]="verifyOTPAction" [responseCodeMainService]="responseCodeMainService" (requestOTPChanged)="requestOTPChanged($event)"
+						 (otpPass)="otpPass($event)"></verify-otp>
+					</div>
+					<div class="form-actions">
+						<div class="col-md-offset-3 col-md-12">
+							<button type="button" class="btn btn-outline btn-default" (click)="navigateBack()"><i class="fa fa-angle-left"></i> {{'button.back' | translate}} </button>
+							<!--(click)="onSubmit()"-->
+							<button type="button" class="btn btn-outline kkppurple button-next" [disabled]="isAdd && (!isRequestOTP || OTPData.pin == '')"
+							 (click)="onBillerSubmit()"> {{'button.confirm' | translate}} <i class="fa fa-angle-right"></i></button>
+							<!--(click)="onSubmit()"-->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,147 @@
+<div class="portlet light nopadding">
+    <div class="portlet-body form">
+        <form class="input-details-form {{ settings.styleClass }}" #form="ngForm" novalidate>
+            <input type="hidden" id="txnId" name="txnId" [(ngModel)]="model.txnId" #txnId="ngModel" />
+            <input type="hidden" id="txnMasId" name="txnMasId" [(ngModel)]="model.txnMasId" #txnMasId="ngModel" />
+            <input type="hidden" id="editType" name="editType" [(ngModel)]="model.editType" #editType="ngModel" />
+            <input type="hidden" id="referenceNO" name="referenceNO" [(ngModel)]="model.referenceNO" #referenceNO="ngModel" />
+            <div class="form-group" [ngClass]="{ 'has-error': fromAccount.accNo === undefined && submitted }">
+			    <label>{{ 'lbl.transferFrom' | translate }} <span class="required"> * </span> </label>
+                <div>
+                    <input type="text" class="form-control" name="fromAccount" placeholder="{{ fromAccount.accNo !== undefined ? fromAccount.getShortDescDisplay() : '' }}" disabled="">
+                    <span *ngIf="fromAccount.accNo === undefined && submitted" class="help-block">{{ 'label.Required' | strformat:['lbl.transferFrom'] }}</span>
+                </div>
+            </div>
+	        <div class="form-group" [ngClass]="{ 'has-error': toBiller.billerID === undefined && submitted }">
+			    <label>{{ 'lbl.toBiller' | translate }} <span class="required"> * </span> </label>
+			    <div>
+				    <input type="text" class="form-control" name="toBiller" 
+                    placeholder="{{ toBiller.billerID !== undefined ?  ((toBiller.billerAliasName != null) ? (toBiller.billerAliasName+'/'+toBiller.billerName) : toBiller.billerName) : '' }}" 
+                    disabled="">
+				    <span *ngIf="toBiller.billerID !== undefined" >
+                        <div [style.marginTop.px]="10">
+                            <label>{{getDisplayLabel(toBiller, 1) || 'lbl.ref1' | translate }} :</label>
+                            <span>{{toBiller.ref1}}</span>
+                        </div>
+                        <div *ngIf="toBiller.ref2!=undefined&&toBiller.ref2!='' && !isEDonationCategory(toBiller.categoryId)" [style.marginTop.px]="10">
+                            <label>{{getDisplayLabel(toBiller, 2) || 'lbl.ref2' | translate }} :</label>
+                            <span>{{toBiller.ref2}}</span>
+                        </div>
+                        <div *ngIf="toBiller.ref3!=undefined&&toBiller.ref3!=''" [style.marginTop.px]="10">
+                            <label>{{getDisplayLabel(toBiller, 3) || 'lbl.ref3' | translate }} :</label>
+                            <span>{{toBiller.ref3}}</span>
+                        </div>
+                    </span>
+                    <span *ngIf="toBiller.billerID === undefined && submitted" class="help-block">{{ 'label.Required' | strformat:['lbl.toBiller'] }}</span> 
+				</div>
+		    </div>
+		    <div class="form-group" [ngClass]="{ 'has-error': amount.errors && (amount.dirty || amount.touched || submitted) }">
+			    <label>{{ 'lbl.amount' | translate }} <span class="required"> * </span> </label>
+			    <div>
+			        <div class="input-group">
+					    <input type="text" id="amount" name="amount" class="form-control text-right" [disabled]="model.disableAmount" [(ngModel)]="model.amount" #amount="ngModel" [min]="0.01" currencyFormatter required autocomplete="off"/>
+					    <span class="input-group-addon">
+					        {{ 'lbl.baht' | translate }}
+						</span>
+				    </div>
+                    <span *ngIf="amount.errors && (amount.dirty || amount.touched || submitted)" class="help-block">
+                        <label *ngIf="amount.errors.required || amount.errors.min">
+                            {{ 'label.Required' | strformat:['lbl.amount'] }}
+                        </label>
+                    </span>
+		        </div>
+			</div>
+            <div class="form-group" [ngClass]="{ 'has-error': transferDate.errors && (transferDate.dirty || transferDate.touched || submitted) }">
+                <label *ngIf="!isEDonationCategory(toBiller.categoryId)">{{ 'lbl.paymentDate' | translate }} </label>
+                <label *ngIf="isEDonationCategory(toBiller.categoryId)">{{ 'lbl.donateDate' | translate }} </label>
+                <div>
+				    <div class="input-group input-large date date-picker" [ngClass]="{'removeDatePicker' : model.isRTP || isEDonationCategory(toBiller.categoryId)}">
+						<input type="hidden" class="form-control" name="transferDate" [(ngModel)]="model.transferDate" #transferDate="ngModel" />
+                        <ng2-datepicker [(date)]="isEDonationCategory(toBiller.categoryId)? minDate: dt" (onSelect)="onSelect($event)" dateFormat="dddd D MMMM YYYY" [rangeStart]="minDate"
+                            [rangeEnd]="maxDate" [disabled]="true" [accentColor]="'#594F74'" [placeholder]="''" [dayNames]="dateOptions.dayShortNames | multiTranslate"
+                            [months]="dateOptions.monthNames | multiTranslate" [defaultLang]="translate.currentLang" [cancelText]="'btn.close' | translate">
+                        </ng2-datepicker>
+                        <span *ngIf="transferDate.errors && (transferDate.dirty || transferDate.touched || submitted)" class="help-block">
+                             <label *ngIf="transferDate.errors.required">
+                                {{ 'label.Required' | strformat:['lbl.transferDate'] }}
+                            </label>
+                        </span>
+					</div>
+			    </div>
+            </div>
+		    <div class="form-group" *ngIf="!isEDonationCategory(toBiller.categoryId)">
+                <div [hidden]="model.isRTP">
+			    <label>{{ 'lbl.recurringType.paybill' | translate }}</label>
+                    <div class="mt-radio-inline">                        
+					    <label class="mt-radio" *ngFor="let recType of recurringTypes">
+						    <input type="radio" name="recurringType" [(ngModel)]="model.recurringType" [value]="recType.value" [disabled]="model.editType == '0'"
+                                (change)="onRecTypeChange(model.recurringType)" #recurringType="ngModel">&nbsp;{{ recType.display | translate}}
+                            <span></span>
+					    </label>
+			        </div>
+                </div>
+		        <div>
+                    <div *ngIf="isReccuring" class="form-group col-md-12" style="margin-bottom:0px!important;padding-bottom:0px!important">
+                        <div class="row">
+                            <div class="form-group col-md-6" [ngClass]="{ 'has-error': scheduleType.errors && (scheduleType.dirty || scheduleType.touched || submitted) }">
+                                <label>{{ 'lbl.frequency' | translate }}</label>
+                                <div>
+                                    <select class="form-control" name="scheduleType" [(ngModel)]="model.scheduleType" #scheduleType="ngModel" [min]="1">
+                                        <option *ngFor="let schedType of scheduleTypes" [value]="schedType.schedTypeId" [selected]="model.scheduleType == schedType.schedTypeId">{{ schedType.desc }}</option>
+                                    </select>
+                                    <span *ngIf="scheduleType.errors && (scheduleType.dirty || scheduleType.touched || submitted)" class="help-block">
+                                        <label *ngIf="scheduleType.errors?.min">{{ 'label.Required' | strformat:['lbl.frequency'] }}</label>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6" [ngClass]="{ 'has-error': recurringTime.errors && (recurringTime.dirty || recurringTime.touched || submitted) }">
+                                <label>{{ 'lbl.recurringTime' | translate }}</label>
+                                <div>
+                                    <select class="form-control" name="recurringTime" [(ngModel)]="model.recurringTime" #recurringTime="ngModel" [min]="1">
+                                        <option *ngFor="let recTime of recurringTimes" [value]="recTime.time" [selected]="model.recurringTime == recTime.time">
+                                            {{ recTime.desc }}
+                                        </option>                                        
+                                    </select>
+                                    <span *ngIf="recurringTime.errors && (recurringTime.dirty || recurringTime.touched || submitted)" class="help-block">
+                                        <label *ngIf="recurringTime.errors?.min">{{ 'label.Required' | strformat:['lbl.recurringTime'] }}</label>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>						
+			    </div>
+	        </div>
+			<div class="form-group">
+                <label>{{ 'lbl.note' | translate }}</label>
+                <div>
+                    <textarea class="form-control" rows="3" id="note" maxlength="50" name="note" [(ngModel)]="model.note" #note="ngModel"></textarea>
+                </div>
+            </div>
+			<div class="form-group" *ngIf="isEDonationCategory(toBiller.categoryId) && isCitizenCardType()">
+                <label class="font-kkppurple">{{ 'label.eDonation.sendToRevenueDepartment' | translate }}</label>
+                <div class="mt-radio-inline">
+                    <label class="mt-radio">
+                        <input type="radio" name="sendToRDType" [(ngModel)]="model.sendToRDType" [value]="1"
+                               #sendToRDType="ngModel">&nbsp;{{ 'label.eDonation.agree' | translate}}
+                        <span></span>
+                    </label>
+                    <label class="mt-radio">
+                        <input type="radio" name="sendToRDType" [(ngModel)]="model.sendToRDType" [value]="0"
+                               #sendToRDType="ngModel">&nbsp;{{ 'label.eDonation.disAgree' | translate}}
+                        <span></span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-offset-3 col-sm-offset-3 col-md-9 col-sm-9">
+                        <button class="btn btn-outline kkppurple button-next" (click)="beforeGoToNextStep(form.value, form.valid)"> {{ 'btn.next' | translate }}
+                            <i class="fa fa-angle-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<e-donation-modal #sendToRDModal [data]="messageModalData.data" [valid]="messageModalData.valid" (onEmit)="onSubmit($event)" (onHidden)="closeModal()"></e-donation-modal>

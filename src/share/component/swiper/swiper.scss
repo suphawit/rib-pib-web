@@ -1,0 +1,26 @@
+slide-swiper{
+    .swiper-panel {
+        height:56px;
+        background-color:#f4f4f4;
+    }
+
+    .swiper-panel img {
+        width:56px;
+        height:56px;
+        padding:5px;
+    }
+
+    // .swiper-panel .name{
+    //     height:30px;
+    //     background-color:#fff;
+    //     color:#8e9093;
+    // }
+
+    .swiper-panel .focus-center {
+        width:56px;
+        height:56px;
+        background-color:#009ac7; 
+        margin:-56px auto;
+        z-index:1000!important;
+    }
+}

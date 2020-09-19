@@ -1,0 +1,26 @@
+<div class="row wizard-step-title">
+    <div class="col-md-12">
+        <div class="portlet light">
+	        <div class="portlet-title">
+		        <div class="caption">
+			        <i class=" icon-layers font-kkppurple"></i>
+                    <span class="caption-subject font-kkppurple sbold uppercase">{{ 'lbl.billPaymentFirstStep' | translate }}</span>
+                </div>
+	        </div>
+	    </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-4 col-sm-4">
+        <from-account-list [settings]="settings" [currentAccount]="billPaymentObj?.fromAccount" (accountChanged)="updateMyAccount($event)"></from-account-list>
+    </div>
+
+    <div class="col-md-5 col-sm-5">       
+        <bill-payment-input-details [settings]="settings" [fromAccount]="srcAccountObj" [toBiller]="destBillerObj"></bill-payment-input-details>
+    </div>
+
+    <div class="col-md-3 col-sm-3">
+        <to-biller-list [settings]="settings" [currentBiller]="billPaymentObj?.toBiller" (billerChanged)="updateBiller($event)"></to-biller-list>
+    </div>
+    
+</div>

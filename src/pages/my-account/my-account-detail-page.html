@@ -1,0 +1,17 @@
+<div class="clearfix"></div>
+<h3 class="page-title">{{ 'label.myAccountDetail' | translate }}</h3>
+<div class="row">
+    <div class="col-md-12">
+        <alert-message #alertMessage [type]="alertConfig.type" [message]="alertConfig.message"></alert-message>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-8 col-sm-8">
+        <my-account-detail [data]="accountDetailConfig.accountData" [hideMenu]="accountDetailConfig.hideMenu" [showBorder]="accountDetailConfig.showBorder" (onGetData)="onGetDataChangeTerm($event)"></my-account-detail>
+    </div>
+    <div class="col-md-4 col-sm-4">
+        <portlets-menu [config]="accountDetailConfig.accountData" (OnMenuClick)="OnMenuClick($event)" [style]="styleWeb"></portlets-menu>
+    </div>
+</div>
+<bs-modal-message-delete-my-account #messageModal [body]="messageModalData.body" [title]="messageModalData.title" [size]="messageModalData.size" [config]="messageModalData.config" 
+        [accountAliasName]="messageModalData.accountAliasName" [accountNumber]="messageModalData.accountNumber" (onEmit)="onEmit($event)" (onHidden)="onModalHidden($event)"></bs-modal-message-delete-my-account>

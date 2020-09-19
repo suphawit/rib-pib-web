@@ -1,0 +1,50 @@
+<div class="panel-group">
+    <div class="panel panel-default" *ngFor="let group of accordian.data; trackBy: trackByFn" (click)="autoScaleHeight()">
+        <div class="panel-heading" (click)="toggleState(group.stateName.id)">
+            <h4 class="panel-title">
+                {{group.stateName.name | translate}} 
+                <i class="pull-right glyphicon" [ngClass]="{'glyphicon-menu-down': accordian.state[group.stateName.id] === 'collapsed', 'glyphicon-menu-up': accordian.state[group.stateName.id] === 'expanded'}"></i>
+            </h4>
+        </div>
+        <div class="panel-body" [@accordingState]="accordian.state[group.stateName.id]" [style.overflow]="'hidden'">
+            <table class="table table-light">
+                <tbody>
+                    <tr *ngFor="let item of group.stateData; trackBy: trackByFn" class="line-bottom">
+                        <td class="fit">
+                            <div *ngIf="item.anyIDType === constants.ANYID_TYPE_BANK_ACCOUNT" class="icon-circle" [style.background-color]="bankCodeDataService.getBankCodeImagePropertiesByField(item.bankCode,'color')">
+                                <img class="user-pic rounded" src="{{'assets/' + bankCodeDataService.getBankCodeImagePropertiesByField(item.bankCode,'url')}}" /> 
+                            </div>
+                            <div *ngIf="item.anyIDType !== constants.ANYID_TYPE_BANK_ACCOUNT" class="icon-circle" [style.background-color]="anyIDTypeList[item.anyIDType]?.iconObj?.iconColor">
+                                <!--<i class="icon-w" [ngClass]="{ 'icon-card-id': item.anyIDType === constants.ANYID_TYPE_CITIZEN_ID, 'icon-mobile-phone': item.anyIDType === constants.ANYID_TYPE_MOBILE }"></i>-->
+                                <img class="user-pic rounded" src="{{ anyIDTypeList[item.anyIDType]?.iconObj?.icon }}" title="{{ anyIDTypeList[item.anyIDType]?.desc }}" alt="{{ anyIDTypeList[item.anyIDType]?.desc }}" 
+                                    onerror="this.style.display='none';" />
+                            </div>
+                        </td>    
+                        <td width="24%">
+                            <div class="text-wrap">
+                                <a class="primary-link" (click)="navigateToExAccDetail(item)">{{ item.acctAliasName }}</a>
+                            </div>
+                        </td>
+                        <td width="16%">
+                            <div class="text-wrap">
+                                {{item.acctNo}}
+                            </div>
+                        </td>
+                        <td width="25%">
+                            <div class="text-wrap">
+                                {{ ((item.anyIDType === constants.ANYID_TYPE_BANK_ACCOUNT) ? item.bankName : anyIDTypeList[item.anyIDType].desc) | stringLimit:25 }}
+                            </div>
+                        </td>
+                        <td class="right">
+                            <div class="pull-right">
+                                <label class="btn btn-circle btn-icon-only btn-default" (click)="onClickFavourite(item)"><i class="fa" [ngClass]="{ 'fa-star' : item.isFavourite === 'Y', 'fa-star-o' : item.isFavourite === 'N' }"></i></label>
+                                <label class="btn btn-circle btn-default" *ngIf="permissionManage.transfer && item.allowTransfer" (click)="navigateToFundTransfer(item)">{{'lbl.transfer' | translate}}</label>
+                                <label class="btn btn-circle btn-default" (click)="navigateToExAccDetail(item)">{{'label.moreinfo' | translate}}</label>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

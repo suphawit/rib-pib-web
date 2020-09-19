@@ -1,0 +1,73 @@
+.panel-custom {
+    .panel-body {
+        padding:0!important
+    }
+
+    .panel-default > .panel-heading a {
+        color:#fff
+    }
+
+    .panel-heading .panel-title {
+        font-size:15px!important
+    }
+
+    .panel-title .glyphicon {
+        font-size:14px!important;
+        top:3px!important
+    }
+
+    .panel {
+        margin-bottom:5px
+    }
+
+    .panel-default > .panel-heading {
+        background-image:none;
+        color:#fff;
+        padding-top:6px!important;
+        padding-bottom:6px!important
+    }
+
+    .table {
+        margin-bottom:0!important
+    }
+}
+
+.pib-web {
+    .panel-default > .panel-heading {
+        background-color:#6e6e6e!important
+    }
+    .dropdown > .dropdown-menu{
+        left: -170px;
+        min-width: 350px;
+    }
+    
+}
+
+.rib-web {
+    .dropdown > .dropdown-menu{
+        left: -170px;
+        min-width: 350px;
+    }
+    	
+    .container {
+    position: fixed;
+    top: 30px;
+    left: 50px;
+    height: 30px;
+    width: 300px;
+    background: red;
+    }
+    .outer {
+    overflow: hidden;
+    }
+    .inner {
+    position: absolute;
+    }
+    .show-up {
+    width: 100px;
+    height: 300px;
+    background: green;
+    position: relative;
+    margin-left: 20px;
+    }
+}

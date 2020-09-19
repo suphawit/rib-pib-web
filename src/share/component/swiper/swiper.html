@@ -1,0 +1,8 @@
+<div class="swiper-panel">
+    <swiper [config]="config" (indexChange)="onIndexChange($event)">
+        <div *ngFor="let ms of menuSwiper;trackBy: trackById; let i = index">
+            <img [src]="ms.srcImg" title="{{ ms.name }}" alt="{{ ms.name }}" onerror="this.style.display='none';" />
+        </div>
+    </swiper>
+    <div class="focus-center"></div>
+</div>

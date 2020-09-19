@@ -1,0 +1,19 @@
+<form class="form-horizontal" [formGroup]="verifyReSubmitRefcodeForm" (ngSubmit)="onSubmit()" novalidate>
+    <div class="form-group" formControlValidator [control]="verifyReSubmitRefcodeForm.controls.referenceCode" [submitted]="submitted">
+        <label>{{'label.refcode'|translate}} <span class="required">*</span></label>
+        <div class="row">
+            <div class="col-sm-5"> 
+                <input type="text" class="form-control" id="referenceCode" placeholder="" formControlName="referenceCode" [maxLength]="20" autocomplete="off" />
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+    </div>
+    <div class="form-actions"> 
+        <div class="row">
+            <div class="col-sm-offset-3 col-sm-9">
+                <!--<button type="button" class="btn btn-outline btn-default" (click)="onBack()"><i class="fa fa-angle-left"></i> {{ 'button.back' | translate}}</button>-->
+                <button type="submit" class="btn btn-outline kkppurple button-next">{{'button.next'|translate}}&nbsp;<i class="fa fa-angle-right"></i></button>
+            </div>
+        </div>
+    </div>
+</form>

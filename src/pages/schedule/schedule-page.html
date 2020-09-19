@@ -1,0 +1,57 @@
+<div class="clearfix"></div>
+<h3 class="page-title">{{ 'label.manageSchedule' | translate }}</h3>
+<div class="row">
+	<div class="col-md-12">
+		<alert-message #alertMessage [type]="alertConfig.type" [message]="alertConfig.message"></alert-message>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<div class="portlet light portlet-fit bordered">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="fa fa-calendar font-purple"></i>
+					<span class="caption-subject bold font-purple uppercase">{{'lbl.pending.schedule' | translate}}</span>
+				</div>
+				<!-- <div class="actions">
+					<div class="btn-group" dropdown [isOpen]="dropdownListPeriodOption.isopen">
+						<a id="period-btn" class="btn green-haze btn-outline btn-circle btn-sm hover-initialized" dropdownToggle> {{monthList.selected.label}}
+							<i class="fa fa-angle-down"></i>
+						</a>
+						<ul class="dropdown-menu pull-right" *dropdownMenu aria-labelledby="period-btn">
+							<li *ngFor="let item of monthList.options;trackBy: trackByFn">
+								<a (click)="onChangePeriod(item)">{{item.label}}</a>
+							</li>
+						</ul>
+					</div>
+				</div> -->
+			</div>
+			<div class="portlet-body">
+				<ul class="nav nav-tabs">
+					<li [ngClass]="{ 'active': timeline.subtitle === 'fundtransfer' }" *ngIf="actionCode.VIEW_TRANSFER_SCHEDULE">
+						<a (click)="switchScheduleType('fundtransfer')">{{'lbl.transfer' | translate}}</a>
+					</li>
+					<li [ngClass]="{ 'active': timeline.subtitle === 'biller' }" *ngIf="actionCode.VIEW_BILL_PAYMENT_SCHEDULE">
+						<a (click)="switchScheduleType('biller')">{{'label.billpayment' | translate}}</a>
+					</li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane active in">
+						<timeline [data]="timeline.data" [title]="timeline.title" [subtitle]="timeline.subtitle" (onActions)="onActions($event)"></timeline>
+					</div>
+					<div class="tab-pane active in">
+						<bs-modal-message-delete #bsModalMessage [title]="messageModalData.title" [config]="messageModalData.config" [size]="messageModalData.size"
+						 	(onEmit)="onEmit($event)" (onHidden)="onModalHiddenResultMessage($event)"></bs-modal-message-delete>
+						<bs-modal-message-delete-all #bsModalAllMessage [title]="messageModalData.title" [config]="messageModalData.config" [size]="messageModalData.size"
+						 	(onEmit)="onEmit($event)" (onHidden)="onModalHiddenResultMessage($event)"></bs-modal-message-delete-all>
+						<bs-modal-message-edit #bsModalEditSchedule [title]="messageModalData.title"  [body]="messageModalData.body" [config]="messageModalData.config" [size]="messageModalData.size"
+						 	(onEmit)="onEmit($event)" (onHidden)="onModalHiddenResultMessage($event)"></bs-modal-message-edit>
+						<bs-modal-message-result #bsModalResultMessage [title]="messageModalData.title" [body]="messageModalData.body" [config]="messageModalData.config"
+						 	[size]="messageModalData.size" (onEmit)="onEmit($event)" (onHidden)="onModalHiddenResultMessage($event)"></bs-modal-message-result>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<timeline-modal-message #myTimelineModal [title]="timelineModalData.title" [type]="timelineModalData.type" [key]="timelineModalData.key" [size]="timelineModalData.size" [config]="timelineModalData.config"></timeline-modal-message>

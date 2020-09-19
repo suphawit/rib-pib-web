@@ -1,0 +1,13 @@
+<div class="">
+    <div class="clearfix"></div>
+    <h3 class="page-title">{{ 'list.lang' | translate }}</h3>
+    <div class="row ">
+        <div class=" col-lg-3 col-md-3 col-sm-3  ">
+            <span class="font-kkppurple">{{'label.chooseLanguage' | translate}}</span>
+        </div>
+        <div class=" col-md-5 col-sm-5 col-lg-5">
+            <a class=" btn btn-circle kkppurple btn-outline" (click)="onLanguageSettingsChange('th')" [ngClass]="{'active' : languageSettingValue == 'th'}" [style.width.px]="100">ภาษาไทย</a>
+            <a class=" btn btn-circle kkppurple btn-outline" (click)="onLanguageSettingsChange('en')" [ngClass]="{'active' : languageSettingValue == 'en'}" [style.width.px]="100">English</a>
+        </div>
+    </div>
+</div>

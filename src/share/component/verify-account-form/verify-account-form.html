@@ -1,0 +1,28 @@
+<form class="form-horizontal" [formGroup]="verifyAccountForm" (ngSubmit)="onSubmit()" novalidate>
+    <div class="form-group">
+        <label>{{'label.selectAccTypeList' | translate}}</label>
+        <div class="row">
+            <div class="col-sm-5"> 
+                <select class="form-control" name="productType" (change)="onChange($event.target.value)">
+                    <option value="{{item.value}}" [selected]="true" *ngFor="let item of productData">{{item.name | translate}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="form-group" formControlValidator [control]="verifyAccountForm.controls.accountNO" [submitted]="submitted">
+        <label>{{'label.accNo' | translate}} <span class="required">*</span></label>
+        <div class="row">
+            <div class="col-sm-5">
+                <input type="text" class="form-control" id="accountNO" placeholder="" formControlName="accountNO" [maxLength]="15" autocomplete="off" />
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+    </div>
+    <div class="form-actions"> 
+        <div class="row">
+            <div class="col-sm-offset-3 col-sm-9">
+                <button type="submit" class="btn btn-outline kkppurple button-next">{{'button.next'|translate}}&nbsp;<i class="fa fa-angle-right"></i></button>
+            </div>
+        </div>
+    </div>
+</form>

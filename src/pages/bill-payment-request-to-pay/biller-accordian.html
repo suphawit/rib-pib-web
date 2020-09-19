@@ -1,0 +1,35 @@
+<div class="panel-group">
+    <div class="panel panel-default" *ngFor="let group of accordian.data; trackBy: trackByFn">
+        <div class="panel-heading" (click)="toggleState(group.stateName.id)">
+            <h4 class="panel-title">
+                {{group.stateName.name | translate}} 
+                <i class="pull-right glyphicon" [ngClass]="{'glyphicon-menu-down': accordian.state[group.stateName.id] === 'collapsed', 'glyphicon-menu-up': accordian.state[group.stateName.id] === 'expanded'}"></i>
+            </h4>
+        </div>
+        <div class="panel-body" [@accordingState]="accordian.state[group.stateName.id]" [style.overflow]="'hidden'">
+            <table class="table table-light">
+                <tbody>
+                    <tr *ngFor="let item of group.stateData; trackBy: trackByFn" class="line-bottom">
+                        <td width="25%">
+                            <a class="primary-link" (click)="navigateToBillerProfileDetail(item)">{{item.aliasName}}</a>
+                        </td>
+                        <td width="35%">
+                            <span *ngIf="translate.currentLang == 'en'">{{item.billerNameEn}}</span>
+                            <span *ngIf="translate.currentLang == 'th'">{{item.billerNameTh}}</span>
+                        </td>
+                        <td class="right">
+                            <div class="pull-right">
+                                <label class="btn btn-circle btn-icon-only btn-default" (click)="onClickFavourite(item)"><i class="fa" [ngClass]="{ 'fa-star' : item.isFavourite === 'Y', 'fa-star-o' : item.isFavourite === 'N' }"></i></label>
+                                <label *ngIf="permissionService.getShortcutActionCodePermission('PAY_BILL','PAY_BILL')" class="btn btn-circle btn-default" (click)="navigateToPayBill(item)">{{'lbl.paybill' | translate}}</label>
+                                <label class="btn btn-circle btn-default" (click)="navigateToBillerProfileDetail(item)">{{'label.moreinfo' | translate}}</label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr *ngIf="group.stateData.length < 1">
+                        <td class="text-danger" colspan="6">{{ 'label.billerNotFound' | translate }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

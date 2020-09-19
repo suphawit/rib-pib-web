@@ -1,0 +1,71 @@
+pages-home{
+    .home-bg{
+        position: absolute;
+        width: 100%;
+        @media (min-width: 992px){
+            margin-left: -256px;
+        }
+        @media (max-width: 992px){
+            margin-left: -20px;
+        }
+        float: right;
+        min-height: 100%;
+        height: auto !important;
+        z-index: 1;
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+        -webkit-transition-duration: 0.3s;
+        transition-duration: 0.3s;
+        background-image: url($base_url+'/assets/images/bg_home.jpg');
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+
+    .home-mobile-bg{
+        position: absolute;
+        width: 100%;
+        float: right;
+        min-height: 100%;
+        height: auto !important;
+        z-index: 10;
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+        -webkit-transition-duration: 0.3s;
+        transition-duration: 0.3s;
+        background-image: url($base_url+'/assets/images/mobile.png');
+        background-size: 95%;
+        background-repeat: no-repeat;
+    }
+    .content-box {
+        margin-top: -10px;
+        padding-bottom: 2%;
+    }
+    .content-box img.appstore_btn, .content-box img.google_play_btn {
+    max-width: 130px;
+    min-width: 120px;
+    width: 100%;
+    }
+    .content-box img.appstore_btn {
+        float: right;
+    }
+    .row {
+        margin-left: -15px !important;
+    }
+    .text-box {
+        color: $color-kkp-purple;
+        padding: 0% 15%;
+    }
+    h1, h4{
+        font-family: Kiatnakin,Tahoma,'Arial',Thonburi,Helvetica!important;
+        font-weight: 300;
+    }
+    .datails{
+        text-align: center;
+        margin-top:-20px;
+        color: $color-kkp-purple;
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+}

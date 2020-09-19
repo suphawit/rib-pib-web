@@ -1,0 +1,130 @@
+<div class="page-header navbar navbar-fixed-top">
+    <div class="page-header-inner ">
+        <div class="page-logo">
+            <a>
+                <img src="./assets/layouts/layout/img/logo.png?v={{BUILD_NUM}}" alt="kiatnakin-logo" class="logo-default" /> 
+            </a>
+            <!--<div class="menu-toggler sidebar-toggler">
+                <span></span>
+            </div>-->
+        </div>
+        <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+            <span></span>
+        </a>
+        <div class="top-menu">
+            <div *ngIf="isLogin == true && isTermAndCon">
+                <ul class="nav navbar-nav pull-right">
+                    <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
+                        <a href="#" class="dropdown-toggle" dropdown-menu-hover="" data-toggle="dropdown" data-close-others="true">
+                            <i class="icon-bell"></i>
+                            <span  *ngIf="badgeMenu !== '0'" class="badge badge-default"> {{badgeMenu}} </span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="external">
+                                <h3>
+                                    <span class="bold">{{badgeMenu}}</span> notifications</h3>
+                                <!-- <a href="#/profile/dashboard">view all</a> -->
+                            </li>
+                            <li>
+                                <div class="slimScrollDiv advddv" style="height: 300px;">
+                                    <ul infiniteScroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="300" [scrollWindow]="false" (scrolled)="onScrollDown()"
+                                        class="dropdown-menu-list scroller" style="height: 300px; overflow-y: scroll; width: auto;"
+                                        data-handle-color="#637283" data-initialized="1">
+                                        <li class="" *ngFor="let notification of notificationListReverse;  let i= index" [ngClass]="{ 'notification-highlight': notification.isRead === false }"
+                                            (click)="onclickNotification(notification,i)">
+                                            <a href="javascript:;">
+                                                <!--<span class="time">just now </span>-->
+                                                <span class="time" *ngIf="translate.currentLang == 'en'">{{notification.createDate | amLocale:'en' | amTimeAgo:true }}</span>
+                                                <span class="time" *ngIf="translate.currentLang == 'th'">{{notification.createDate | amLocale:'th' | amTimeAgo:true }}</span>
+                                                <span class="details">
+                                        <span class="{{notification.icons.bg}}">
+                                                <i class="{{notification.iconName.icons}}"></i>
+                                        </span>
+                                                <span *ngIf="translate.currentLang == 'en'">{{notification.msgEn}}</span>
+                                                <span *ngIf="translate.currentLang == 'th'">{{notification.msgTh}}</span>
+                                                </span>
+                                            </a>
+                                        </li>
+
+                                    </ul>
+                                    <div class="slimScrollBar" style="background: rgb(99, 114, 131); width: 7px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 171.429px;"></div>
+                                    <div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(234, 234, 234); opacity: 0.2; z-index: 90; right: 1px;"></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown dropdown-user">
+                        <!--<a href="#" class="dropdown-toggle" dropdown-menu-hover data-toggle="dropdown" data-close-others="true">
+                            <span class="username username-hide-on-mobile" *ngIf="translate.currentLang == 'th'">
+                                {{'lbl.welcome'|translate}} {{permissionService.userData.fullNameTH}} {{permissionService.userData.fullSurNameTH}}<br/>
+                                <div *ngIf="permissionService.userData.lastSuccessFullLogon != null && permissionService.userData.lastSuccessFullLogon != ''">
+                                    {{'lbl.lastlogin' | translate}} {{permissionService.userData.lastSuccessFullLogon}}
+                                </div>
+                            </span>
+                            <span class="username username-hide-on-mobile" *ngIf="translate.currentLang == 'en'">
+                                {{'lbl.welcome'|translate}} {{permissionService.userData.fullNameEN}} {{permissionService.userData.fullSurNameEN}}<br/>
+                                <div *ngIf="permissionService.userData.lastSuccessFullLogon != null && permissionService.userData.lastSuccessFullLogon != ''">
+                                    {{'lbl.lastlogin' | translate}} {{permissionService.userData.lastSuccessFullLogon}}
+                                </div>
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-default">
+                            <li>
+                                <a (click)="clickLogout()">
+                                    <i class="icon-key"></i> {{'lbl.logout' | translate}}
+                                </a>
+                            </li>
+                        </ul>-->
+                        <div class="dropdown-toggle">
+                            <span class="username username-hide-on-mobile">
+                                {{'lbl.welcome'|translate}} {{permissionService.userData['fullName'+translate.currentLang.toUpperCase()]}} {{permissionService.userData['fullSurName'+translate.currentLang.toUpperCase()]}}<br/>
+                                <span *ngIf="permissionService.userData.lastSuccessFullLogon != null && permissionService.userData.lastSuccessFullLogon != ''">
+                                    {{'lbl.lastlogin' | translate}} {{permissionService.userData.lastSuccessFullLogon}}&nbsp;-&nbsp;
+                                </span>
+                                <a style="color: white;" (click)="clickLogout()">{{'lbl.logout' | translate}}</a>
+                            </span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div *ngIf="isLogin != true || !isTermAndCon">
+                <!--<ul class="nav navbar-nav pull-right">
+
+
+                    <li class="dropdown dropdown-user">
+                        <select class="b-select web-select dropdown dropdown-language" name="languageSetting" (change)="onLanguageSettingsChange($event.target.value)">
+                            <option value="{{labelLanguageSetting.value}}" [selected]="labelLanguageSetting.value === languageSettingValue" *ngFor="let labelLanguageSetting of labelLanguageSettings; trackBy: trackById">{{labelLanguageSetting.name | translate}}</option>
+                        </select>
+                    </li>
+                </ul>-->
+                <ul class="nav navbar-nav pull-right">
+                    <li class="dropdown dropdown-user">
+                        <a href="#" style="color: white; padding-top: 20px;" class="dropdown-toggle" dropdown-menu-hover data-toggle="dropdown" data-close-others="true">
+
+                            <span class="uppercase">
+                                {{languageSettingValue}}
+                            </span>
+                            <i class="fa fa-angle-down"></i>
+                        </a>
+                        <ul style="max-width: 55px; min-width: 50px;" class="dropdown-menu dropdown-menu-default">
+                            <li (click)="onLanguageSettingsChange(labelLanguageSetting.value)" *ngFor="let labelLanguageSetting of labelLanguageSettings; trackBy: trackById">
+                                <a style="padding: 8px 16px 8px 17px !important;">
+                                   {{labelLanguageSetting.name | translate}}
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+<bs-modal-message #messageModal [body]="messageModalData.body" [title]="messageModalData.title" [size]="messageModalData.size"
+    [config]="messageModalData.config" (onHidden)="onModalHidden($event)" (onEmit)="onEmit($event)"></bs-modal-message>
+
+    <timeline-modal-message #myTimelineModal [title]="timelineModalData.title" [type]="timelineModalData.type" [key]="timelineModalData.key" [size]="timelineModalData.size" [config]="timelineModalData.config"></timeline-modal-message>
+    <RTP-timeline-modal-message #rtpTimelineModal [title]="timelineModalData.title" [type]="timelineModalData.type" [key]="timelineModalData.key" [size]="timelineModalData.size" [config]="timelineModalData.config"></RTP-timeline-modal-message>

@@ -1,0 +1,10 @@
+my-account-list-page{
+    .table-scrollable {
+        max-height: 240px;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+    .portlet-light {
+        padding: 10px 15px 10px 15px !important;
+    }
+}

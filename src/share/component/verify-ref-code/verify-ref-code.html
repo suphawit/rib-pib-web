@@ -1,0 +1,64 @@
+<form class="form-horizontal" [formGroup]="verifyRefCodeForm" (ngSubmit)="onSubmit()" novalidate><!--(ngSubmit)="onSubmit()"-->
+    <div class="form-group">
+        <div class="row">
+            <div class="col-sm-12"><label>{{'label.cardType' | translate}}</label></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <card-type (onChangeCardType)="onChangeCardType($event)"></card-type>
+            </div>
+        </div>
+    </div>
+    <div class="form-group" formControlValidator [control]="verifyRefCodeForm.controls.cardId" [submitted]="submitted">
+        <div class="row">
+            <div class="col-sm-12">
+                <label>
+                    {{'label.cardNumber' | translate}}
+                </label>
+                <span class="required" aria-required="true"> * </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <input type="text" class="form-control input-xlarge" placeholder="" [maxLength]="20" id="cardId" formControlName="cardId" autocomplete="off" />
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group" *ngIf="verifyRefCodeForm.value.cardType == 'P' && issueCountryList.length > 0">
+        <div class="row">
+            <div class="col-sm-12"><label>{{'label.issueCountry' | translate}}</label></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <select class="form-control" name="countryCode" (change)="onChangeCountry($event.target.value)">
+                    <option value="{{country.countryCode}}" *ngFor="let country of issueCountryList;trackBy: trackById">{{country['desc'+descLang]}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="form-group" formControlValidator [control]="verifyRefCodeForm.controls.refCode" [submitted]="submitted">
+        <div class="row">
+            <div class="col-sm-12" >
+                <label>
+                    {{'label.refcode' | translate}}
+                </label>
+                <span class="required" aria-required="true"> * </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <input type="text" class="form-control input-xlarge" placeholder="" [maxLength]="15" id="refCode" formControlName="refCode" autocomplete="off" />
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-actions">
+        <div class="col-md-offset-3 col-sm-offset-3 col-md-9 col-sm-9">
+            <button type="button" class="btn btn-outline btn-default" *ngIf="showBackButton" (click)="onClickBack()"><i class="fa fa-angle-left"></i> {{ 'button.back' | translate}}</button>
+            <button type="submit" class="btn btn-outline kkppurple button-next"> {{'button.next' | translate}} <i class="fa fa-angle-right"></i></button>
+        </div>
+    </div>
+    
+</form>

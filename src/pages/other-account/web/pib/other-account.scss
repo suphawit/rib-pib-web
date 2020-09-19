@@ -1,0 +1,45 @@
+pib-add-other-account-confirm {
+    .no-gap {
+        margin-bottom:0!important
+    }
+
+    .page-content {
+        border-left:1px solid #F0F5F7
+    }
+}
+
+pib-edit-other-account-confirm {
+    .no-gap {
+        margin-bottom:0!important
+    }
+
+    .page-content {
+        border-left:1px solid #F0F5F7;
+        border-bottom:0 solid #F0F5F7!important
+    }
+} 
+
+pib-add-other-account {
+    .input-xlarge {
+        width:420px!important
+    }
+
+    .light-green {
+        color:#FFF;
+        background-color:#32c5d2;
+        border-color:#32c5d2
+    }
+}
+
+other-account-list-page {
+    .icon-w:before {
+        font-size:17px!important;
+        line-height:26px!important
+    }
+}
+
+pib-add-other-account, pib-edit-other-account {
+    .dropdown-menu > li > a{
+        border-bottom-style: none;
+    }
+}

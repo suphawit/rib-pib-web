@@ -1,0 +1,16 @@
+<div class="clearfix"></div>
+<h3 class="page-title">{{ title | translate }}</h3>
+<div class="row">
+    <div class="col-md-12">
+        <alert-message #alertMessage [type]="alertOption.type" [message]="alertOption.message"></alert-message>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <step-wizard 
+            [data]="stepOption.data" 
+            [style]="stepOption.style" 
+            [step]="stepOption.step">
+        </step-wizard>
+    </div>
+</div>

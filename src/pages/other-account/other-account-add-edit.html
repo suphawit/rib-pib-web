@@ -1,0 +1,146 @@
+<div class="clearfix"></div>
+<h3 class="page-title">{{ titlePage | translate }}</h3>
+<div class="row">
+	<div lass="col-md-12">
+		<alert-message #alertMessage [type]="type" [message]="message"></alert-message>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<step-wizard [data]="stepWizard.input.data" [style]="stepWizard.input.style" [step]="stepWizard.input.step"></step-wizard>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<div class="portlet light ">
+			<div class="portlet-title" style="margin-top: 25px;">
+				<div class="caption">
+					<i class=" icon-layers font-kkppurple"></i>
+					<span class="caption-subject font-kkppurple sbold uppercase">{{ otherAccountStep | translate}}</span>
+				</div>
+			</div>
+			<div class="portlet-body form">
+				<form class="form-group" [formGroup]="otherAccountFormGroup" (ngSubmit)="onSubmit()">
+					<div class="form-group" formControlValidator [control]="otherAccountFormGroup.controls.accountAliasname" [submitted]="submitted">
+						<label>{{'label.tdAliasName'|translate}}
+							<span class="required" aria-required="true"> * </span>
+						</label>
+						<div>
+							<input type="text" class="form-control input-xlarge" [maxLength]="30" placeholder="" formControlName="accountAliasname" autocomplete="off" />
+							<div class="help-block with-errors"></div>
+						</div>
+					</div>
+					<div class="form-group" formControlValidator [control]="otherAccountFormGroup.controls.category" [submitted]="submitted">
+						<label>
+							{{'lbl.category'|translate}}
+							<span class="required" aria-required="true"> * </span>
+						</label>
+						<div>
+							<select class="form-control input-xlarge" formControlName="category">
+								<option  value="" >{{'lbl.drpSelect'|translate}}</option>
+								<option  value="{{accCategory.catId}}" *ngFor="let accCategory of accCategoryList;trackBy: trackByFn; let i = index">{{accCategory.catName}}</option>
+							</select>
+							<div class="help-block with-errors"></div>
+						</div>
+					</div>
+					<div class="form-group" formControlValidator [control]="otherAccountFormGroup.controls.anyIDType" [submitted]="submitted">
+						<label>{{'label.type'|translate}}
+							<span class="required" aria-required="true"> * </span>
+						</label>
+						<div>
+							<select class="form-control input-xlarge" formControlName="anyIDType" (change)="Onchange(param,$event.target.value)" [attr.disabled]="isAfterFund"> 
+								<option  [selected]="otherAccountFormGroup.value.anyIDType === type" value="{{ type }}" *ngFor="let type of getAnyIDTypes();trackBy: trackByFn; let i = index">
+									{{ lstOfAnyIDType[type]?.desc }}
+								</option>
+							</select>
+							<div class="help-block with-errors"></div>
+						</div>
+					</div>
+					<div *ngIf="anyIDType == constants.ANYID_TYPE_BANK_ACCOUNT" class="form-group" formControlValidator [control]="otherAccountFormGroup.controls.bankCode"
+					 [submitted]="submitted">
+						<label>{{'lbl.bankName'|translate}}
+							<span class="required" aria-required="true"> * </span>
+						</label>
+						<div>
+							<select class="form-control input-xlarge" formControlName="bankCode" (change)="checkAccountInfo($event.target.value)"> 
+								<option [selected]="bankCode == value" value ="">{{'lbl.drpSelect'|translate}}</option>
+								<option [selected]="bankCode == bankList.bankCode " value="{{bankList.bankCode}}" *ngFor="let bankList of bankLists;trackBy: trackByFn; let i = index">{{bankList.bankName}}</option>
+							</select>
+							<div class="help-block with-errors"></div>
+						</div>
+					</div>
+
+					<div class="form-group" formControlValidator [option]="{anyIDType: labelLang}" [control]="otherAccountFormGroup.controls.accountNo" [submitted]="submitted">
+						<label>
+							{{ labelLang }}
+							<span class="required" aria-required="true"> * </span>
+						</label>
+						<div>
+							<input type="text" [onlyNumber]="configAnyIDType.valueType" [maxLength]="configAnyIDType.valueLength" class="form-control input-xlarge"
+							 	placeholder="" formControlName="accountNo" autocomplete="off" />
+							<div class="help-block with-errors"></div>
+						</div>
+					</div>
+
+					<div *ngIf="anyIDType == constants.ANYID_TYPE_BANK_ACCOUNT && showAcctName == true" class="form-group" formControlValidator [control]="otherAccountFormGroup.controls.accountName"
+					 [submitted]="submitted">
+						<label>{{'label.accName'|translate}}
+							<span class="required" aria-required="true"> * </span>
+						</label>
+						<div>
+							<input type="text" class="form-control input-xlarge" onlyENUpper #input (input)="input.value=$event.target.value.toUpperCase()"
+							 	placeholder="" formControlName="accountName" autocomplete="off" [maxLength]="350" />
+							<div class="help-block with-errors"></div>
+						</div>
+					</div>
+
+					<div>
+						<label>{{'lbl.notifyReceiver'|translate}}
+							<span> </span>
+					</label>
+					</div>
+
+					<div class="form-group" formControlValidator [control]="otherAccountFormGroup.controls.email" [submitted]="submitted">
+						{{'lbl.notifyEmail'|translate}}
+						<div>
+							<input type="text" class="form-control input-xlarge" placeholder="" formControlName="email" autocomplete="off" />
+							<div class="help-block with-errors"></div>
+						</div>
+					</div>
+
+					<div class="form-group" formControlValidator [control]="otherAccountFormGroup.controls.mobile" [submitted]="submitted">
+						{{'lbl.notifySMS'|translate}}
+						<div class="input-group">
+							<div class="input-group input-xlarge">
+								<input type="text" [maxLength]="10" class="form-control" placeholder="" formControlName="mobile" onlyNumber="true" autocomplete="off" />
+								<div class=" input-group-btn " dropdown>
+									<button type="button" id="msgToggle" class="btn kkppurple" dropdownToggle>{{msgLang|translate}}
+										<i class="fa fa-angle-down"></i>
+									</button>
+									<ul *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="msgToggle">
+										<li role="menuitem">
+											<a>{{'lbl.notifyLanguage'|translate}}</a>
+										</li>
+										<li class="divider dropdown-divider"></li>
+										<li role="menuitem" *ngFor="let lang of notifySMSLangData;trackBy: trackByFn" (click)="toggleSMSLang(lang.value)">
+											<a> {{ lang.display | translate }} </a>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="help-block with-errors"></div>
+						</div>
+					</div>
+					<div class="form-actions">
+						<div class="row">
+							<div class="col-md-offset-3 col-md-9">
+								<button *ngIf="isAfterFund === false" type="button" class="btn btn-default" (click)="navigateback()" [ngClass]="{'btn-outline ': pageStyle == constants.STYLE_RIB_WEB}"><i class="fa fa-angle-left"></i> {{'button.back'|translate}} </button>
+								<button type="submit" class="btn btn-outline kkppurple button-next">{{'button.next'|translate}}&nbsp;<i class="fa fa-angle-right"></i></button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

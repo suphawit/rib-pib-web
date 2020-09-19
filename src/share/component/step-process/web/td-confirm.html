@@ -1,0 +1,127 @@
+<div class="portlet light nopadding">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class=" icon-layers font-kkppurple"></i>
+            <span class="caption-subject font-kkppurple sbold uppercase">{{ 'lbl.fundTransferSecondStep' | translate }}</span>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <form #form="ngForm" novalidate>
+            <div class="row">                
+			    <div class="col-md-offset-2 col-sm-offset-2 col-md-7 col-sm-7">
+				     <div class="portlet-body">
+                        <div class="table-scrollable table-scrollable-borderless">
+                            <table class="table table-light">
+                                <tbody>
+                                    <tr>
+                                        <td> {{ 'lbl.transferFrom' | translate }} </td>
+                                            <td>
+                                                <table>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="fit">
+                                                                <div class="icon-circle" style.background-color="{{ transferObj.srcAccount?.bank?.imgObj?.color }}">
+                                                                    <img  src="{{ constants.BANK_IMAGE_PATH + transferObj.srcAccount?.bank?.imgObj?.url }}" title="{{ transferObj.destAccount?.bank?.bankName }}" 
+                                                                        alt="{{ transferObj.destAccount?.bank?.bankName }}"  onerror="this.style.display='none';" class="user-pic rounded" />
+                                                                </div>
+                                                            </td>
+                                                            <td style="padding-left:5px!important"
+                                                                [innerHTML]="transferObj.srcAccount?.getAccountDisplay() 
+                                                                    + '<br />' + ('lbl.availableBalance' | translate)
+                                                                    + '&nbsp;' + (transferObj.srcAccount?.balance | formatCurrency) 
+                                                                    + '&nbsp;' + ('lbl.baht' | translate) | sanitizeHtml" >
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td> {{ 'lbl.transferTo' | translate }} </td>
+                                            <td>
+                                                <table>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="fit">
+                                                                <div *ngIf="transferObj.destAccount?.anyIDType?.anyIDType === constants.ANYID_TYPE_BANK_ACCOUNT" class="icon-circle" 
+                                                                    style.background-color="{{ transferObj.destAccount?.bank?.imgObj?.color }}" >
+                                                                    <img src="{{ constants.BANK_IMAGE_PATH + transferObj.destAccount?.bank?.imgObj?.url }}" title="{{ transferObj.destAccount?.bank?.bankName }}" 
+                                                                        alt="{{ transferObj.destAccount?.bank?.bankName }}" onerror="this.style.display='none';" class="user-pic rounded" />
+                                                                </div>
+                                                                <div *ngIf="transferObj.destAccount?.anyIDType?.anyIDType !== constants.ANYID_TYPE_BANK_ACCOUNT" class="icon-circle" style.background-color="{{ transferObj.destAccount?.anyIDType?.iconObj?.iconColor }}">
+                                                                    <img src="{{ transferObj.destAccount?.anyIDType?.iconObj?.icon }}" title="{{ transferObj.destAccount?.anyIDType?.desc }}" alt="{{ transferObj.destAccount?.anyIDType?.desc }}" 
+                                                                        onerror="this.style.display='none';" class="user-pic rounded" />
+                                                                </div>
+                                                            </td>
+                                                            <td [innerHTML]="transferObj.destAccount?.getAccountDisplay() | sanitizeHtml" style="padding-left:5px!important">
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>     
+                                        <tr>
+                                            <td> {{ 'lbl.transactionDate' | translate }} </td>
+                                            <td> {{ transferObj?.txnDate | dateFormat }} </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td> {{ 'lbl.debitDate' | translate }} </td>
+                                            <td> {{ transferObj?.transferDecisionList[0].getDebitDateTimeDisplay() | dateFormat }} </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td> {{ 'lbl.transferDate' | translate }} </td>
+                                            <td> {{ transferObj?.transferDecisionList[0].getCreditTimeDisplay() | dateFormat }} </td>
+                                            <td></td>
+                                        </tr>                                   
+                                        <tr>
+                                            <td> {{ 'lbl.amount' | translate }} </td>
+                                            <td> {{ transferObj?.transferAmount | formatCurrency }} &nbsp; {{ 'lbl.baht' | translate }} </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td> {{ 'lbl.fee' | translate }} </td>
+                                            <td> {{ transferObj?.transferDecisionList[0].feeAmount | formatCurrency }} &nbsp; {{ 'lbl.baht' | translate }} </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td> {{ 'lbl.term' | translate }} </td>
+                                            <td> {{ transferObj?.termType.getTermNameDisplay() }} </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td> {{ 'lbl.interestRate' | translate }} </td>
+                                            <td> {{ transferObj?.transferDecisionList[0].intRate | formatCurrency }} &nbsp; % </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td> {{ 'lbl.interestCondition' | translate }} </td>
+                                            <td> {{ transferObj?.transferDecisionList[0].intCond }}</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td> {{ 'label.benefitAccount' | translate }} </td>
+                                            <td> {{ transferObj?.benefitAcc }}</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td> {{ 'lbl.note' | translate }} </td>
+                                            <td> <textarea class="form-control" rows="3" id="note" maxlength="40" name="note" [(ngModel)]="model.note" #note="ngModel"></textarea> </td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-offset-2 col-sm-offset-2 col-md-7 col-sm-7">
+                    <a href="javascript:;" (click)="goToPrevStep(form.value)" class="btn btn-outline btn-default"> <i class="fa fa-angle-left"></i> {{ 'btn.back' | translate }} </a>
+                    <button class="btn btn-outline kkppurple button-next" (click)="goToNextStep(form.value)"> {{ 'btn.confirm' | translate }} <i class="fa fa-angle-right"></i></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

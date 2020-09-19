@@ -1,0 +1,47 @@
+<div class="clearfix"></div>
+<h3 class="page-title">{{ 'lbl.KKpromptPayDetail' | translate }}</h3>
+<div class="row">
+    <div class="col-md-12">
+        <alert-message #alertMessage [type]="alertConfig.type" [message]="alertConfig.message"></alert-message>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-8 col-sm-8">
+<!-- BEGIN PORTLET-->
+<div class="portlet light bordered">
+    <div class="portlet-body">
+        <table class="table table-light">
+            <tr>
+                <td style="width: 40%;">
+                    <span class="bold font-purple">{{'lbl.KKPromptPayID'|translate}}</span>
+                </td>														
+                <td align="">
+                    <span>{{selectAccount?.anyIDValue}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="">
+                    <span class="bold font-purple">{{'label.type'|translate}}</span> 
+                </td>															
+                <td align="">
+                    <span *ngIf ="translateService.currentLang ==  'en'">{{selectAccount?.promptpayLabelEn}}</span>
+                    <span *ngIf ="translateService.currentLang ==  'th'">{{selectAccount?.promptpayLabelTh}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="">
+                    <span class="bold font-purple">{{'label.accNumber'|translate}}</span>
+                </td>															
+                <td align="">
+                    <span>{{selectAccount?.accountNo}}</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<!-- END PORTLET-->
+    </div>
+    <div class="col-md-4 col-sm-4">
+        <portlets-menu (OnMenuClick)="OnMenuClick($event)" [style]="'rib-web'"></portlets-menu>
+    </div>
+</div>

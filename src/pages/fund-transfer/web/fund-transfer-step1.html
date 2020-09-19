@@ -1,0 +1,28 @@
+<div class="row wizard-step-title {{ settings.styleClass }}">
+    <div class="col-md-12">
+        <div class="portlet light">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class=" icon-layers font-kkppurple"></i>
+                    <span class="caption-subject font-kkppurple sbold uppercase">{{ 'lbl.fundTransferFirstStep' | translate }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <!-- <div [ngClass]="{'col-lg-3 col-sm-3': settings.styleClass == constants.STYLE_RIB_WEB, 'col-lg-4 col-sm-4': settings.styleClass == constants.STYLE_PIB_WEB }"> -->
+    <div class="col-lg-4 col-sm-4">
+        <from-account-list [settings]="settings" [currentAccount]="transferObj?.srcAccount" (accountChanged)="updateMyAccount($event)"></from-account-list>
+    </div>
+
+    <div class="col-md-5 col-sm-5">
+        <input-details *ngIf="!isTermDeposit" [settings]="settings" [fromAccount]="srcAccountObj" [toAccount]="destAccountObj" (onRecurringChange)="onRecurringChange()"></input-details> 
+        <td-input-details *ngIf="isTermDeposit" [settings]="settings" [fromAccount]="srcAccountObj" [toAccount]="destAccountObj"></td-input-details>
+    </div>
+
+    <!-- <div [ngClass]="{'col-md-4 col-sm-4': settings.styleClass == constants.STYLE_RIB_WEB, 'col-md-3 col-sm-3': settings.styleClass == constants.STYLE_PIB_WEB }"> -->
+    <div class="col-md-3 col-sm-3">
+        <to-account-list [settings]="settings" [currentAccount]="transferObj?.destAccount" (accountChanged)="updateOtherAccount($event)"></to-account-list>
+    </div>
+</div>

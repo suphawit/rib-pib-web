@@ -1,0 +1,72 @@
+<div [ngClass]="{ 'timeline':errorMessage == null }">
+    <!-- TIMELINE ITEM -->
+    {{errorMessage | translate}}
+    <div class="timeline-item" *ngFor="let timeline of timelineDataRender; trackBy: trackByFn">
+        <div class="timeline-badge" *ngIf="timeline.transDate">
+            <div class="timeline-text">
+                {{ timeline.transDate }}
+                <div class="font">{{ timeline.transMonth }}</div>
+            </div>
+        </div>
+        <div class="timeline-body">
+            <div class="timeline-body-arrow"></div>
+            <div class="timeline-body-head">
+                <div class="timeline-body-head-caption">
+                    <span class="timeline-body-alerttitle font-purple">
+                        {{ timeline.rtpMsgTypeLable | translate }}: {{timeline.status}} 
+                    </span>
+                    <span class="timeline-body-time font-grey-cascade" *ngIf="timeline.transTime">
+                        {{ 'label.at' | translate }} {{ timeline.transTime }}
+                    </span>
+                </div>
+                <div class="timeline-body-head-actions">
+                    <div class="btn-group" dropdown [isOpen]="timeline.isopen">
+                        <a id="{{ timeline.actionButton }}" class="btn btn-circle btn-outline kkppurple btn-sm dropdown-toggle hover-initialized" type="button" dropdownToggle>{{ 'lbl.actions' | translate }}
+                            <i class="fa fa-angle-down"></i>
+                        </a>
+                        <ul class="dropdown-menu pull-right" *dropdownMenu [attr.aria-labelledby]="timeline.actionButton">
+                            <li>
+                                <a (click)="selectMenuList('moreinfo', timeline.rawData)">{{ 'label.moreinfo' | translate }}</a>
+                            </li>
+                            <li *ngIf="timeline.rawData.requesterIdType !== 'BILLERID' 
+                                && timeline.rtpMsgType === 'INCOMING'
+                                && _PermissionService.getShortcutActionCodePermission('FUND_TRANSFER','FUND_TRANSFER')">
+                                <a (click)="selectMenuList('transfer', timeline.rawData)">{{ 'lbl.transfer' | translate }}</a>
+                            </li>
+                            <li *ngIf="timeline.rawData.requesterIdType === 'BILLERID' 
+                                && timeline.rtpMsgType === 'INCOMING'
+                                && _PermissionService.getShortcutActionCodePermission('PAY_BILL','PAY_BILL')">
+                                <a (click)="selectMenuList('billpayment', timeline.rawData)">{{ 'label.billpayment' | translate }}</a>
+                            </li>
+                            <li *ngIf="timeline.rtpMsgType === 'INCOMING' && timeline.rawData.requesterIdType !== 'BILLERID'">
+                                <a (click)="selectMenuList('rtpblocklist', timeline.rawData)">{{'btn.blockThisAccount'|translate}}</a>
+                            </li>
+                            <li *ngIf="timeline.rtpMsgType === 'INCOMING'">
+                                <a (click)="selectMenuList('delete', timeline.rawData)">{{'btn.removeRTPReceive'|translate}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-body-content">
+                <span *ngIf="timeline.rtpMsgType === 'INCOMING'" class="font-grey-cascade"> 
+                    <br><strong>{{ 'lbl.RequestFrom' | translate }}</strong> : {{ timeline.requesterAccountName }} <span *ngIf="timeline.requesterIdType !== 'BILLERID'">({{ timeline.requesterIdValue }})</span>
+                </span>
+                <span *ngIf="timeline.rtpMsgType === 'OUTGOING'" class="font-grey-cascade"> 
+                    <br><strong>{{ 'lbl.RequestTo' | translate }}</strong> : {{ timeline.receiverAccountName }} <span *ngIf="timeline.receiverIdType !== 'BILLERID'">({{ timeline.receiverIdValue }})</span>
+                </span>
+                <span class="font-grey-cascade"> 
+                    <br><strong>{{'label.type' | translate}}</strong> : {{ (timeline.rtpMsgType === 'INCOMING') ? timeline.requesterIdTypeLabel : timeline.receiverIdTypeLabel}} 
+                </span>
+                <span class="font-grey-cascade"> 
+                    <br><strong>{{'lbl.amount' | translate}}</strong> : {{ timeline.amount }} {{ 'lbl.baht' | translate }} 
+                </span>
+                <span class="font-grey-cascade"> 
+                    <br><strong>{{ 'lbl.note' | translate }}</strong> : {{ (timeline.additionalNote) ? timeline.additionalNote : '-' }}	
+                </span>
+            </div>
+        </div>
+    </div>
+    <!-- END TIMELINE ITEM -->
+</div>
+<RTP-timeline-modal-message #myTimelineModal [title]="timelineModalData.title" [type]="timelineModalData.type" [key]="timelineModalData.key" [size]="timelineModalData.size" [config]="timelineModalData.config"></RTP-timeline-modal-message>

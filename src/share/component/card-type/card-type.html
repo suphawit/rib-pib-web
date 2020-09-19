@@ -1,0 +1,3 @@
+<select id="ddlCardType" class="form-control" name="cardType" (change)="onCardTypeChange($event.target.value)">
+    <option value="{{labelCardType.value}}" [selected]="labelCardType.selected" *ngFor="let labelCardType of labelCardTypes;trackBy: trackById">{{labelCardType.name | translate}}</option>
+</select>

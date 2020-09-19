@@ -1,0 +1,81 @@
+<div class="clearfix"></div>
+<h3 class="page-title">{{ 'label.otheraccountdetail' | translate }}</h3>
+<div class="row">
+    <div class="col-md-12">
+        <alert-message #alertMessage [type]="alertConfig.type" [message]="alertConfig.message"></alert-message>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-8 col-sm-8 col-xs-12">
+        <!--start Detail -->
+        <div class="portlet-body">
+            <table class="table table-light">
+                <tr>
+                    <td class="" style="width: 270px; ">
+                        <span class="bold font-kkppurple">{{'label.accountAliasName'|translate}}</span>
+                    </td>
+                    <td align="">
+                        <span>{{accountDetail?.acctAliasName}}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="">
+                        <span class="bold font-kkppurple">{{'label.type'|translate}}</span>
+                    </td>
+                    <td align="">
+                        <span>{{accountDetail?.accountBean?.anyIDType?.desc}}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="">
+                        <span class="bold font-kkppurple">{{accountDetail?.accountBean?.anyIDType?.label}}</span>
+                    </td>
+                    <td align="">
+                        <span>{{accountDetail?.acctNo}}</span>
+                    </td>
+                </tr>
+                <tr *ngIf="accountDetail?.bankName != null">
+                    <td class="">
+                        <span class="bold font-kkppurple">{{'lbl.bankName'|translate}}</span>
+                    </td>
+                    <td>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td class="fit">
+                                        <div class="icon-circle" [style.background-color]="bankCodeDataService.getBankCodeImagePropertiesByField(accountDetail?.bankCode,'color')">
+                                            <img class="user-pic rounded" src="{{'assets/' + bankCodeDataService.getBankCodeImagePropertiesByField(accountDetail?.bankCode,'url')}}">
+                                        </div>
+                                    </td>
+                                    <td style="padding-left: 10px">
+                                        {{accountDetail?.bankName}}
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="">
+                        <span class="bold font-kkppurple">{{'label.accCategory'|translate}}</span>
+                    </td>
+                    <td align="">
+                        <span>{{accountDetail?.categoryName}}</span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!--end Detail -->
+    </div>
+    <div class="col-md-4 col-sm-4 col-xs-12">
+        <portlets-menu (OnMenuClick)="OnMenuClick($event)" [config]="firstLoad? accountDetail : (accountDetail?.isFavourite === 'Y' ? 'fa-star' : 'fa-star-o')"></portlets-menu>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+    </div>
+</div>
+
+<delete-other-acc-modal #bsModalMessage [accountDetail]="messageModalData?.accountDetail" [title]="messageModalData.title"
+    [config]="messageModalData.config" [size]="messageModalData.size" (onEmit)="onEmit($event)" (onHidden)="onModalHidden($event)"></delete-other-acc-modal>

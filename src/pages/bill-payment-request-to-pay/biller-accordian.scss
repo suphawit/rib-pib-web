@@ -1,0 +1,30 @@
+biller-request-to-pay-accordian,biller-request-to-pay-accordian-mobile{
+    table.table tbody > tr > td:hover {
+        background-color: transparent !important;
+    }
+    .fit .icon-w:before {
+        font-size: 21px !important;
+    }
+    .table.table-light > tbody > tr > td {
+        border-bottom: none;
+    }
+    .line-bottom {
+        border-bottom: 1px solid #ddd !important;
+    }
+    .line-bottom:last-child {
+        border-bottom: 0px !important;
+    }
+    .panel-body {
+        padding: 0px;
+    }
+    .panel {
+        border: 0;
+    }
+
+   table.table {
+       margin-bottom:0!important;
+    }
+
+    
+    
+}

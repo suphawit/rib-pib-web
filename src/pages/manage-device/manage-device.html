@@ -1,0 +1,43 @@
+<div class="portlet" [style.padding.px]="5">
+    <div class="clearfix"></div>
+    <h3 class="page-title">{{ title | translate }}</h3>
+    <div class="row">
+        <div class="col-md-12">
+            <alert-message #alertMessage [title]="alertConfig.title" [type]="alertConfig.type" [message]="alertConfig.message"></alert-message>
+        </div>
+    </div>
+	<div class="row">
+	</div>
+        <div class="panel card panel-default">
+        <div class="panel-heading card-header">
+            <div class="panel-title card-title">
+                <div class="accordion-toggle" >
+                    <div>{{'lbl.myDevice'|translate}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="table-scrollable table-scrollable-borderless">
+            <table class="table table-hover table-light">
+                <span style="padding-left: 15px;" *ngIf="listOfDevices?.length == 0">{{'lbl.noDevicesFound'|translate}}</span>
+                <tbody> 
+                    <tr class="line-bottom" *ngFor="let device of listOfDevices;">
+                        <td class="fit">
+                            <div class="fit icon-circle" style.background-color="{{ mobileAnyIdType.iconObj?.iconColor }}">
+                                <img src="{{ mobileAnyIdType.iconObj?.icon }}" title="{{ mobileAnyIdType.desc }}" alt="{{mobileAnyIdType.desc }}" 
+                                 class="user-pic rounded" />
+                            </div>
+                        </td>
+                        <td>
+                            <a style="float: right;" (click)="onSubmit(device)" class="btn btn-circle btn-default">
+                                {{'label.remove'|translate}}
+                            </a>
+                            <span class="primary-link">{{ device.deviceModel }}</span><br>
+                            <span class="primary-link">{{'lbl.lastAccess'|translate}} : {{ device.lastLogin }}</span> 
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<bs-modal-message #messageModal [body]="messageModalData.body" [title]="messageModalData.title" [size]="messageModalData.size" [config]="messageModalData.config" (onEmit)="onEmit($event)" (onHidden)="onModalHidden()"></bs-modal-message>

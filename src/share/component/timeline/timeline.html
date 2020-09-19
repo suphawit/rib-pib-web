@@ -1,0 +1,88 @@
+<div [ngClass]="{ 'timeline':errorMessage == null }">
+    <!-- TIMELINE ITEM -->
+    <span *ngIf="errorMessage">{{errorMessage | translate}}</span>
+    <div class="timeline-item" *ngFor="let timeline of timelineDataRender; trackBy: trackByFn; let i = index">
+        <div class="timeline-badge" *ngIf="timeline.transDate">
+            <div class="timeline-text">
+                {{ timeline.transDate }}
+                <div [style.fontSize.px]="tlTransFontSize">{{ timeline.transMonth }}</div>
+            </div>
+        </div>
+        <div class="timeline-body">
+            <div class="timeline-body-arrow"></div>
+            <div class="timeline-body-head">
+                <div class="timeline-body-head-caption">
+                    <span class="timeline-body-alerttitle" [ngClass]="{ 'font-kkppurple': timelineTitle === 'schedule' || timeline.statusCode === 'SC' || timeline.status === 'PAID', 'font-red': timelineTitle !== 'schedule' && timeline.statusCode !== 'SC' && timeline.status !== 'PAID' }">
+                        {{ ((timelineSubTitle === 'fundtransfer') ? 'lbl.transfer' : (timelineSubTitle === 'RTP') ? timeline.rtpMsgTypeLable: 'label.billpayment') | translate }}:  {{(timelineSubTitle === 'RTP') ? timeline.statusDesc : timeline.status}}
+                    </span>
+                    <span class="timeline-body-time font-grey-cascade" *ngIf="timeline.transTime">
+                        {{ 'label.at' | translate }} {{ timeline.transTime }}
+                    </span>
+                </div>
+                <div class="timeline-body-head-actions">
+                    <div class="btn-group" ngbDropdown>
+                        <a id="{{ timeline.actionButton }}" class="btn btn-circle kkppurple btn-outline btn-sm dropdown-toggle hover-initialized" type="button" ngbDropdownToggle>{{ 'lbl.actions' | translate }}
+                            <i class="fa fa-angle-down"></i>
+                        </a>
+                        <ul class="dropdown-menu pull-right" [attr.aria-labelledby]="timeline.actionButton">
+                            <li *ngIf="timelineTitle === 'schedule' && permissionManage[timelineTitle][timelineSubTitle]?.edit == true ">
+                                <a (click)="selectMenuList('edit', timeline.rawData)">{{ 'btn.edit' | translate }} </a>
+                            </li>
+                            <li *ngIf="permissionManage[timelineTitle][timelineSubTitle]?.moreInfo == true || timelineTitle === 'schedule'">
+                                <a (click)="selectMenuList('moreinfo', timeline.rawData)">{{ 'label.moreinfo' | translate }}</a>
+                            </li>
+                            <ng-container *ngIf="isDesktop">
+                                <li *ngIf="timelineTitle === 'history'
+                                    && (timeline?.canPrintSlip && permissionManage[timelineTitle][timelineSubTitle]?.print ? true : false)
+                                    && timelineSubTitle !== 'RTP' ">
+                                    <a (click)="selectMenuList('print', timeline.rawData)">{{ 'btn.print' | translate }}</a>
+                                </li>
+                            </ng-container>
+                            <li class="divider" *ngIf="timelineTitle === 'schedule'"> </li>
+                            <li *ngIf="timelineTitle === 'schedule' && permissionManage[timelineTitle][timelineSubTitle]?.delete == true">
+                                <a (click)="selectMenuList('delete', timeline.rawData)">{{ 'btn.delete' | translate }}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-body-content">
+                <span class="font-grey-cascade" *ngIf="timelineSubTitle !== 'RTP'"> 
+                    <strong>{{ 'lbl.transferFrom' | translate }}</strong> : {{ timeline.accountFromName }} ({{ timeline.accountFromNumber }})
+                </span>
+                <span class="font-grey-cascade" *ngIf="timeline.accountToName != null && timelineSubTitle === 'fundtransfer'"> 
+                    <br><strong>{{ 'lbl.transferTo' | translate }}</strong> : {{ timeline.accountToName }} ({{ timeline.accountToNumber }})
+                </span>
+                <span class="font-grey-cascade" *ngIf="timeline.accountToName == null && timelineSubTitle === 'fundtransfer'"> 
+                    <br><strong>{{ 'lbl.transferTo' | translate }}</strong> : {{ timeline.accountToNumber }}
+                </span>
+                <span class="font-grey-cascade" *ngIf="timelineSubTitle === 'RTP' && timelineTitle === 'history' && timeline.rtpMsgType === 'INCOMING'"> 
+                    <strong>{{ 'lbl.RequestFrom' | translate }}</strong> : {{ timeline.requesterAccountName }}<span *ngIf="timeline.requesterIdType!=='BILLERID'"> ({{timeline.requesterIdValue}})</span>
+                </span>
+                <span class="font-grey-cascade" *ngIf="timelineSubTitle === 'RTP' && timelineTitle === 'history' && timeline.rtpMsgType === 'OUTGOING'"> 
+                    <strong>{{ 'lbl.RequestTo' | translate }}</strong> : {{ timeline.receiverAccountName }}<span *ngIf="timeline.receiverIdType!=='BILLERID'"> ({{timeline.receiverIdValue}})</span>
+                </span>
+                <span class="font-grey-cascade" *ngIf="timelineSubTitle === 'RTP'"> 
+                    <br><strong>{{ 'label.type' | translate }}</strong> : {{ timeline.Type }}
+                </span>
+                <span class="font-grey-cascade" *ngIf="timelineSubTitle === 'biller'"> 
+                    <br><strong>{{ 'lbl.billerAliasName' | translate }}</strong> : {{ timeline.paymentFor }}
+                </span>
+                <span class="font-grey-cascade" *ngIf="timelineSubTitle === 'biller'"> 
+                    <br><strong>{{ 'lbl.billerName' | translate }}</strong> : {{ timeline.biller }}
+                </span>
+                <span class="font-grey-cascade"> 
+                    <br><strong>{{ 'lbl.amount' | translate }}</strong> : {{ timeline.amount }} {{ 'lbl.baht' | translate }} 
+                </span>
+                <span class="font-grey-cascade" *ngIf="timelineTitle === 'schedule' && timelineSubTitle !== 'RTP'">
+                    <br><strong>{{ ((timelineSubTitle === 'fundtransfer') ? 'lbl.recurringType' : 'lbl.recurringType.paybill') | translate }}</strong> : {{ timeline.recurringType }}{{(timeline.recurringTimes > 0) ? '('+timeline.recurringTimes+')' : ''}}
+                </span>
+                <span class="font-grey-cascade"> 
+                    <br><strong>{{ 'lbl.note' | translate }}</strong> : {{ (timeline.note) ? timeline.note : '-' }}	
+                </span>
+            </div>
+        </div>
+    </div>
+    <!-- END TIMELINE ITEM -->
+</div>
+<timeline-modal-message #myTimelineModal [title]="timelineModalData.title" [type]="timelineModalData.type" [key]="timelineModalData.key" [size]="timelineModalData.size" [config]="timelineModalData.config"></timeline-modal-message>

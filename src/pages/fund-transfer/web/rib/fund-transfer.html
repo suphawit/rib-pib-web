@@ -1,0 +1,14 @@
+<h3 class="page-title">{{ 'lbl.fundTransfer' | translate }}</h3>
+<alert-message #alertMessage [type]="alertConfig.type" [message]="alertConfig.message"></alert-message>
+<div [hidden]="!(hasAccount && isDataReady)" class="portlet portlet-fit">
+    <div class="row">
+	    <div class="col-md-12 col-sm-12">
+            <div class="portlet portlet-fit">
+                <step-wizard [data]="stepWizard.input.data" [style]="stepWizard.input.style" [step]="stepWizard.input.step"></step-wizard>
+            </div>
+	        <div class="portlet portlet-fit">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+<div bsModal #childModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" (onHidden)="hidden($event)">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">{{'lbl.eDonation.confirm' | translate}}</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    {{'label.eDonation.confirm.detail' | translate}}
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" (click)="hidden()">{{'btn.eDonation.disAgree' | translate}}</button>
+                <button type="button" class="btn btn-default" (click)="emitValue()">{{'btn.eDonation.agree' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>

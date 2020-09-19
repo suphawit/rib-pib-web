@@ -1,0 +1,27 @@
+other-account-list-page{
+    table.table {
+        margin-bottom: 0px;
+    }
+    .icon-w:before {
+        font-size: 24px !important;
+        line-height: 26px;
+    }
+    .pib-web {
+        other-account-accordian{
+            .panel-heading {
+                @include gradient-radial($color-pib-panel-heading, $color-pib-panel-heading);
+                border-color: $color-pib-panel-heading;
+                color:$color-pib-panel-heading-font;
+            }
+        }
+        
+    }
+    .rib-web {
+        other-account-accordian{
+            .panel-heading {
+                @include gradient-radial($color-kk-blue, $color-kk-blue);
+                border-color: $color-kk-blue;
+            }
+        }
+    }
+}

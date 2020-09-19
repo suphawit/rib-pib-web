@@ -1,0 +1,47 @@
+<div class="panel-custom {{ settings.styleClass }}">
+    <add-new-biller [currentBiller]="currentBiller" [selectedAddNewAccountPanel]="(currentBiller?.isAddNewToBiller === true || accordian.data.length < 1 )? 'expanded' : 'collapsed'" (addNewBillerBean)="getAddNewBillerBeanData($event)"></add-new-biller>
+    <div class="panel panel-default" *ngFor="let group of accordian.data; trackBy: trackByFn">
+        <div class="panel-heading" (click)="toggleState(group.stateName.id)">
+            <h4 class="panel-title">
+                {{group.stateName.name | translate}} 
+                <i class="pull-right glyphicon" [ngClass]="{'glyphicon-menu-down': accordian.state[group.stateName.id] === 'collapsed', 'glyphicon-menu-up': accordian.state[group.stateName.id] === 'expanded'}"></i>
+            </h4>
+        </div>
+        <div class="panel-body" [@accordingState]="accordian.state[group.stateName.id]">
+            <table class="table table-hover table-light">
+                <tbody>
+                    <tr  class="line-bottom">
+                    <tr [class.highlight]="isHighlighted(biller, currentBiller)" *ngFor="let biller of group.stateData; trackBy: trackByFn" (click)="onSelectChanged(biller)">
+                        <td class="fit" *ngIf="!isEDonationCategory(biller.categoryId)"> 
+                            <biller-image class="user-pic rounded"
+                                [srcpath]= "utilService.getBillerIcon(biller)" 
+                                [defaultpath]="utilService.getDefaultBillerIconPath()">
+                            </biller-image>
+                        </td>
+                        <td class="fit" *ngIf="isEDonationCategory(biller.categoryId)">
+                            <biller-image class="user-pic rounded"
+                                [srcpath]= "utilService.getEDonateIcon(biller)"
+                                [defaultpath]="utilService.getDefaultEDonateIconPath()">
+                            </biller-image>
+                        </td>
+                        <td class="aliasName">
+                            <span class="bbill-paymentold font-kkppurple">{{ biller.billerAliasName }}</span><br />
+                            <div *ngIf="biller.ref1 != ''">
+                                <span *ngIf="translate.currentLang == 'en'">{{biller.ref1TextEn}}: {{ biller.ref1 }}<br/></span> 
+                                <span *ngIf="translate.currentLang == 'th'">{{biller.ref1TextTh}}: {{ biller.ref1 }}<br/></span>
+                            </div>
+                            <div *ngIf="biller.ref2 != null && !isEDonationCategory(biller.categoryId)">
+                                <span *ngIf="translate.currentLang == 'en'">{{biller.ref2TextEn}}: {{ biller.ref2 }}<br/></span>
+                                <span *ngIf="translate.currentLang == 'th'">{{biller.ref2TextTh}}: {{ biller.ref2 }}<br/></span>
+                            </div>
+                            <div *ngIf="biller.ref3 != null">
+                                <span *ngIf="translate.currentLang == 'en'">{{biller.ref3TextEn}}: {{ biller.ref3 }}</span>
+                                <span *ngIf="translate.currentLang == 'th'">{{biller.ref3TextTh}}: {{ biller.ref3 }}</span>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

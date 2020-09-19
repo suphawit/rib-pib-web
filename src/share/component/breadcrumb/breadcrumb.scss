@@ -1,0 +1,47 @@
+// PIB-WEB
+.breadcrumb {
+    background-color:#fff;
+    padding:10px 0;
+    color:#333;
+    font-size:1em;
+    font-weight:lighter;
+    // margin-left:23px;
+}
+
+.breadcrumb .active {
+    color:#444;
+}
+
+.breadcrumb li.active,.breadcrumb li.active a,.breadcrumb li:hover a {
+    color:#444;
+}
+
+.breadcrumb a:link,.breadcrumb a:visited {
+    color:#888;
+    display:inline-block;
+}
+
+.breadcrumb > li + li:before {
+    top:0px!important;
+    left:2px!important;
+    position:relative;
+    color:#888!important;
+    content:'\f105';
+    font-family:FontAwesome;
+}
+
+.breadcrumb li.active:before {
+    content:'\f111';
+    font-family:FontAwesome;
+    font-size:0.4em;
+    color:#888!important;
+}
+
+// RIB-WEB
+.page-content-white .page-bar .page-breadcrumb, .page-container-bg-solid .page-bar .page-breadcrumb {
+    margin-top:25px!important
+}
+
+.page-content-white .page-bar .page-breadcrumb, .page-container-bg-solid .page-bar .page-breadcrumb {
+    padding: 5px 0;
+}

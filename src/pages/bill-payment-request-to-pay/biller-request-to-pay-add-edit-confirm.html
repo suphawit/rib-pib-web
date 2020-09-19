@@ -1,0 +1,92 @@
+<div class="portlet" [style.padding.px]="5">
+	<div class="clearfix"></div>
+	<h3 class="page-title">{{ titlePageBiller | translate}}</h3>
+
+	<div class="row">
+		<div class="col-md-12">
+			<alert-message #alertMessage [type]="alertConfig.type" [message]="alertConfig.message"></alert-message>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<step-wizard [data]="stepWizard.input.data" [style]="stepWizard.input.style" [step]="stepWizard.input.step"></step-wizard>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="portlet light " id="form_wizard_1">
+				<div class="portlet-title">
+					<div class="caption">
+						<i class=" icon-layers font-kkppurple"></i>
+						<span class="caption-subject font-kkppurple sbold uppercase">{{ stepPageBiller | translate}}</span>
+
+					</div>
+				</div>
+				<div class="portlet-body form">
+					<div class="col-md-12">
+
+						<div class="table-scrollable table-scrollable-borderless">
+							<table class="table table-light">
+								<tbody>
+									<tr>
+										<td class="col-md-3">{{'lbl.billerAliasName' | translate}}</td>
+										<td>{{confirmBillerProfile.aliasName}}</td>
+									</tr>
+
+									<tr>
+										<td class="col-md-3">{{'lbl.billerName'|translate}}</td>
+										<td>
+											<biller-image
+												[srcpath]= "confirmBillerProfile.logoCompany" 
+												[defaultpath]="isEDonationCategory(confirmBillerProfile.categoryId) ? utilService.getDefaultEDonateIconPath() : utilService.getDefaultBillerIconPath()">
+											</biller-image>
+											<span [ngClass]="{'padding-left10px': confirmBillerProfile.logoCompany != ''}" *ngIf="translate.currentLang == 'th'">{{confirmBillerProfile.billerNameTh}}</span>
+											<span [ngClass]="{'padding-left10px': confirmBillerProfile.logoCompany != ''}" *ngIf="translate.currentLang == 'en'">{{confirmBillerProfile.billerNameEn}}</span>
+										</td>
+									</tr>
+									<tr>
+										<td class="col-md-3">{{'label.billerCategory' | translate}}</td>
+										<td>
+											<span *ngIf="translate.currentLang == 'th'">{{confirmBillerProfile.categoryTh}}</span>
+											<span *ngIf="translate.currentLang == 'en'">{{confirmBillerProfile.categoryEn}}</span>
+										</td>
+									</tr>
+									<tr *ngFor="let billerRefNo of confirmBillerProfile.refNoList; trackBy: trackById; let i = index ">
+										<td class="col-md-3" *ngIf="!isEDonationCategory(confirmBillerProfile.categoryId) || i !== 1">
+											<span *ngIf="translate.currentLang == 'th'">{{billerRefNo.refTextTh}}</span>
+											<span *ngIf="translate.currentLang == 'en'">{{billerRefNo.refTextEn}}</span>
+										</td>
+										<td *ngIf="!isEDonationCategory(confirmBillerProfile.categoryId) || i !== 1">
+											{{billerRefNo.value}}
+										</td>
+									</tr>
+
+								</tbody>
+							</table>
+						</div>
+						<div class="row form-group" *ngIf="isAdd && isFromAddNewAfterPayBill !== true">
+							<verify-otp [style]="verifyOTPStyle" [actionOTP]="verifyOTPAction" [responseCodeMainService]="responseCodeMainService" (requestOTPChanged)="requestOTPChanged($event)"
+							 (otpPass)="otpPass($event)"></verify-otp>
+						</div>
+						<div class="form-actions">
+							<div class="row">
+								<div class="col-md-offset-3 col-sm-offset-3 col-md-9 col-sm-9">
+									<button type="button" class="btn btn-outline btn-default" (click)="onClickBack()">
+										<i class="fa fa-angle-left"></i> {{'button.back' | translate}} </button>
+									<!--(click)="onSubmit()"-->
+									<button type="button" class="btn btn-outline kkppurple button-next" [disabled]="isAdd && (!isRequestOTP || OTPData.pin == '') && isFromAddNewAfterPayBill !== true"
+									 (click)="onClickSubmit()"> {{'button.confirm' | translate}}
+										<i class="fa fa-angle-right"></i>
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>

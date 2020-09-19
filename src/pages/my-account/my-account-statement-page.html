@@ -1,0 +1,60 @@
+<div class="clearfix"></div>
+<h3 class="page-title">{{ 'label.accStatement' | translate }}</h3>
+<div class="row">
+    <div class="col-md-12">
+        <alert-message #alertMessage [type]="alertConfig.type" [message]="alertConfig.message"></alert-message>
+    </div>
+</div>
+<div class="row">
+    <div class="portlet light">
+    <div class="portlet-body">
+        <table class="table table-light">
+            <tr>
+                <td style="width: 30%;">
+                    <span class="bold font-purple">{{'label.tdAliasName'|translate}}</span>
+                </td>														
+                <td align="">
+                    <span>{{accountData.myAccountAliasName}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="">
+                    <span class="bold font-purple">{{'label.accNumber'|translate}}</span> 
+                </td>															
+                <td align="">
+                    <span>{{accountData.myAccountNumber}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="">
+                    <span class="bold font-purple">{{'tableHead.availableBalance'|translate}}</span>
+                </td>															
+                <td align="">
+                    <span>{{accountData.myAvailableBalance | number:'.2-2'}}&nbsp;{{'lbl.baht' | translate}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="">
+                    <span class="bold font-purple">{{'lbl.currentBalance'|translate}}</span>
+                </td>															
+                <td align="">
+                    <span>{{accountData.myLedgerBalance | number:'.2-2'}}&nbsp;{{'lbl.baht' | translate}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="">
+                    <span class="bold font-purple">{{'label.lastUpdatedOn'|translate}}</span> 
+                </td>															
+                <td align="">
+                    <span>{{accountData.lastUpdatedDate}}</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <my-account-statement [accountId]="statementData.accountId" [accountType]="statementData.accountType"></my-account-statement>
+    </div>
+</div>

@@ -1,0 +1,832 @@
+import { Injectable } from '@angular/core';
+
+@Injectable()
+export class Constants {
+
+  MFP_CONTEXT_ROOT: string;
+  RIB_WEB_APP_ID: string;
+  PIB_WEB_APP_ID: string;
+  MENU_MOBILE: string;
+  MENU_WEB: string;
+
+  RESP_CODE_SUCCESS: string;
+  RESP_CODE_CREATE_USER_DUPLICATE: string;
+  RESP_CODE_OTP_IN_CORRECT: string;
+  RESP_CODE_REQ_OTP_AGAIN: string;
+  RESP_CODE_OTHER_ACCOUNT_NOT_FOUND: string;
+  RESP_CODE_MY_ACCOUNT_NOT_FOUND: string;
+  RESP_CODE_BILLER_NOT_FOUND: string;
+  RESP_CODE_INVALID_USERNAME_OR_PASSWORD: string;
+  RESP_CODE_HISTORY_NOT_FOUND: string;
+  RESP_CODE_SCHEDULE_NOT_FOUND: string;
+
+  VER_RIB_WEB: string;
+  VER_PIB_WEB: string;
+  Auth_REALM_LOGIN: string;
+
+  CHANNEL_RIB_WEB: string;
+  CHANNEL_RIB_MOBILE: string;
+  CHANNEL_PIB_WEB: string;
+  CHANNEL_PIB_MOBILE: string;
+
+  CUSTOMER_TYPE: string;
+
+  TOKEN_UUID: string;
+
+  CUSTOMER_TYPE_RETAIL: string;
+
+  CORP_ID_RIB: string;
+
+  ACTION_TYPE_ACTIVATE_ACCOUNT: string;
+  ACTION_TYPE_FORGOT_PASSWORD: string;
+  ACTION_TYPE_FORGOT_USERNAME: string;
+
+  ACTION_CODE_ACTIVATE_ACCOUNT: string;
+  ACTION_CODE_ADD_EXT_ACCOUNT: string;
+  ACTION_CODE_ADD_MY_ACCOUNT: string;
+  ACTION_CODE_CHANGE_PASSWORD: string;
+  ACTION_CODE_ADD_BILLER: string;
+  ACTION_CODE_EDIT_BILLER: string;
+  ACTION_CODE_FORGOT_PASSWORD: string;
+  ACTION_CODE_FUND_TRANSFER: string;
+  ACTION_CODE_RESET_PASSWORD: string;
+  ACTION_CODE_FORGOT_USERNAME: string;
+  ACTION_CODE_REGISTER_ANYID: string;
+  ACTION_CODE_TERM_AND_CON: string;
+  ACTION_CODE_BILL_PAYMENT: string;
+  ACTION_CODE_E_DONATION: string;
+  ACTION_CODE_BPS_BILL_PAYMENT: string;
+  ACTION_CODE_CREATE_RTP: string;
+  ACTION_CODE_AMEND_ANYID: string;
+  ACTION_CODE_CHANGE_USERNAME: string
+
+  STYLE_RIB_WEB: string;
+  STYLE_RIB_MOBILE: string;
+  STYLE_PIB_WEB: string;
+  STYLE_PIB_MOBILE: string;
+
+  SCREEN_NAME_ACCOUNT_ACTIVATE: string;
+  SCREEN_NAME_BILL_PAYMENT: string;
+
+  IMMEDIATE_TYPE_TODAY: string;
+  IMMEDIATE_TYPE_LATER: string;
+
+  RECURRING_TYPE_YES: string;
+  RECURRING_TYPE_NO: string;
+
+  SCHEDULER_TYPE_ONE_TIME: number;
+  SCHEDULER_TYPE_WEEKLY: number;
+  SCHEDULER_TYPE_MONTHLY: number;
+
+  CULTURE_SHORTNAME_THAI = "TH";
+  CULTURE_SHORTNAME_ENGLISH = "EN";
+
+  KNOWN_CULTURE_ENLISH_US = "en-US";
+  KNOWN_CULTURE_THAI = "th-TH";
+
+  TRANSFER_TIME_IMMEDIATE = "I";
+  TRANSFER_TIME_MORNING = "M";
+  TRANSFER_TIME_EVENING = "E";
+
+  ANYID_TYPE_BANK_ACCOUNT = "ACCTNO";
+  ANYID_TYPE_CITIZEN_ID = "NATID";
+  ANYID_TYPE_MOBILE = "MSISDN";
+
+  ACCOUNT_TYPE_TD = "TD";
+  ACCOUNT_TYPE_SA = "SA";
+  ACCOUNT_TYPE_CA = "CA";
+
+  OWNER_ACCOUNT = "Y";
+
+  BANK_IMAGE_PATH = "assets/";
+  KKP_BANK_CODE = "069";
+  DEFAULT_BANK_CODE = "000";
+
+  TRANSFER_STATUS_SUCCESS = "SC";
+  TRANSFER_STATUS_SUBMITTED = "SB";
+  TRANSFER_STATUS_FAILED = "FL";
+  TRANSFER_STATUS_PROCESSING = "PC";
+  TRANSFER_STATUS_PENDING = "PD";
+
+  EDIT_TYPE_THIS_TIME = "0";
+  EDIT_TYPE_ALL_SCHEDULE = "1";
+
+  FIRST_PAGE_CODE_AF_LGN = "DASHBOARD";
+  FIRST_PAGE_CODE_BF_LGN = "HOME";
+
+  FIRST_PAGE_CODE_AF_LGN_PIB_W = "MY_DEPOSITS";
+  FIRST_PAGE_CODE_BF_LGN_PIB_W = "";
+
+  YES_STATUS = "Y"
+  NO_STATUS = "N";
+  
+  RECURRING_THIS_TIME = "this_time";
+  RECURRING_ALL_SCHEDULE = "all_schedule";
+
+  KK_PATH_URL = "http://www.kiatnakin.co.th";
+
+  PROMPT_PAY_URL = this.KK_PATH_URL + "/th/kk-promptpay";
+  PIB_LOGOUT_URL = "https://wealthmanagement.kkpfg.com/";
+
+  E_DONATION_CATEGORY_ID = "26";
+
+  REQ_ACTION_CODE: {
+    VERIFY_CUSTOMER: string,
+    MY_ACCOUNT_INQUIRY_CASA_STATEMENT: string,
+    MY_ACCOUNT_INQUIRY_TD_STATEMENT: string,
+    CASA_STATEMENT_REPORT: string,
+    TD_STATEMENT_REPORT: string,
+    REQUEST_USERNAME_BY_VERIFY_DEPOSIT_ACCOUNT: string,
+    RESET_PASSWORD: string;
+    MY_ACCOUNT_INQUIRY: string;
+    DASHBOARD: string;
+    GET_RATES_BY_CIF_TYPE_SWITCH_TERM_TD: string;
+    SWITCH_TERM_TD: string;
+    MY_ACCOUNT_INQUIRY_DETAIL_SWITCH_TERM_TD: string;
+    INQUIRY_TERM_MASTER_DATA_SWITCH_TERM_TD: string;
+    CONTACT_US: string;
+    INQUIRY_CUSTOMER_ANYID_INFORMATION: string;
+    MY_ACCOUNT_INQUIRY_CASA_SUMMARY: string;
+    RBAC_MY_ACCOUNT_INQUIRY_CASA_SUMMARY: string;
+    VERIFY_ANYID_INFORMATION: string;
+    INQUIRY_TRANSFER_TO_ACCOUNT: string;
+    RBAC_GET_INFORMATION_SERVICE: string;
+    PREPARE_FUND_TRANSFER: string;
+    FUND_TRANSFER: string;
+    RBAC_UPDATE_TERM_AND_CONDITION: string;
+    INQUIRY_BANK_INFO: string,
+    INQUIRY_CATEGORY_INFO: string;
+    INQUIRY_SCHEDULE_TYPE: string;
+    EXTERNAL_ACCOUNT_INQUIRY: string;
+    EXTERNAL_ACCOUNT_UPDATE_FAVORITE: string;
+    INQUIRY_HISTORY_FUND_TRANSFER: string;
+    MY_ACCOUNT_ADD: string;
+    MY_ACCOUNT_ADD_SUBMIT: string;
+    MY_ACCOUNT_EDIT: string;
+    MY_ACCOUNT_DELETE: string;
+    EXTERNAL_ACCOUNT_DELETE: string;
+    PREPARE_FUND_TRANSFER_TD: string;
+    GET_RATES_BY_CIF_TYPE: string;
+    FUND_TRANSFER_TD: string;
+    CASA_TRANSFER_SLIP: string;
+    TD_TRANSFER_SLIP: string;
+    EXTERNAL_ACCOUNT_ADD: string;
+    INQUIRY_BILL: string;
+    INQUIRY_BILL_SCHEDULE: string;
+    INQUIRY_FUND_TRANSFER: string;
+    INQUIRY_HISTORY_PAYMENT_BILL: string;
+    REGISTER_ANYID: string;
+    BILLER_VERIFY_ADD: string;
+    BILLER_ADD: string;
+    BILLER_VERIFY_EDIT: string;
+    BILLER_EDIT: string;
+    BILLER_EDIT_WITHOUT_OTP: string;
+    BILLER_DELETE: string;
+    CASA_TRANSFER_HISTORY_SLIP: string;
+    TD_TRANSFER_HISTORY_SLIP: string;
+    BILL_PAYMENT_SLIP_PIBRIB: string;
+    BILL_PAYMENT_DONATION_SLIP_PIBRIB: string;
+    INQUIRY_TRANSFER_FEE: string;
+    VERIFY_BILL_PAYMENT: string;
+    CONFIRM_BILL_PAYMENT: string;
+    EDIT_FUND_TRANSFER: string;
+    EDIT_FUND_TRANSFER_SUBMIT: string;
+    MY_ACCOUNT_ADD_SUBMIT_WITHOUT_OTP: string;
+    EXTERNAL_ACCOUNT_ADD_SUBMIT_WITHOUT_OTP: string;
+    VERIFY_EDIT_BILL_PAYMENT: string;
+    CONFIRM_EDIT_BILL_PAYMENT: string;
+    INQUIRY_ANYID_TYPE: string;
+    RTP_INQUIRY_INCOMING: string;
+	  INQUIRY_BILLER_CUSTOMER: string;
+    INQUIRY_BILLER_INFO: string;
+    BPS_INQUIRY_BILLER_TOKEN_AND_CATEGORY_LIST: string;
+    BPS_INQUIRY_ALL_CATEGORY:string;
+    INQUIRY_PAY_INFO: string;
+    INQUIRY_PAY_INFO_PIBRIB: string;
+    INQUIRY_BILL_PAYMENT_FEE: string;
+    VERIFY_ADD_BILLER: string;
+    ADD_BILLER: string;
+    VERIFY_EDIT_BILLER: string;
+    EDIT_BILLER: string;
+    DELETE_BILLER: string;
+    UPDATE_FAVOURITE_BILLER: string;
+	  RTP_INQUIRY_HISTORY: string;
+    BPS_CONFIRM_BILL_PAYMENT: string;
+	  DELETE_BILL_SCHEDULE_ONETIME: string;
+    DELETE_BILL_SCHEDULE_ALL: string;
+    BPS_VERIFY_EDIT_BILL_PAYMENT: string;
+	  BPS_CONFIRM_EDIT_BILL_PAYMENT: string;
+    RTP_INQUIRY_OUTGOING: string;
+    RTP_INQUIRY_ANYID_MY: string;
+    RTP_INQUIRY_ANYID_OTHER: string;
+    RTP_VERIFY_CREATE: string; 
+    RTP_CONFIRM_CREATE: string;
+    BADGE_MENU_COUNT: string;
+    QR_GERNERATE: string; 
+    VERIFY_REF_CODE: string;
+    ACTIVATE_CUSTOMER:string;
+    VERIFY_SUBSCRIPTION_ATM_PIN:string;
+    VERIFY_SUBSCRIPTION_PRODUCT_ID: string;
+    REQUEST_OTP:string;
+    VERIFY_OTP:string;
+    REQUEST_USERNAME: string;
+    INQUIRY_TERM_AND_CONDITION: string;
+    RTP_INQUIRY_BLOCKLIST: string;
+    RTP_CREATE_BLOCKLIST: string;
+    RTP_DELETE_BLOCKLIST: string; 
+    RTP_CANCEL: string; 
+    INQUIRY_PAY_INFO_ONLINE: string; 
+    VERIFY_FUND_TRANSFER: string;
+    CONFIRM_FUND_TRANSFER: string; 
+    INQUIRY_ALL_ISSUE_COUNTRY: string; 
+ 	  VERIFY_AMEND_ANYID: string;
+    CONFIRM_AMEND_ANYID: string; 
+    VERIFY_EDIT_FUND_TRANSFER: string;
+    CONFIRM_EDIT_FUND_TRANSFER: string;
+    BPS_ADD_BILLER_WITHOUT_OTP: string;
+    ADD_BILLER_WITHOUT_OTP: string;
+    EDONATION_INQUIRY_CUSTOMER_TYPE: string;
+    CHANGE_USER_NAME: string;
+    INQUIRY_USER_NAME: string;
+    INQUIRY_ALL_DEVICE: string;
+    REMOVE_DEVICE: string;
+    UPDATE_TERM_AND_CONDITION: string;
+  };
+
+  REQ_PROCEDURE_NAME: {
+    VERIFY_CUSTOMER: string,
+    MY_ACCOUNT_INQUIRY_CASA_STATEMENT: string,
+    MY_ACCOUNT_INQUIRY_TD_STATEMENT: string,
+    CASA_STATEMENT_REPORT: string,
+    TD_STATEMENT_REPORT: string,
+    REQUEST_USERNAME_BY_VERIFY_DEPOSIT_ACCOUNT: string,
+    RESET_PASSWORD: string;
+    MY_ACCOUNT_INQUIRY: string;
+    DASHBOARD: string;
+    GET_RATES_BY_CIF_TYPE_SWITCH_TERM_TD: string;
+    SWITCH_TERM_TD: string;
+    MY_ACCOUNT_INQUIRY_DETAIL_SWITCH_TERM_TD: string;
+    INQUIRY_TERM_MASTER_DATA_SWITCH_TERM_TD: string;
+    CONTACT_US: string;
+    INQUIRY_CUSTOMER_ANYID_INFORMATION: string;
+    MY_ACCOUNT_INQUIRY_CASA_SUMMARY: string;
+    VERIFY_ANYID_INFORMATION: string;
+    INQUIRY_TRANSFER_TO_ACCOUNT: string;
+    PREPARE_FUND_TRANSFER: string;
+    FUND_TRANSFER: string;
+    RBAC_UPDATE_TERM_AND_CONDITION: string;
+    INQUIRY_BANK_INFO: string;
+    INQUIRY_CATEGORY_INFO: string;
+    INQUIRY_SCHEDULE_TYPE: string;
+    FETCH_CURRENT_DATE: string;
+    EXTERNAL_ACCOUNT_INQUIRY: string;
+    EXTERNAL_ACCOUNT_UPDATE_FAVORITE: string;
+    INQUIRY_HISTORY_FUND_TRANSFER: string;
+    MY_ACCOUNT_ADD: string;
+    MY_ACCOUNT_ADD_SUBMIT: string;
+    MY_ACCOUNT_EDIT: string
+    MY_ACCOUNT_DELETE: string;
+    EXTERNAL_ACCOUNT_DELETE: string;
+    PREPARE_FUND_TRANSFER_TD: string;
+    GET_RATES_BY_CIF_TYPE: string;
+    FUND_TRANSFER_TD: string;
+    CASA_TRANSFER_SLIP: string;
+    TD_TRANSFER_SLIP: string;
+    EXTERNAL_ACCOUNT_ADD: string;
+    INQUIRY_BILL: string;
+    INQUIRY_BILL_SCHEDULE: string;
+    INQUIRY_FUND_TRANSFER: string;
+    INQUIRY_HISTORY_PAYMENT_BILL: string;
+    REGISTER_ANYID: string;
+    BILLER_VERIFY_ADD: string;
+    BILLER_ADD: string;
+    BILLER_VERIFY_EDIT: string;
+    BILLER_EDIT: string;
+    BILLER_EDIT_WITHOUT_OTP: string;
+    BILLER_DELETE: string;
+    BILL_PAYMENT_SLIP_PIBRIB: string;
+    BILL_PAYMENT_DONATION_SLIP_PIBRIB: string;
+    INQUIRY_TRANSFER_FEE: string;
+    VERIFY_BILL_PAYMENT: string;
+    CONFIRM_BILL_PAYMENT: string
+    EDIT_FUND_TRANSFER: string;
+    EDIT_FUND_TRANSFER_SUBMIT: string;
+    MY_ACCOUNT_ADD_SUBMIT_WITHOUT_OTP: string;
+    EXTERNAL_ACCOUNT_ADD_SUBMIT_WITHOUT_OTP: string;
+    VERIFY_EDIT_BILL_PAYMENT: string;
+    CONFIRM_EDIT_BILL_PAYMENT: string;
+    INQUIRY_ANYID_TYPE: string;
+    RTP_INQUIRY_INCOMING: string;
+    INQUIRY_BILLER_CUSTOMER: string;
+    INQUIRY_BILLER_INFO: string;
+    BPS_INQUIRY_BILLER_TOKEN_AND_CATEGORY_LIST: string;
+    BPS_INQUIRY_ALL_CATEGORY: string;
+    INQUIRY_PAY_INFO: string;
+    INQUIRY_PAY_INFO_PIBRIB: string;
+    INQUIRY_BILL_PAYMENT_FEE: string;
+    VERIFY_ADD_BILLER: string;
+    ADD_BILLER: string;
+    VERIFY_EDIT_BILLER: string;
+    EDIT_BILLER: string;
+    DELETE_BILLER: string;
+    UPDATE_FAVOURITE_BILLER: string;
+	  RTP_INQUIRY_HISTORY: string;
+    BPS_CONFIRM_BILL_PAYMENT: string;
+	  DELETE_BILL_SCHEDULE_ONETIME: string;
+    DELETE_BILL_SCHEDULE_ALL: string;
+    BPS_VERIFY_EDIT_BILL_PAYMENT: string;
+    BPS_CONFIRM_EDIT_BILL_PAYMENT: string;
+    RTP_INQUIRY_OUTGOING: string;
+    RTP_INQUIRY_ANYID_MY: string;
+    RTP_INQUIRY_ANYID_OTHER: string;
+    RTP_VERIFY_CREATE: string;
+    RTP_CONFIRM_CREATE: string;
+    BADGE_MENU_COUNT: string;
+    QR_GERNERATE: string;
+    VERIFY_REF_CODE: string;
+    ACTIVATE_CUSTOMER:string;
+    VERIFY_SUBSCRIPTION_ATM_PIN:string;
+    VERIFY_SUBSCRIPTION_PRODUCT_ID: string;
+    REQUEST_OTP:string;
+    VERIFY_OTP:string;
+    REQUEST_USERNAME: string;
+    INQUIRY_TERM_AND_CONDITION: string;
+    RTP_INQUIRY_BLOCKLIST: string;
+    RTP_CREATE_BLOCKLIST: string;
+    RTP_DELETE_BLOCKLIST: string;
+	  RTP_CANCEL: string; 
+	  INQUIRY_PAY_INFO_ONLINE: string;
+    VERIFY_FUND_TRANSFER: string;
+    CONFIRM_FUND_TRANSFER: string; 
+    INQUIRY_ALL_ISSUE_COUNTRY: string;
+	  VERIFY_AMEND_ANYID: string;
+    CONFIRM_AMEND_ANYID: string;
+	  BPS_ADD_BILLER_WITHOUT_OTP: string;
+    VERIFY_EDIT_FUND_TRANSFER: string;
+    CONFIRM_EDIT_FUND_TRANSFER: string;
+    ADD_BILLER_WITHOUT_OTP: string;
+    PROMOTION_INFORMATION: string;
+    PROMPTPAY_INFORMATION: string;
+    NEWS_INFORMATION: string;
+    KKP_URL_INFORMATION: string;
+    EDONATION_INQUIRY_CUSTOMER_TYPE: string;
+    CHANGE_USER_NAME: string;
+    INQUIRY_USER_NAME: string;
+    INQUIRY_ALL_DEVICE: string;
+    REMOVE_DEVICE: string;
+  };
+
+  PORTLETS_MENU_DATA: {
+    STATEMENT: string;
+    TRANSFER: string;
+    PAYMENT: string;
+    FAVOURITE: string;
+    CALENDAR: string;
+    EDIT: string;
+    DELETE: string;
+    SCHEDULE: string;
+    CHANGETERM: string;
+    CREATERTP: string;
+    QRGEN: string;
+  };
+
+  MONTH_FULLNAME: {
+    en: Array<any>;
+    th: Array<any>;
+  };
+
+  BREAD_CRUMB_FIX_NAME = { icon: null, menuCode: "AcceptTermsAndcontdition", menuEn: "Terms and Conditions", menuTh: "ข้อตกลงการใช้บริการ", parentCode: null };
+  BREAD_CRUMB_MAPPING = {
+    "FUND_TRANSFER":"lbl.fundTransfer",
+    "FUND_TRANSFER.CONFIRM":"lbl.fundTransfer",
+    "FUND_TRANSFER.COMPLETE":"lbl.fundTransfer",
+
+    "MANAGE_BILLER.add":"lbl.addbiller",
+    "MANAGE_BILLER.add-confirm":"lbl.addbiller",
+
+    "MANAGE_BILLER.edit":"label.titleEditBiller",
+    //"MANAGE_BILLER.EDIT_VERIFY":"label.titleEditBiller",
+    "MANAGE_BILLER.edit-confirm":"label.titleEditBiller",
+
+    "MY_DEPOSITS.ADD":"lbl.addAccount",
+    "MY_DEPOSITS.ADD_CONFIRM":"lbl.addAccount",
+    
+
+    "MY_DEPOSITS.EDIT":"lbl.editMyAccount",
+    "MY_DEPOSITS.EDIT_CONFIRM":"lbl.editMyAccount",
+
+    "MY_DEPOSITS.DETAIL":"label.myAccountDetail",
+
+    "MY_DEPOSITS.STATEMENT":"label.accStatement",
+
+
+    "OTHER_ACCOUNTS.add1":"lbl.addOtherAccount",
+    "OTHER_ACCOUNTS.add2":"lbl.addOtherAccount",
+
+
+    "OTHER_ACCOUNTS.edit1":"label.editAcc",
+    "OTHER_ACCOUNTS.edit2":"label.editAcc",
+
+    "OTHER_ACCOUNTS.DETAIL":"label.otheraccountdetail",
+
+    //"MANAGE_BILLER.DETAIL":"lbl.billerDetail",
+    "MY_RTP.ADD": "btn.addRTP",
+    "MY_RTP.ADD_CONFIRM": "btn.addRTP",
+    "MY_RTP.ADD_COMPLETE": "btn.addRTP",
+
+    "MY_MUTUAL_FUND.SUMMARY":"mutualFundType.headPage",
+    "MY_MUTUAL_FUND.DETAIL":"label.MutualFundDetailHead",
+
+    "KK_PRODUCT_SERVICE.REGISTER_KK_PROMPT_PAY":"lbl.KKPromptPay",
+    "KK_PRODUCT_SERVICE.REGISTER_KK_PROMPT_PAY_STEP2":"lbl.KKPromptPay",
+    "KK_PRODUCT_SERVICE.REGISTER_KK_PROMPT_PAY_STEP3":"lbl.KKPromptPay",
+
+    "MY_ACCOUNTS.CHANGETERM":"label.changeterm",
+    "MY_ACCOUNTS.CHANGETERM_TD":"label.changeterm",
+    "MY_ACCOUNTS.CHANGETERM_TD_CONFIRM":"label.changeterm",
+
+    "MANAGE_BILLER":"label.billerList",
+    "MANAGE_BILLER.LIST":"label.billerList",
+    "MANAGE_BILLER.detail":"lbl.billerDetail",
+
+    "MY_RTP": "label.myrequestToPay",
+    "RTP_RECEIVE": "label.requestToPay",
+
+    "QR_GENERATOR": "lbl.QRGenerateHead",
+    "QR_GENERATOR.COMPLETE": "lbl.QRGenerateHead",
+
+    "KK_PRODUCT_SERVICE.DETAIL": "lbl.QRGenerateHead",
+
+    "RTP_BLOCK_LIST": "lbl.rtpBlockListMenu",
+
+    "MY_KK_PROMPTPAY":"label.promptpayServiceHeader",
+    "MY_KK_PROMPTPAY.DETAIL":"lbl.KKpromptPayDetail",
+    "MY_KK_PROMPTPAY.EDIT":"lbl.editKKpromptPay",
+    "MY_KK_PROMPTPAY.EDIT_CONFIRM":"lbl.editKKpromptPay",
+    "MY_KK_PROMPTPAY.EDIT_COMPLETE":"lbl.editKKpromptPay"
+    
+  }
+
+  DASHBOARD_MENU: {
+    MY_ACCOUNT: string;
+    MY_PROMPTPAY: string;
+  };
+
+  constructor() {
+    this.VER_RIB_WEB = "4.11.0";
+    this.VER_PIB_WEB = "4.11.0";
+
+    this.MFP_CONTEXT_ROOT = "mfp";
+    this.RIB_WEB_APP_ID = "com.kiatnakinbank.kkebankingweb";
+    this.PIB_WEB_APP_ID = "com.kiatnakinbank.pibweb";
+
+    this.RESP_CODE_SUCCESS = "RIB-I-SCC000";
+    this.RESP_CODE_CREATE_USER_DUPLICATE = "RIB-E-ACT006";
+    this.RESP_CODE_OTP_IN_CORRECT = "RIB-E-OTP001";
+    this.RESP_CODE_REQ_OTP_AGAIN = "RIB-E-OTP003";
+    this.RESP_CODE_OTHER_ACCOUNT_NOT_FOUND = "RIB-E-ACC017";
+    this.RESP_CODE_MY_ACCOUNT_NOT_FOUND = "RIB-E-ACC016";
+    this.RESP_CODE_BILLER_NOT_FOUND = "RIB-E-BIL015";
+    this.RESP_CODE_INVALID_USERNAME_OR_PASSWORD = "RIB-E-LOG003";
+    this.RESP_CODE_HISTORY_NOT_FOUND = "RIB-E-DATA03";
+    this.RESP_CODE_SCHEDULE_NOT_FOUND = "RIB-E-DATA04";
+
+    this.Auth_REALM_LOGIN = "UserLoginCBS";
+
+    this.MENU_MOBILE = "MOBILE";
+    this.MENU_WEB = "WEB";
+
+    this.CUSTOMER_TYPE = "RIB";
+
+    this.TOKEN_UUID = "uuid";
+
+    this.CUSTOMER_TYPE_RETAIL = "retail";
+
+    this.CORP_ID_RIB = "RIB";
+
+    this.ACTION_TYPE_ACTIVATE_ACCOUNT = "S";
+    this.ACTION_TYPE_FORGOT_PASSWORD = "P";
+    this.ACTION_TYPE_FORGOT_USERNAME = "U";
+
+    this.ACTION_CODE_ACTIVATE_ACCOUNT = "activate_account";
+    this.ACTION_CODE_ADD_EXT_ACCOUNT = "add_ext_account";
+    this.ACTION_CODE_ADD_MY_ACCOUNT = "add_my_account";
+    this.ACTION_CODE_ADD_BILLER = "add_biller";
+    this.ACTION_CODE_EDIT_BILLER = "edit_biller";
+    this.ACTION_CODE_CHANGE_PASSWORD = "change_password";
+    this.ACTION_CODE_FORGOT_PASSWORD = "forgot_password";
+    this.ACTION_CODE_FORGOT_USERNAME = "forgot_username";
+    this.ACTION_CODE_FUND_TRANSFER = "fund_transfer";
+    this.ACTION_CODE_RESET_PASSWORD = "reset_password";
+    this.ACTION_CODE_REGISTER_ANYID = "register_anyid";
+    this.ACTION_CODE_TERM_AND_CON = "term_and_con";
+    this.ACTION_CODE_BILL_PAYMENT = "bill_payment";
+    this.ACTION_CODE_E_DONATION = "bill_payment_edonation";
+    this.ACTION_CODE_CREATE_RTP = "create_rtp";
+    this.ACTION_CODE_AMEND_ANYID = "amend_anyid";
+    this.ACTION_CODE_CHANGE_USERNAME = "change_username";
+
+    this.STYLE_RIB_WEB = "rib-web";
+    this.STYLE_RIB_MOBILE = "rib-mobile";
+    this.STYLE_PIB_WEB = "pib-web";
+    this.STYLE_PIB_MOBILE = "pib-mobile";
+
+    this.CHANNEL_RIB_WEB = "RIB_WEB";
+    this.CHANNEL_RIB_MOBILE = "RIB_MOBILE";
+    this.CHANNEL_PIB_WEB = "PIB_WEB";
+    this.CHANNEL_PIB_MOBILE = "PIB_MOBILE";
+
+    this.SCREEN_NAME_ACCOUNT_ACTIVATE = "account-activate";
+
+    this.IMMEDIATE_TYPE_TODAY = "T";
+    this.IMMEDIATE_TYPE_LATER = "L";
+
+    this.RECURRING_TYPE_YES = "Y";
+    this.RECURRING_TYPE_NO = "N";
+
+    this.SCHEDULER_TYPE_ONE_TIME = 0;
+    this.SCHEDULER_TYPE_WEEKLY = 1;
+    this.SCHEDULER_TYPE_MONTHLY = 2;
+
+    this.SCREEN_NAME_BILL_PAYMENT = "bill-payment";
+
+    this.REQ_ACTION_CODE = {
+      VERIFY_CUSTOMER: "ACT_VERIFY_CUSTOMER",
+      RESET_PASSWORD: "ACT_RESET_PASSWORD",
+      REQUEST_USERNAME_BY_VERIFY_DEPOSIT_ACCOUNT: "ACT_REQUEST_USERNAME_BY_VERIFY_DEPOSIT_ACCOUNT",
+      CASA_STATEMENT_REPORT: "ACT_CASA_STATEMENT_REPORT",
+      TD_STATEMENT_REPORT: "ACT_TD_STATEMENT_REPORT",
+      MY_ACCOUNT_INQUIRY_TD_STATEMENT: "ACT_MY_ACCOUNT_INQUIRY_TD_STATEMENT",
+      MY_ACCOUNT_INQUIRY_CASA_STATEMENT: "ACT_MY_ACCOUNT_INQUIRY_CASA_STATEMENT",
+      MY_ACCOUNT_INQUIRY: "ACT_MY_ACCOUNT_INQUIRY",
+      DASHBOARD: "ACT_DASHBOARD",
+      GET_RATES_BY_CIF_TYPE_SWITCH_TERM_TD: "ACT_GET_RATES_BY_CIF_TYPE_SWITCH_TERM_TD",
+      SWITCH_TERM_TD: "ACT_SWITCH_TERM_TD",
+      MY_ACCOUNT_INQUIRY_DETAIL_SWITCH_TERM_TD: "ACT_MY_ACCOUNT_INQUIRY_DETAIL_SWITCH_TERM_TD",
+      INQUIRY_TERM_MASTER_DATA_SWITCH_TERM_TD: "ACT_INQUIRY_TERM_MASTER_DATA_SWITCH_TERM_TD",
+      CONTACT_US: "ACT_CONTACT_US",
+      INQUIRY_CUSTOMER_ANYID_INFORMATION: "ACT_INQUIRY_CUSTOMER_ANYID_INFORMATION",
+      MY_ACCOUNT_INQUIRY_CASA_SUMMARY: "ACT_MY_ACCOUNT_INQUIRY_CASA_SUMMARY",
+      RBAC_MY_ACCOUNT_INQUIRY_CASA_SUMMARY: "ACT_RBAC_MY_ACCOUNT_INQUIRY_CASA_SUMMARY",
+      VERIFY_ANYID_INFORMATION: "ACT_VERIFY_ANYID_INFORMATION",
+      INQUIRY_TRANSFER_TO_ACCOUNT: "ACT_RBAC_INQUIRY_TRANSFER_TO_ACCOUNT",
+      RBAC_GET_INFORMATION_SERVICE: "ACT_RBAC_GET_INFORMATION_SERVICE",
+      PREPARE_FUND_TRANSFER: "ACT_PREPARE_FUND_TRANSFER",
+      FUND_TRANSFER: "ACT_FUND_TRANSFER",
+      RBAC_UPDATE_TERM_AND_CONDITION: "ACT_RBAC_UPDATE_TERM_AND_CONDITION",
+      INQUIRY_BANK_INFO: "ACT_INQUIRY_BANK_INFO",
+      INQUIRY_CATEGORY_INFO: "ACT_INQUIRY_CATEGORY_INFO",
+      INQUIRY_SCHEDULE_TYPE: "ACT_INQUIRY_SCHEDULE_TYPE",
+      EXTERNAL_ACCOUNT_INQUIRY: "ACT_EXTERNAL_ACCOUNT_INQUIRY",
+      EXTERNAL_ACCOUNT_UPDATE_FAVORITE: "ACT_EXTERNAL_ACCOUNT_UPDATE_FAVORITE",
+      INQUIRY_HISTORY_FUND_TRANSFER: "ACT_INQUIRY_TRANSFER_HISTORY",
+      MY_ACCOUNT_ADD: "ACT_MY_ACCOUNT_ADD",
+      MY_ACCOUNT_ADD_SUBMIT: "ACT_MY_ACCOUNT_ADD_SUBMIT",
+      MY_ACCOUNT_EDIT: "ACT_MY_ACCOUNT_CHANGE_ALIAS_NAME",
+      MY_ACCOUNT_DELETE: "ACT_MY_ACCOUNT_DELETE",
+      EXTERNAL_ACCOUNT_DELETE: "ACT_EXTERNAL_ACCOUNT_DELETE",
+      PREPARE_FUND_TRANSFER_TD: "ACT_PREPARE_FUND_TRANSFER_TD",
+      GET_RATES_BY_CIF_TYPE: "ACT_GET_RATES_BY_CIF_TYPE",
+      FUND_TRANSFER_TD: "ACT_FUND_TRANSFER_TD",
+      CASA_TRANSFER_SLIP: "ACT_CASA_TRANSFER_SLIP",
+      TD_TRANSFER_SLIP: "ACT_TD_TRANSFER_SLIP",
+      EXTERNAL_ACCOUNT_ADD: "ACT_EXTERNAL_ACCOUNT_ADD",
+      INQUIRY_BILL: 'ACT_INQUIRY_BILL',
+      INQUIRY_BILL_SCHEDULE: "ACT_INQUIRY_BILL_SCHEDULE_PERIOD_PIB_RIB",
+      INQUIRY_FUND_TRANSFER: "ACT_INQUIRY_FUND_TRANSFER_SCHEDULE",
+      INQUIRY_HISTORY_PAYMENT_BILL: "ACT_INQUIRY_HISTORY_PAYMENT_PIB_RIB",
+      REGISTER_ANYID: 'ACT_REGISTER_ANYID',
+      BILLER_VERIFY_ADD: 'ACT_VERIFY_ADD_BILL',
+      BILLER_ADD: 'ACT_ADD_BILL',
+      BILLER_VERIFY_EDIT: 'ACT_VERIFY_EDIT_BILL',
+      BILLER_EDIT: 'ACT_EDIT_BILL',
+      BILLER_EDIT_WITHOUT_OTP : 'ACT_EDIT_BILL_WITHOUT_OTP',
+      BILLER_DELETE: 'ACT_DELETE_BILL',
+      CASA_TRANSFER_HISTORY_SLIP: "ACT_CASA_TRANSFER_SLIP_PIBRIB",
+      TD_TRANSFER_HISTORY_SLIP: "ACT_TD_TRANSFER_SLIP_PIBRIB",
+      BILL_PAYMENT_SLIP_PIBRIB: "ACT_BILL_PAYMENT_SLIP_PIBRIB",
+      BILL_PAYMENT_DONATION_SLIP_PIBRIB: "ACT_BILL_PAYMENT_DONATION_SLIP_PIBRIB",
+      INQUIRY_TRANSFER_FEE: "ACT_INQUIRY_TRANSFER_FEE",
+      VERIFY_BILL_PAYMENT: "ACT_BPS_VERIFY_BILL_PAYMENT",
+      CONFIRM_BILL_PAYMENT: "ACT_CONFIRM_BILL_PAYMENT",
+      EDIT_FUND_TRANSFER: "ACT_EDIT_FUND_TRANSFER",
+      EDIT_FUND_TRANSFER_SUBMIT: "ACT_EDIT_FUND_TRANSFER_SUBMIT",
+      MY_ACCOUNT_ADD_SUBMIT_WITHOUT_OTP: "ACT_MY_ACCOUNT_ADD_SUBMIT_WITHOUT_OTP",
+      EXTERNAL_ACCOUNT_ADD_SUBMIT_WITHOUT_OTP: "ACT_EXTERNAL_ACCOUNT_ADD_SUBMIT_WITHOUT_OTP",
+      VERIFY_EDIT_BILL_PAYMENT: "ACT_VERIFY_EDIT_BILL_PAYMENT",
+      CONFIRM_EDIT_BILL_PAYMENT: "ACT_CONFIRM_EDIT_BILL_PAYMENT",
+      INQUIRY_ANYID_TYPE: "ACT_INQUIRY_ANYID_TYPE",
+      RTP_INQUIRY_INCOMING: "ACT_RTP_INQUIRY_INCOMING",
+      INQUIRY_BILLER_CUSTOMER: "ACT_BPS_INQUIRY_BILLER_CUSTOMER",
+      INQUIRY_BILLER_INFO: "ACT_BPS_INQUIRY_BILLER_INFO",
+      BPS_INQUIRY_BILLER_TOKEN_AND_CATEGORY_LIST: "ACT_BPS_INQUIRY_BILLER_TOKEN_AND_CATEGORY_LIST",
+      BPS_INQUIRY_ALL_CATEGORY: "ACT_BPS_INQUIRY_ALL_CATEGORY",
+      INQUIRY_PAY_INFO: "ACT_BPS_INQUIRY_PAY_INFO",
+      INQUIRY_PAY_INFO_PIBRIB: "ACT_BPS_INQUIRY_PAY_INFO_PIBRIB",
+      INQUIRY_BILL_PAYMENT_FEE: "ACT_BPS_INQUIRY_FEE_PAYMENT",
+      VERIFY_ADD_BILLER: "ACT_BPS_VERIFY_ADD_BILLER",
+      ADD_BILLER: "ACT_BPS_ADD_BILLER",
+      VERIFY_EDIT_BILLER: "ACT_BPS_VERIFY_EDIT_BILLER",
+      EDIT_BILLER: "ACT_BPS_EDIT_BILLER",
+      DELETE_BILLER: "ACT_BPS_DELETE_BILLER",
+	    RTP_INQUIRY_HISTORY: "ACT_RTP_INQUIRY_HISTORY",
+      UPDATE_FAVOURITE_BILLER: "ACT_BPS_UPDATE_FAVOURITE_BILLER",
+      BPS_CONFIRM_BILL_PAYMENT: "ACT_BPS_CONFIRM_BILL_PAYMENT",
+      DELETE_BILL_SCHEDULE_ALL: "ACT_DELETE_BILL_SCHEDULE_ALL",
+      DELETE_BILL_SCHEDULE_ONETIME: "ACT_DELETE_BILL_SCHEDULE_ONETIME",
+      BPS_VERIFY_EDIT_BILL_PAYMENT: "ACT_BPS_VERIFY_EDIT_BILL_PAYMENT",
+      BPS_CONFIRM_EDIT_BILL_PAYMENT: "ACT_BPS_CONFIRM_EDIT_BILL_PAYMENT",
+      RTP_INQUIRY_OUTGOING: "ACT_RTP_INQUIRY_OUTGOING",
+      RTP_INQUIRY_ANYID_MY: "ACT_RTP_INQUIRY_ANYID_MY",
+      RTP_INQUIRY_ANYID_OTHER: "ACT_RTP_INQUIRY_ANYID_OTHER",
+      RTP_VERIFY_CREATE: "ACT_RTP_VERIFY_CREATE",
+      RTP_CONFIRM_CREATE: "ACT_RTP_CONFIRM_CREATE",
+      BADGE_MENU_COUNT: "ACT_BADGE_MENU_COUNT",
+      QR_GERNERATE: "ACT_QR_GERNERATE",
+      VERIFY_REF_CODE: "ACT_VERIFY_REF_CODE",
+      ACTIVATE_CUSTOMER: "ACT_ACTIVATE_SUBSCRIPTION_CUSTOMER",
+      VERIFY_SUBSCRIPTION_ATM_PIN: "ACT_VERIFY_SUBSCRIPTION_ATM_PIN",
+      VERIFY_SUBSCRIPTION_PRODUCT_ID: "ACT_VERIFY_SUBSCRIPTION_PRODUCT_ID",
+      REQUEST_OTP: "ACT_REQUEST_OTP",
+      VERIFY_OTP: "ACT_VERIFY_OTP",
+      REQUEST_USERNAME: "ACT_REQUEST_USERNAME",
+      INQUIRY_TERM_AND_CONDITION: "ACT_INQUIRY_TERM_AND_CONDITION",
+      RTP_INQUIRY_BLOCKLIST: "ACT_RTP_INQUIRY_BLOCKLIST",
+      RTP_CREATE_BLOCKLIST: "ACT_RTP_CREATE_BLOCKLIST",
+      RTP_DELETE_BLOCKLIST: "ACT_RTP_DELETE_BLOCKLIST",
+	    RTP_CANCEL: "ACT_RTP_CANCEL",
+	    INQUIRY_PAY_INFO_ONLINE: "ACT_BPS_INQUIRY_PAY_INFO_ONLINE",
+      VERIFY_FUND_TRANSFER: "ACT_VERIFY_FUND_TRANSFER",
+      CONFIRM_FUND_TRANSFER: "ACT_CONFIRM_FUND_TRANSFER",
+      INQUIRY_ALL_ISSUE_COUNTRY: "ACT_INQUIRY_ALL_ISSUE_COUNTRY",
+		  VERIFY_AMEND_ANYID: "ACT_VERIFY_AMEND_ANYID",
+      CONFIRM_AMEND_ANYID: "ACT_CONFIRM_AMEND_ANYID",
+	    BPS_ADD_BILLER_WITHOUT_OTP: "ACT_BPS_ADD_BILLER_WITHOUT_OTP",
+      VERIFY_EDIT_FUND_TRANSFER: "ACT_VERIFY_EDIT_FUND_TRANSFER",
+      CONFIRM_EDIT_FUND_TRANSFER: "ACT_CONFIRM_EDIT_FUND_TRANSFER",
+		  ADD_BILLER_WITHOUT_OTP: "ACT_ADD_BILLER_WITHOUT_OTP",
+      EDONATION_INQUIRY_CUSTOMER_TYPE: "ACT_EDONATION_INQUIRY_CUSTOMER_TYPE",
+      CHANGE_USER_NAME: "ACT_CHANGE_USER_NAME",
+      INQUIRY_USER_NAME: "ACT_INQUIRY_USER_NAME",
+      INQUIRY_ALL_DEVICE: "ACT_GET_ALL_DEVICE",
+      REMOVE_DEVICE: "ACT_REMOVE_DEVICE",
+      UPDATE_TERM_AND_CONDITION: "ACT_UPDATE_TERM_AND_CONDITION"
+    };
+
+    this.REQ_PROCEDURE_NAME = {
+      VERIFY_CUSTOMER: "verifyCustomerProcedure",
+      RESET_PASSWORD: "resetPasswordProcedure",
+      REQUEST_USERNAME_BY_VERIFY_DEPOSIT_ACCOUNT: "requestUsernameByDepositAccountProcedure",
+      CASA_STATEMENT_REPORT: "getCASAStatementProcedure",
+      TD_STATEMENT_REPORT: "getTDStatementProcedure",
+      MY_ACCOUNT_INQUIRY_TD_STATEMENT: "inquiryMyAccountTDStatementProcedure",
+      MY_ACCOUNT_INQUIRY_CASA_STATEMENT: "inquiryMyAccountCASAStatementProcedure",
+      MY_ACCOUNT_INQUIRY: "inquiryMyAccountProcedure",
+      DASHBOARD: "dashboardProcedure",
+      GET_RATES_BY_CIF_TYPE_SWITCH_TERM_TD: "getRatesByCIFTypeSwitchTermTDProcedure",
+      SWITCH_TERM_TD: "switchTermTDProcedure",
+      MY_ACCOUNT_INQUIRY_DETAIL_SWITCH_TERM_TD: "inquiryMyAccountDetailSwitchTermTDProcedure",
+      INQUIRY_TERM_MASTER_DATA_SWITCH_TERM_TD: "inquiryTermMasterDataSwitchTermTDProcedure",
+      CONTACT_US: "getTermAndConditionProcedure",
+      INQUIRY_CUSTOMER_ANYID_INFORMATION: "inquiryCustomerAnyIDInformationProcedure",
+      MY_ACCOUNT_INQUIRY_CASA_SUMMARY: "inquiryMyAccountCASASummaryProcedure",
+      VERIFY_ANYID_INFORMATION: "registerAnyIDProcedure",
+      INQUIRY_TRANSFER_TO_ACCOUNT: "inquiryTransferToAccountProcedure",
+      PREPARE_FUND_TRANSFER: "prepareFundTransferProcedure",
+      FUND_TRANSFER: "fundTransferProcedure",
+      RBAC_UPDATE_TERM_AND_CONDITION: "updateTermAndConditionProcedure",
+      INQUIRY_BANK_INFO: "inquiryBankInfoProcedure",
+      INQUIRY_CATEGORY_INFO: "inquiryCategoryInfoProcedure",
+      INQUIRY_SCHEDULE_TYPE: "inquiryScheduleTypeProcedure",
+      FETCH_CURRENT_DATE: "fetchCurrentDateProcedure",
+      EXTERNAL_ACCOUNT_INQUIRY: "inquiryExternalAccountProcedure",
+      EXTERNAL_ACCOUNT_UPDATE_FAVORITE: "updateFavoriteProcedure",
+      INQUIRY_HISTORY_FUND_TRANSFER: "inquiryTransferHistoryProcedure",
+      MY_ACCOUNT_ADD: "addMyAccountProcedure",
+      MY_ACCOUNT_ADD_SUBMIT: "addMyAccountSubmitProcedure",
+      MY_ACCOUNT_EDIT: "changeAilasNameMyAccountProcedure",
+      MY_ACCOUNT_DELETE: "deleteMyAccountProcedure",
+      EXTERNAL_ACCOUNT_DELETE: "deleteExternalAccountProcedure",
+      PREPARE_FUND_TRANSFER_TD: "prepareFundTransferTDProcedure",
+      GET_RATES_BY_CIF_TYPE: "getRatesByCIFTypeProcedure",
+      FUND_TRANSFER_TD: "fundTransferTDProcedure",
+      CASA_TRANSFER_SLIP: "getCASATransferProcedure",
+      TD_TRANSFER_SLIP: "getTDTransferProcedure",
+      EXTERNAL_ACCOUNT_ADD: "addExternalAccountProcedure",
+      INQUIRY_BILL: 'inquiryBillCustomerProcedure',
+      INQUIRY_BILL_SCHEDULE: 'inquiryBillPaymentProcedure',
+      INQUIRY_FUND_TRANSFER: "inquiryTransferScheduleProcedure",
+      INQUIRY_HISTORY_PAYMENT_BILL: "inquiryBillPaymentHistoryProcedure",
+      REGISTER_ANYID: 'registerAnyIDProcedure',
+      BILLER_VERIFY_ADD: 'verifyAddBillCustomerProcedure',
+      BILLER_ADD: 'addBillCustomerProcedure',
+      BILLER_VERIFY_EDIT: 'verifyEditBillCustomerProcedure',
+      BILLER_EDIT: 'editBillCustomerProcedure',
+      BILLER_EDIT_WITHOUT_OTP : 'editBillCustomerWithoutOTPProcedure',
+      BILLER_DELETE: 'deleteBillCustomerProcedure',
+      BILL_PAYMENT_SLIP_PIBRIB: "getBillPaymentProcedure",
+      BILL_PAYMENT_DONATION_SLIP_PIBRIB: "getSlipBillPaymentEdonationProcedure",
+      INQUIRY_TRANSFER_FEE: "inquiryTransferFeeProcedure",
+      VERIFY_BILL_PAYMENT: "verifyBPSBillpayProcedure",
+      CONFIRM_BILL_PAYMENT: "confirmBillPaymentProcedure",
+      EDIT_FUND_TRANSFER: "editFundTransferProcedure",
+      EDIT_FUND_TRANSFER_SUBMIT: "editFundTransferSubmitProcedure",
+      MY_ACCOUNT_ADD_SUBMIT_WITHOUT_OTP: "addMyAccountSubmitWithOutOTPProcedure",
+      EXTERNAL_ACCOUNT_ADD_SUBMIT_WITHOUT_OTP: "addExternalAccountSubmitWithoutOTPProcedure",
+      VERIFY_EDIT_BILL_PAYMENT: "editBillPaymentProcedure",
+      CONFIRM_EDIT_BILL_PAYMENT: "confirmEditBillPaymentProcedure",
+      INQUIRY_ANYID_TYPE: "inquiryBankInfoProcedure",
+      RTP_INQUIRY_INCOMING: "inquiryRTPIncomingProcedure",
+      INQUIRY_BILLER_CUSTOMER: "inquiryBillerCustomerProcedure",
+      INQUIRY_BILLER_INFO: "inquiryBillerInfoProcedure",
+      BPS_INQUIRY_BILLER_TOKEN_AND_CATEGORY_LIST: "inquiryBillerTokenAndCategoryListProcedure",
+      BPS_INQUIRY_ALL_CATEGORY: "inquiryAllCategoryProcedure",
+      INQUIRY_PAY_INFO: "inquiryPayInfoProcedure",
+      INQUIRY_PAY_INFO_PIBRIB: "inquiryPayInfoPIBRIBProcedure",
+      INQUIRY_BILL_PAYMENT_FEE: "inquiryFeePaymentProcedure",
+      VERIFY_ADD_BILLER: "verifyAddBillerProcedure",
+      ADD_BILLER: "addBillerProcedure",
+      VERIFY_EDIT_BILLER: "verifyEditBillerProcedure",
+      EDIT_BILLER: "editBillerProcedure",
+      DELETE_BILLER: "deleteBillerProcedure",
+	    RTP_INQUIRY_HISTORY: "inquiryRTPHistoryProcedure",
+      UPDATE_FAVOURITE_BILLER: "updateBillerFavouriteProcedure",
+      BPS_CONFIRM_BILL_PAYMENT: "confirmBPSBillpayProcedure",
+      DELETE_BILL_SCHEDULE_ALL: "deleteAllBillPaymentProcedure",
+      DELETE_BILL_SCHEDULE_ONETIME: "deleteBillPaymentProcedure",
+      BPS_VERIFY_EDIT_BILL_PAYMENT: "verifyBPSEditBillpayProcedure",
+      BPS_CONFIRM_EDIT_BILL_PAYMENT: "confirmBPSEditBillpayProcedure",
+      RTP_INQUIRY_OUTGOING: "inquiryRTPOutgoingProcedure",
+      RTP_INQUIRY_ANYID_MY: "inquiryRTPInquiryAnyidMyProcedure",
+      RTP_INQUIRY_ANYID_OTHER: "inquiryRTPInquiryAnyidOtherProcedure",
+      RTP_VERIFY_CREATE: "verifyCraeteRTPProcedure",
+      RTP_CONFIRM_CREATE: "confirmCraeteRTPProcedure",
+      BADGE_MENU_COUNT: "badgeMenuCountProcedure",
+      QR_GERNERATE: "generateQRCodeProcedure",
+      VERIFY_REF_CODE: "verifyReferenceCodeProcedure",
+      ACTIVATE_CUSTOMER: "activateCustomerProcedure",
+      VERIFY_SUBSCRIPTION_ATM_PIN: "verifySubscriptionAtmPinProcedure",
+      VERIFY_SUBSCRIPTION_PRODUCT_ID: "verifySubscriptionProductIdProcedure",
+      REQUEST_OTP: "requestOTPProcedure",
+      VERIFY_OTP: "verifyOTPProcedure",
+      REQUEST_USERNAME: "requestUsernameProcedure",
+      INQUIRY_TERM_AND_CONDITION: "inquiryTermAndConditionProcedure",
+      RTP_INQUIRY_BLOCKLIST: "inquiryRTPBlockListProcedure",
+      RTP_CREATE_BLOCKLIST: "createRTPBlockListProcedure",
+      RTP_DELETE_BLOCKLIST: "deleteRTPBlockListProcedure",
+	    RTP_CANCEL: "cancelRtpProcedure",
+	    INQUIRY_PAY_INFO_ONLINE: "inquiryPayInfoOnlineProcedure",
+      VERIFY_FUND_TRANSFER: "verifyFundTransferProcedure",
+      CONFIRM_FUND_TRANSFER: "confirmFundTransferProcedure",
+      INQUIRY_ALL_ISSUE_COUNTRY: "inquiryAllIssueCountryProcedure",
+      VERIFY_AMEND_ANYID: "verifyTransactionAmendAnyIDProcedure",
+      CONFIRM_AMEND_ANYID: "confirmAmendAnyIDProcedure",
+	    BPS_ADD_BILLER_WITHOUT_OTP: "addBillerWithOutOTPProcedure",
+      VERIFY_EDIT_FUND_TRANSFER: "verifyEditFundTransferProcedure",
+      CONFIRM_EDIT_FUND_TRANSFER: "confirmEditFundTransferProcedure",
+      ADD_BILLER_WITHOUT_OTP: "addBillerWithOutOTPProcedure",
+	    PROMOTION_INFORMATION: "getPromotionProcedure",
+      PROMPTPAY_INFORMATION: "getPromptPayProcedure",
+      KKP_URL_INFORMATION: "getKkpUrlProcedure",
+      NEWS_INFORMATION: "getNewsProcedure",
+      EDONATION_INQUIRY_CUSTOMER_TYPE: "inquiryCustomerType",
+      CHANGE_USER_NAME: "changeUsernameProcedure",
+      INQUIRY_USER_NAME: "inquiryUsernameProcedure",
+      INQUIRY_ALL_DEVICE: "getAllDeviceProcedure",
+      REMOVE_DEVICE: "removeDeviceProcedure"
+    };
+
+    this.PORTLETS_MENU_DATA = {
+      STATEMENT: "statement",
+      TRANSFER: "transfer",
+      PAYMENT: "payment",
+      FAVOURITE: "favourite",
+      CALENDAR: "calendar",
+      EDIT: "edit",
+      DELETE: "delete",
+      SCHEDULE: "schedule",
+      CHANGETERM: "changeterm",
+      CREATERTP: "create_rtp",
+      QRGEN:"qr_gen"
+    };
+
+    this.MONTH_FULLNAME = {
+      "en": ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+      "th": ["\u0e21\u0e01\u0e23\u0e32\u0e04\u0e21", "\u0e01\u0e38\u0e21\u0e20\u0e32\u0e1e\u0e31\u0e19\u0e18\u0e4c",
+        "\u0e21\u0e35\u0e19\u0e32\u0e04\u0e21", "\u0e40\u0e21\u0e29\u0e32\u0e22\u0e19",
+        "\u0e1e\u0e24\u0e29\u0e20\u0e32\u0e04\u0e21", "\u0e21\u0e34\u0e16\u0e38\u0e19\u0e32\u0e22\u0e19",
+        "\u0e01\u0e23\u0e01\u0e0e\u0e32\u0e04\u0e21", "\u0e2a\u0e34\u0e07\u0e2b\u0e32\u0e04\u0e21",
+        "\u0e01\u0e31\u0e19\u0e22\u0e32\u0e22\u0e19", "\u0e15\u0e38\u0e25\u0e32\u0e04\u0e21",
+        "\u0e1e\u0e24\u0e28\u0e08\u0e34\u0e01\u0e32\u0e22\u0e19", "\u0e18\u0e31\u0e19\u0e27\u0e32\u0e04\u0e21"]
+    };
+
+    this.DASHBOARD_MENU = {
+      MY_ACCOUNT: "myaccount",
+      MY_PROMPTPAY: "mypromptpay"
+    }
+  };
+  
+  BILLER_ICON_URL = 'assets/images/biller_icons/';
+  DEFAULT_BILLER_ICON = 'assets/images/biller.png';
+  DEFAULT_E_DONATE_BILLER_ICON = 'assets/images/eDonate.png';
+}

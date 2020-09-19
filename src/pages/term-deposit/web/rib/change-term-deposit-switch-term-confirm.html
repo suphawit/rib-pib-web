@@ -1,0 +1,77 @@
+<div>
+	<table class="table table-striped table-bordered table-hover table-checkable order-column">
+		<thead>
+			<tr>
+				<th class="col-md-2 text-align">{{'lbl.depositNoTD'|translate}}</th>
+				<th>{{'lbl.valueDateTD'|translate}}</th>
+				<th>{{'lbl.maturityDate'|translate}}</th>
+				<th>{{'lbl.term'|translate}}</th>
+				<th>{{'lbl.amount'|translate}}</th>
+				<th>{{'lbl.interestRate'|translate}}</th>
+				<th>{{'lbl.interestCondition'|translate}}</th>
+				<th>{{'label.benefitAccount'|translate}}</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="text-align">{{SelectedDepositItem.depNo}} </td>
+				<td>{{SelectedDepositItem.dateOpen}} </td>
+				<td>{{SelectedDepositItem.dateMaturity}} </td>
+				<td>{{SelectedDepositItem.term_description}} </td>
+				<td>{{SelectedDepositItem.balAvailable | number:'.2-2'}} {{'label.currency'|translate}} </td>
+				<td>{{SelectedDepositItem.interest }} % </td>
+				<td>{{SelectedDepositItem.freqIntPay}} </td>
+				<td>{{SelectedDepositItem.benefitAcc}} </td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<div class="table-responsive">
+	<table class="table table-light">
+		<tbody>
+			<tr>
+				<td class="width-gap">
+					<span class="bold font-kkppurple">{{'lbl.term'|translate}}</span>
+				</td>
+				<td align="">
+					<span [hidden]="currentLang !== 'en'">{{SelectedTermType.termNameEng}}</span>
+					<span [hidden]="currentLang !== 'th'">{{SelectedTermType.termNameTha}}</span>
+				</td>
+			</tr>
+			<tr>
+				<td class="">
+					<span class="bold font-kkppurple">{{'lbl.interestCondition'|translate}}</span>
+				</td>
+				<td align="">
+					<span [hidden]="currentLang !== 'en'">{{SelectedTermType.freqIntPayDescEng}}</span>
+					<span [hidden]="currentLang !== 'th'">{{SelectedTermType.freqIntPayDescTha}}</span>
+				</td>
+			</tr>
+			<tr>
+				<td class="">
+					<span class="bold font-kkppurple">{{'lbl.interestRate'|translate}}</span>
+				</td>
+				<td align="">
+					<span>{{newInterestRate}} %</span>
+				</td>
+			</tr>
+			<tr>
+				<td class="">
+					<span class="bold font-kkppurple">{{'label.principleBalance'|translate}}</span>
+				</td>
+				<td align="">
+					<span>{{SelectedDepositItem.balPrincipal | number:'.2-2'}} {{'label.currency'|translate}}</span>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<div class="row padding-border">
+	<div class="col-md-offset-3">
+		<a *ngIf="isShowCloseButton == false" (click)="navigatePage('MY_ACCOUNTS.CHANGETERM_TD')" class="btn btn-outline btn-default"><i class="fa fa-angle-left"></i> {{'button.back'|translate}} </a>
+		<a *ngIf="isShowCloseButton == false" (click)="navigateToSwitchTermSuccess()" class="btn btn-outline kkppurple button-next"> {{'button.confirm'|translate}}	<i class="fa fa-angle-right"></i></a>
+		<div>
+			<a *ngIf="isShowCloseButton == true" (click)="navigatePage('DASHBOARD')" class="btn btn-outline btn-default"><i class="fa fa-cross"></i> {{'btn.close'|translate}} </a>
+		</div>
+	</div>
+</div>

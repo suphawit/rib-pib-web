@@ -1,0 +1,17 @@
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-settings font-kkppurple"></i>
+            <span class="caption-subject font-kkppurple bold uppercase">{{'label.menu' | translate}}</span>
+        </div>
+    </div>
+    <div class="portlet-body">
+        <a *ngFor="let item of menuData;trackBy: trackById">
+            <div class="icon-btn float-left" (click)="onMenuClick(item.value)" *ngIf="item.isShow == true">
+                <i class="fa {{item.icon}}"></i>
+                <div>{{item.name | translate}}</div>
+            </div>
+        </a>
+        <div class="clear"></div>
+    </div>
+</div>

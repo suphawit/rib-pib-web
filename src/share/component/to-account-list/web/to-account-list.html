@@ -1,0 +1,108 @@
+<div class="panel-custom {{ settings.styleClass }}">
+    <accordion [closeOthers]="true" activeIds="0">
+        <accordion-group #group [isOpen]="status.isOpen || (accountGroup.catId == (currentAccount?.category?.catId || 0))" *ngFor="let accountGroup of otherAccounts;"  (click)="autoScaleHeight()">
+            <div accordion-heading>
+                {{ accountGroup.name }}
+                <i class="pull-right float-xs-right glyphicon" 
+                    [ngClass]="{'glyphicon-chevron-down': group?.isOpen, 'glyphicon-chevron-up': !group?.isOpen}">
+                </i>
+            </div>
+            <div *ngIf="accountGroup.index > 0" class="wrap">
+                <div class="inner"  style="position: inherit !important;">                    
+                    <table class="table table-hover table-light">
+                        <tbody>
+                            <tr [class.highlight]="isHighlighted(account, currentAccount)" 
+                                *ngFor="let account of accountGroup.items" (click)="onSelectChanged(account)">
+							    <td class="fit">
+                                    <div *ngIf="account.anyIDType.anyIDType === constants.ANYID_TYPE_BANK_ACCOUNT" class="icon-circle" style.background-color="{{ account.bank?.imgObj?.color }}">
+                                        <img src="{{ constants.BANK_IMAGE_PATH + account.bank?.imgObj?.url }}" title="{{ account.bank?.bankName }}" alt="{{ account.bank?.bankName }}" 
+                                            onerror="this.style.display='none';" class="user-pic rounded" />
+                                    </div>
+                                    <div *ngIf="account.anyIDType.anyIDType !== constants.ANYID_TYPE_BANK_ACCOUNT" class="icon-circle" style.background-color="{{ account.anyIDType?.iconObj?.iconColor }}">
+                                        <img src="{{ account.anyIDType?.iconObj?.icon }}" title="{{ account.anyIDType?.desc }}" alt="{{ account.anyIDType?.desc }}" 
+                                            onerror="this.style.display='none';" class="user-pic rounded" />
+                                    </div>
+                                </td>    
+							    <td>
+                                    <a href="javascript:;" aria-expanded="false" class="primary-link">{{ account.aliasName | stringLimit:17 }}</a><br />{{ account.accNo | stringLimit:17 }}
+							    </td>
+                            </tr>
+                        </tbody>
+                    </table>                    
+                </div>
+            </div>
+            <div *ngIf="accountGroup.index == 0">
+                <form #accForm="ngForm" novalidate>
+                    <div class="form-group col-md-12" style="margin-top:10px!important">
+                        <label>
+                            {{ 'lbl.accTypeAnyID' | translate }} <span class="required"> * </span>
+                        </label>
+                        <div>
+                            <select class="form-control" name="anyIDType" [(ngModel)]="model.anyIDType" #anyIDType="ngModel" (ngModelChange)="onAnyIDTypeChange($event)">                                
+                                <option *ngFor="let type of getAnyIDTypes();trackBy: trackById" [value]="type" [selected]="model.anyIDType == type">{{ anyIDTypes[type].desc }}</option>
+                            </select>                            
+                        </div>
+                    </div>	
+                    <div *ngIf="model.anyIDType == constants.ANYID_TYPE_BANK_ACCOUNT" class="form-group col-md-12">
+                        <label>
+                           {{ 'lbl.bankName' | translate }} <span class="required"> * </span>
+                        </label>
+                        <div [ngClass]="{ 'has-error': bankCode.errors && (bankCode.dirty || bankCode.touched || submitted) }">
+                            <select class="form-control" name="bankCode" [(ngModel)]="model.bankCode" #bankCode="ngModel" (ngModelChange)="onBankChange($event)" required>
+                                <option value="">{{ 'lbl.drpSelect' | translate }}</option>
+                                <option *ngFor="let bank of banks;trackBy: trackById" [value]="bank.bankCode" [selected]="model.bankCode == bank.bankCode">{{ bank.bankName }}</option>
+                            </select>
+                            <span *ngIf="bankCode.errors && (bankCode.dirty || bankCode.touched || submitted)" class="help-block">
+                                <label *ngIf="bankCode.errors.required">
+                                    {{ 'label.Required' | strformat:['lbl.bankName'] }}
+                                </label>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12" [ngClass]="{ 'has-error': accountNo.errors && (accountNo.dirty || accountNo.touched || submitted) }">
+                        <label *ngIf="model.anyIDType == constants.ANYID_TYPE_BANK_ACCOUNT">
+                           {{ 'lbl.accountNo' | translate }} <span class="required"> * </span>
+                        </label>
+                        <label *ngIf="model.anyIDType != constants.ANYID_TYPE_BANK_ACCOUNT">
+                            {{ anyIDTypes[model.anyIDType].label }} <span class="required"> * </span>
+                        </label>
+                        <div>
+                            <input type="text" id="accountNo" class="form-control" name="accountNo" [(ngModel)]="model.accountNo" #accountNo="ngModel" 
+                                [rangeLength]="rangeLength" [attr.maxlength]="rangeLength[1]" pattern="{{ inputPattern }}" autocomplete="off" required />
+                            <span *ngIf="accountNo.errors && (accountNo.dirty || accountNo.touched || submitted)" class="help-block">
+                                <label *ngIf="accountNo.errors.required">
+                                    {{ 'label.Required' | strformat:[anyIDTypes[model.anyIDType].label] }}
+                                </label>
+                                <label *ngIf="accountNo.errors.pattern || accountNo.errors.rangeLength">
+                                    {{ 'valErr.invalid' | strformat:[anyIDTypes[model.anyIDType].label] }}
+                                </label>
+                            </span>
+                        </div>
+                    </div>
+                    <div *ngIf="isAccNameRequired" class="form-group col-md-12" [ngClass]="{ 'has-error': accountName.errors && (accountName.dirty || accountName.touched || submitted) }">
+                        <label>
+                            {{ 'lbl.accountName' |translate }} <span class="required"> * </span>
+                        </label>
+                        <div>
+                            <input type="text" id="accountName" class="form-control" name="accountName" [(ngModel)]="model.accountName" #accountName="ngModel" 
+                                onlyENUpper #input (input)="input.value=$event.target.value.toUpperCase()" autocomplete="off" required />
+                            <span *ngIf="accountName.errors && (accountName.dirty || accountName.touched || submitted)" class="help-block">
+                                <label *ngIf="accountName.errors.required">
+                                    {{ 'label.Required' | strformat:['lbl.accountName'] }}
+                                </label>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <a href="javascript:;" class="btn btn-outline kkppurple button-next" (click)="addAccount(accForm.value, accForm.valid)"> 
+                            {{ 'btn.addAccount' | translate }}
+                        </a>
+                        <a href="javascript:;" class="btn btn-outline red button-next" (click)="clearForm(accForm)"> 
+                            {{ 'btn.clear' | translate }}
+                        </a>
+                    </div>	
+                </form>	
+            </div>
+        </accordion-group>
+    </accordion>
+</div>

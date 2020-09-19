@@ -1,0 +1,45 @@
+<div class="clearfix"></div>
+<h3 class="page-title">{{'lbl.DashboardMenu'|translate}}</h3>
+<div class="row">
+    <div class="col-md-12">
+        <alert-message #alertMessage [type]="alertConfig.type" [message]="alertConfig.message"></alert-message>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet-body">
+            <ul class="nav nav-tabs">
+                <li [ngClass]="{ 'active': pageType === constants.DASHBOARD_MENU.MY_ACCOUNT }">
+                    <a (click)="switchPageType(constants.DASHBOARD_MENU.MY_ACCOUNT)">{{'label.myaccounts'|translate}}</a>
+                </li>
+                <li [ngClass]="{ 'active': pageType === constants.DASHBOARD_MENU.MY_PROMPTPAY }" *ngIf="permissionService.getShortcutPermission('MY_KK_PROMPTPAY')" >
+                    <a (click)="switchPageType(constants.DASHBOARD_MENU.MY_PROMPTPAY)">{{'label.promptpayServiceHeader'|translate}}</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane fade active in">
+                    <div class="row" [hidden]="checkIsHiddenPageType(constants.DASHBOARD_MENU.MY_ACCOUNT)">
+                        <div class="col-md-5 col-sm-5">
+                            <my-account-list [action]="'dashboard'" [filter]="'CA|SA|TD'" [isSelectAccountOnLoad]="true" (onSelectAccount)="ongetMyAccount($event)"
+                                (onError)="onListError($event)"></my-account-list>
+                        </div>
+                        <div class="col-md-7 col-sm-7">
+                            <my-account-detail [data]="accountDetailConfig.accountData" (onGetData)="onAccountDetail($event)" [hideMenu]="accountDetailConfig.hideMenu"
+                                [showBorder]="accountDetailConfig.showBorder" [style]="accountDetailConfig.style"></my-account-detail>
+                        </div>
+                    </div>
+                    <div class="row" [hidden]="checkIsHiddenPageType(constants.DASHBOARD_MENU.MY_PROMPTPAY)">
+                        <div class="col-md-12 col-sm-12">
+                            <prompt-pay-account-list [options]="KKPromptPayListOptions"></prompt-pay-account-list>
+                        </div>
+                        <div *ngIf="isShowRegisterKKPromptPayLink">
+                            {{alertConfig.message}}
+                            <a (click)="permissionChangeRoute.changeRoute('KK_PRODUCT_SERVICE.REGISTER_KK_PROMPT_PAY')">
+                            {{'btn.clickToRegisterKK'|translate}}</a>			
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div>
+</div>

@@ -1,0 +1,30 @@
+<div *ngIf="isDesktop" class="home-bg"></div>
+<div *ngIf="!isDesktop" class="row content-box">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-box">
+      <h1 class="font-eng">{{'menu.kkpebanking'|translate}}</h1>
+    </div>
+  </div>
+  <div class="col-md-6 col-md-offset-3">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12">
+        <img src="./assets/images/mobile.png?v={{BUILD_NUM}}" class="img-responsive mobile-img col-sm-12" alt="ธนาคารเกียรตินาคิน">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3 datails">
+        <h4>{{'label.landingpage'|translate}}</h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 text-center btn-box">
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <a href="https://itunes.apple.com/us/app/kk-e-banking/id1106337375" target="_blank"><img src="./assets/images/appstore_btn.png?v={{BUILD_NUM}}" class="appstore_btn" alt="appstore"></a>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <a href="https://play.google.com/store/apps/details?id=com.kiatnakinbank.kkebanking" target="_blank"><img src="./assets/images/google_play_btn.png?v={{BUILD_NUM}}" class="google_play_btn" alt="googleplay"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>

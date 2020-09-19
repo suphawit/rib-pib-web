@@ -1,0 +1,211 @@
+<div bsModal #timelineModalMessage="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" [config]="config">
+    <div class="modal-dialog modal-{{optionalSize}}">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">{{ selectTitle | translate }}</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="table-scrollable table-scrollable-borderless">
+                    <table class="table table-light">
+                        <tbody>
+                            <tr *ngIf="selectType !== 'RTP'">
+                                <td>{{ 'lbl.transferFrom' | translate }}</td>
+                                <td>
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td class="fit">
+                                                    <div class="icon-circle" [style.background-color]="bankCodeDataService.getBankCodeImagePropertiesByField(modalData.fromBankCode,'color')">
+                                                        <img class="user-pic rounded" src="{{'assets/' + bankCodeDataService.getBankCodeImagePropertiesByField(modalData.fromBankCode,'url')}}">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="text-wrap"><a href="javascript:;">{{ modalData.accountFromName }}</a></div>
+                                                    <div *ngIf="modalData.fromBankName" class="text-wrap">{{ modalData.fromBankName }}</div>
+                                                    <div *ngIf="modalData.accountFromNumber">({{ modalData.accountFromNumber }})</div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr  *ngIf="selectType !== 'RTP'">
+                                <td *ngIf="selectType === 'fundtransfer'">{{ 'lbl.transferTo' | translate }}</td>
+                                <td *ngIf="selectType === 'biller'">{{ 'lbl.toBiller' | translate }}</td>
+                                <td>
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td class="fit" *ngIf="selectType === 'fundtransfer'">
+                                                    <div class="icon-circle" *ngIf="modalData.anyIDType === constants.ANYID_TYPE_BANK_ACCOUNT" [style.background-color]="bankCodeDataService.getBankCodeImagePropertiesByField(modalData.toBankCode,'color')">
+                                                        <img class="user-pic rounded" onerror="this.style.display='none';" 
+                                                            src="{{ 'assets/' + bankCodeDataService.getBankCodeImagePropertiesByField(modalData.toBankCode,'url') }}" />
+                                                    </div>
+                                                    <div class="icon-circle" *ngIf="modalData.anyIDType !== constants.ANYID_TYPE_BANK_ACCOUNT" [style.background-color]="anyIDTypeList[modalData.anyIDType]?.iconObj?.iconColor">
+                                                        <img src="{{ anyIDTypeList[modalData.anyIDType]?.iconObj?.icon }}" onerror="this.style.display='none';" class="user-pic rounded" />
+                                                    </div>
+                                                </td>
+                                                <td class="fit" *ngIf="selectType === 'biller' && !isEDonationCategory(modalData.categoryId)">
+                                                    <biller-image class="user-pic rounded"
+                                                        [srcpath]= "utilService.getBillerIcon(modalData)"
+                                                        [defaultpath]="utilService.getDefaultBillerIconPath()">
+                                                    </biller-image>
+                                                </td>
+                                                <td class="fit" *ngIf="selectType === 'biller' && isEDonationCategory(modalData.categoryId)">
+                                                    <biller-image class="user-pic rounded"
+                                                        [srcpath]= "utilService.getEDonateIcon(modalData)"
+                                                        [defaultpath]="utilService.getDefaultEDonateIconPath()">
+                                                    </biller-image>
+                                                </td>
+                                                <td *ngIf="selectType === 'fundtransfer'">
+                                                    <div *ngIf="modalData.accountToName" class="text-wrap"><a href="javascript:;">{{ modalData.accountToName }}</a></div>
+                                                    <div *ngIf="anyIDFromDesc" class="text-wrap">{{ anyIDFromDesc }}</div>
+                                                    <div *ngIf="modalData.accountToNumber">({{ modalData.accountToNumber }})</div>
+                                                </td>
+                                                <td *ngIf="selectType === 'biller'">
+                                                    <a>{{ modalData.paymentFor }}</a>
+                                                    <div *ngIf="modalData.biller">{{ (modalData.biller) ? modalData.biller : "" }}</div>
+                                                    <div *ngIf="modalData.ref1">{{ modalData.ref1Text }}: {{ modalData.ref1 }}</div>
+                                                    <div *ngIf="modalData.ref2 && isEDonationCategory(modalData.categoryId) && modalData.ref2 != 0">{{ 'label.eDonation.card' | translate }}: {{ modalData.ref2 }}</div>
+                                                    <div *ngIf="modalData.ref2 && !isEDonationCategory(modalData.categoryId)">{{ modalData.ref2Text }}: {{ modalData.ref2 }}</div>
+                                                    <div *ngIf="modalData.ref3">{{ modalData.ref3Text }}: {{ modalData.ref3 }}</div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr *ngIf="selectType === 'RTP'">
+                                <td>{{ 'lbl.RTPRefCode' | translate }}</td>
+                                <td>{{ modalData.rtpReferenceNo }}</td>
+                                <td></td>
+                            </tr>
+                            <tr *ngIf="selectType === 'RTP' && modalData.rtpMsgType === 'INCOMING'">
+                                    <td>{{ 'lbl.RequestFrom' | translate}}</td>
+                                    <td>{{ modalData.requesterAccountName }} <span *ngIf="modalData.requesterIdType!=='BILLERID'">({{modalData.requesterIdValue}})</span></td>
+                                    <td></td>
+                            </tr>
+                            <tr *ngIf="selectType === 'RTP' && modalData.rtpMsgType === 'OUTGOING'">
+                                    <td>{{ 'lbl.RequestTo' | translate}}</td>
+                                    <td>{{ modalData.receiverAccountName }} <span *ngIf="modalData.receiverIdType!=='BILLERID'">({{modalData.receiverIdValue}})</span></td>
+                                    <td></td>
+                            </tr>
+                            <tr *ngIf="selectType === 'RTP'">
+                                <td>{{ 'label.type' | translate }}</td>
+                                <td>{{ modalData.Type }} </td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>{{ 'lbl.amount' | translate }}</td>
+                                <td>{{ modalData.amount }} <span *ngIf="modalData.amount">{{ 'lbl.baht' | translate }}</span></td>
+                                <td></td>
+                            </tr>
+                            <tr *ngIf="selectType === 'biller'">
+                                <td>{{ 'lbl.fee' | translate }}</td>
+                                <td>{{ modalData.feeAmount }} <span *ngIf="modalData.feeAmount">{{ 'lbl.baht' | translate }}</span></td>
+                                <td></td>
+                            </tr>
+                            <tr *ngIf="selectType !== 'RTP'">
+                                <td>{{ 'lbl.referenceNo' | translate }}</td>
+                                <td>{{ modalData.transactionRef || modalData.referenceNumber }}</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>{{ 'lbl.transactionDate' | translate }}</td>
+                                <td>{{ modalData.transactionDate }}</td>
+                                <td></td>
+                            </tr>
+                            <tr *ngIf="selectType === 'RTP'">
+                                <td>{{ 'lbl.expiredDate' | translate }}</td>
+                                <td>{{ modalData.expiryDate }}</td>
+                                <td></td>
+                            </tr>
+                            <tr *ngIf="selectType === 'RTP' && modalData.requesterIdType === 'BILLERID'">
+                                 <td>{{ 'lbl.referenceNo' | translate }}</td>
+                                 <td>
+                                    <div *ngIf="modalData.ref1">{{ 'lbl.ref1' | translate }}: {{ modalData.ref1 }}</div>
+                                    <div *ngIf="modalData.ref2">{{ 'lbl.ref2' | translate }}: {{ modalData.ref2 }}</div>
+                                    <div *ngIf="modalData.ref3">{{ 'lbl.ref3' | translate }}: {{ modalData.ref3 }}</div>
+                                 </td>
+                            </tr>
+                            <tr *ngIf="selectType === 'biller'">
+                                <td *ngIf="!isEDonationCategory(modalData.categoryId)">{{ 'lbl.paymentDate' | translate }}</td>
+                                <td *ngIf="isEDonationCategory(modalData.categoryId)">{{ 'lbl.donateDate' | translate }}</td>
+                                <td>{{ modalData.debitDate }}</td>
+                                <td></td>
+                            </tr>  
+                            <tr *ngIf="selectType !== 'RTP' && modalData.rtpReferenceNo != null">
+                                <td>{{ 'lbl.RTPRefCode' | translate }}</td>
+                                <td>{{ modalData.rtpReferenceNo }}</td>
+                                <td></td>
+                            </tr>                                
+                            <tr *ngIf="modalData.recurringType && selectKey.indexOf('schedule') > -1">
+                                <td *ngIf="selectType === 'fundtransfer'">{{ 'lbl.recurringType' | translate }}</td>
+                                <td *ngIf="selectType === 'biller'">{{ 'lbl.recurringType.paybill' | translate }}</td>
+                                <td>
+                                    {{ modalData.recurringType }}{{ (modalData.recurringTimes) ? ', ' + modalData.recurringTimes : '' }}
+                                    <span *ngIf="modalData.recurringTimes"> {{ (modalData.recurringTimes && modalData.recurringTimes > 1 ? 'lbl.times' : 'lbl.time') | translate }} </span>
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr *ngIf="selectType === 'fundtransfer' && modalData.accountFromNumber != modalData.accountToNumber">
+                                <td>{{ 'lbl.notifyReceiver' | translate }}</td>
+                                <td>
+                                    <div class="text-wrap" *ngIf="(modalData.toEmail || modalData.toMobileNumber || modalData.msgLanguage)">
+                                        <span *ngIf="modalData.toEmail">{{ 'lbl.notifyEmail' | translate }} : {{ (modalData.toEmail) ? modalData.toEmail : '-' }}<br></span>
+                                        <span *ngIf="modalData.toMobileNumber">{{ 'lbl.notifySMS' | translate }} : {{ (modalData.toMobileNumber) ? modalData.toMobileNumber : '-' }}<br></span>
+                                        <span *ngIf="modalData.toMobileNumber">{{ 'lbl.notifyLanguage' | translate }} : {{ ((modalData.msgLanguage) ? ((modalData.msgLanguage === constants.CULTURE_SHORTNAME_THAI) ? 'lbl.thai' : 'lbl.english') : '-') | translate }}</span>
+                                    </div>
+                                    <div class="text-wrap" *ngIf="(!modalData.toEmail && !modalData.toMobileNumber && !modalData.msgLanguage)">
+                                        <div class="text-wrap">-</div>
+                                    </div>
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>{{ 'lbl.note' | translate }}</td>
+                                <td>
+                                    <div class="text-wrap">{{ (modalData.note) ? modalData.note : '-' }}</div>
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>{{ 'lbl.status' | translate }}</td>
+                                <td *ngIf="modalData?.errorMsg" >{{ modalData.status + ' - ' + modalData?.errorMsg }}</td>
+                                <td *ngIf="!modalData?.errorMsg" >{{ modalData.status }}</td>
+                                <td></td>
+                            </tr>
+                            <tr *ngIf="selectType === 'fundtransfer'">
+                                <td>{{ 'lbl.feeAmount' | translate }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table *ngIf="selectType === 'fundtransfer'" class="table table-striped table-bordered table-advance table-hover">
+                        <thead>
+                            <tr>
+                                <th>{{'lbl.option' | translate}}</th>
+                                <th>{{'lbl.debitDate' | translate}}</th>
+                                <th>{{'lbl.transferDate' | translate}}</th>
+                                <th>{{'lbl.fee' | translate}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span></span>{{ modalData.fundTransferTypeDescToDisplay }}</td>
+                                <td>{{ (modalData.debitDate) ? modalData.debitDate : '-' }}</td>
+                                <td>{{ modalData.receivedDate }}<span *ngIf="modalData.transferTimeName">, {{ modalData.transferTimeName }}</span></td>
+                                <td>{{ (modalData.feeAmount) ? modalData.feeAmount : '-' }} <span *ngIf="modalData.feeAmount">{{ 'lbl.baht' | translate }}</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" (click)="hide()">{{ 'btn.close' | translate }}</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+<div class="row">
+    <div class="col-md-6">
+        <span>{{'label.showPagination' | translate: showPagination}}</span>
+    </div>
+    <div class="col-md-6">
+        <div class="dataTables_paginate paging_bootstrap_extended pull-right">
+            Page
+            <a class="btn btn-sm default" (click)="previous()" [ngClass]="{'disabled' : disablePrev}"><i class="fa fa-angle-left"></i></a>
+            <!-- <input type="text" class="form-control input-sm input-inline input-mini" maxlenght="5" [(ngModel)]="currentPage" (keyup.enter)="onKeyPage()"
+                style="text-align:center; margin: 0 5px;" [onlyNumber]="true" /> -->
+            <input type="text" class="form-control input-sm input-inline input-mini input-page" maxlenght="5" [(ngModel)]="currentPage" [onlyNumber]="true" [readonly]="true" autocomplete="off" />
+            <a class="btn btn-sm default" (click)="next()" [ngClass]="{'disabled' : disableNext}"><i class="fa fa-angle-right"></i></a> of <span class="pagination-panel-total">{{ totalPage }}</span>
+        </div>
+    </div>
+</div>

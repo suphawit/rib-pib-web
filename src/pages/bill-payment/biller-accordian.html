@@ -1,0 +1,44 @@
+<div class="panel-group">
+    <div class="panel panel-default" *ngFor="let group of accordian.data">
+        <div class="panel-heading" (click)="toggleState(group.stateName.id)">
+            <h4 class="panel-title">
+                {{'label.kkproduct' | translate}} 
+                <i class="pull-right float-xs-right glyphicon" [ngClass]="{'glyphicon-chevron-down': accordian.state[group.stateName.id] === 'expanded', 'glyphicon-chevron-up': accordian.state[group.stateName.id] === 'collapsed'}"></i>
+            </h4>
+        </div>
+        <div class="panel-body" [@accordingState]="accordian.state[group.stateName.id]">
+            <table class="table table-light">
+                <tr *ngFor="let item of group.stateData" class="line-bottom">
+                    <td class="fit">
+                        <!--<img class="user-pic rounded" src="assets/images/kk_logo.png" />-->
+                        <div class="icon-circle" style="background-color: #594F74;">
+                            <img class="user-pic rounded" src="assets/images/banks/069.png?v={{BUILD_NUM}}" />
+                        </div>
+                    </td>    
+                    <td width="24%">
+                        <a class="primary-link" (click)="navigateToBillerDetail(item)" *ngIf="isShowMoreInfo">{{item.billerAliasName}}</a>
+                        <span class="primary-link" *ngIf="!isShowMoreInfo">{{item.billerAliasName}}</span>
+                    </td>
+                    <td>
+                        {{item.ref1}}
+                    </td>
+                    <td>
+                        {{item.ref2}}
+                    </td>
+                    <td>
+                        {{item.billerName}}
+                    </td>
+                    <td class="right">
+                        <label class="btn btn-circle btn-default" (click)="navigateToPayBill(item)" *ngIf="isShowBillPay">{{'lbl.paybill' | translate}}</label>
+                        <label class="btn btn-circle btn-default" (click)="navigateToBillerDetail(item)" *ngIf="isShowMoreInfo">{{'label.moreinfo' | translate}}</label>
+                        <label class="btn btn-circle btn-default" (click)="navigateToBillerPromptpayDetail()" *ngIf="isShowMoreInfoDetail">{{'label.moreinfo' | translate}}</label>
+                        
+                    </td>
+                </tr>
+                <tr *ngIf="group.stateData.length < 1">
+                    <td class="text-danger" colspan="6">{{ 'label.billerNotFound' | translate }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

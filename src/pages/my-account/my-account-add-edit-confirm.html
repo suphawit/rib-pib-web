@@ -1,0 +1,61 @@
+<div class="clearfix"></div>
+<h3 class="page-title">{{ myAccountAddEditTitle | translate }}</h3>
+
+<div class="row">
+    <div class="col-md-12">
+        <alert-message #alertMessage [type]="alertConfig.type" [message]="alertConfig.message"></alert-message>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <step-wizard [data]="[{name: '1', label: 'stepWizard.enterDetails'},{name:'2', label:'stepWizard.confirm'}]" [style]="style" [step]="currentStepWizard"></step-wizard>
+    </div>
+</div>
+
+<div *ngIf="myAccount != undefined" class="row" [style.marginTop.px]="30">
+    <div class="col-md-12">
+        <div class="portlet light " id="form_wizard_1">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class=" icon-layers font-kkppurple"></i>
+                    <span class="caption-subject font-kkppurple sbold uppercase" *ngIf="isAdd" >{{'label.addMyAccountStep' | translate}} {{currentStepWizard+1}} {{'label.of'| translate}} 2</span>
+					<span class="caption-subject font-kkppurple sbold uppercase" *ngIf="!isAdd" >{{'label.editMyAccountStep' | translate}} {{currentStepWizard+1}} {{'label.of'| translate}} 2</span>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <table class="table table-light">
+                    <tbody>
+                        <tr>
+                            <td class="col-md-3 col-sm-3">{{'label.accountAliasName' | translate}}</td>
+                            <td>{{myAccount.myAccountAliasName}}</td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-3 col-sm-3">{{'label.accountNumber' | translate}}</td>
+                            <td>
+                                <!--<img class="user-pic rounded addbilerbankimg" style="width: 30px" src="assets/images/kk_logo.png" />-->
+                                <div class="icon-circle">
+                                    <img class="user-pic rounded" src="assets/images/banks/069.png?v={{BUILD_NUM}}" />
+                                </div>
+                                <span class="padding-left10px">{{myAccount.myAccountNumber}}</span>
+                            </td>
+                        </tr>
+                        <tr *ngIf="isAdd">
+                            <td class="col-md-3 col-sm-3">{{'label.accountName' | translate}}</td>
+                            <td>{{myAccount.myAccountName}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="form-actions" *ngIf="isRequireOTP">
+                    <verify-otp [style]="verifyOTPStyle" [actionOTP]="verifyOTPAction" [responseCodeMainService]="responseCodeMainService" (requestOTPChanged)="onRequestOTP($event)" (otpPass)="onkeyupOtpPass($event)"></verify-otp>
+                </div>
+                <div class="row">
+                    <div class="col-md-offset-3 col-md-9 col-sm-offset-3 col-sm-9">
+                        <button type="button" class="btn btn-outline btn-default" (click)="onClickBack()"><i class="fa fa-angle-left"></i> {{'button.back' | translate}} </button><!--(click)="onSubmit()"-->
+                        <button type="button" class="btn btn-outline kkppurple button-next" [disabled]="isRequireOTP && (!isRequestOTP || otpPass == '')" (click)="onSubmitMyAccountSubmit()"> {{'button.confirm' | translate}} <i class="fa fa-angle-right"></i></button><!--(click)="onSubmit()"-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

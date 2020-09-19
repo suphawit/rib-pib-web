@@ -1,0 +1,21 @@
+.padd-left20px{
+    padding-left: 20px;
+}
+.padd-content{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+ion-input.textboxt-bg-amount{
+    border-style: solid;
+    border-color: $textbox-border-color;
+    border-width: 1px;
+    border-radius: 3px;
+    padding-right: 2px !important;
+}
+.amount-panel .label-title.label-md, .amount-panel .label-title.label-ios{
+    color:$color-pib-blue !important;
+}
+
+.amount-panel .item-ios.item-label-stacked .text-input{
+    font-size: 2.9rem !important;
+}

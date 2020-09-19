@@ -1,0 +1,19 @@
+<div class="portlet" [style.padding.px]="5">
+    <form-header [stepwizOption]="formHeader.stepwizOption" [alertMsgOption]="formHeader.alertMsgOption" [title]="formHeader.title"></form-header>
+	<div class="row">
+        <div class="col-md-12">
+            <div class="portlet light ">
+                <div class="portlet-title">
+                    <form-step-caption class="caption" [data]="stepCaptionData.step" [title]="stepCaptionData.title"></form-step-caption>
+                </div>
+				<div class="portlet-body form">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <forgot-username-verify-otp-info [isRequestOTP]="verifyOTPInfo.isRequestOTP" (onAction)="verifyOTPInfo.onAction($event)" [verifyTransactionId]="verifyOTPInfo.verifyTransactionId" [subscriptionChannel]="verifyOTPInfo.subscriptionChannel"></forgot-username-verify-otp-info>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+</div>

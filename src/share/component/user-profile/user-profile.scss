@@ -1,0 +1,25 @@
+user-profile{
+    .page-header{
+        width:500px !important;
+        float:right !important;
+    }
+
+    .noti-loading{
+
+        
+    position: absolute;
+    bottom: 0px;
+    width: 290px;
+    /* background: rebeccapurple; */
+    margin: 0 auto 0;
+    text-align: center;
+
+
+    }
+    .noti-loading img{
+
+        width: 15px;
+        vertical-align: top;
+    }
+
+}

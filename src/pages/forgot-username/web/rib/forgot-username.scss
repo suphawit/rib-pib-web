@@ -1,0 +1,8 @@
+forgot-username {
+    .web-panel-heading {
+        color: $color-white;
+        font-size: 18px;
+        background-color: $color-kk-blue;
+        @include border-radius(5px,5px, 5px, 5px);
+    }
+}

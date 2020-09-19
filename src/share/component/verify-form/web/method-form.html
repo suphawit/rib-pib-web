@@ -1,0 +1,36 @@
+<div class="form-group">
+    <div class="row">
+        <div class="col-md-12">
+            <label for="usingrefcode" class="mt-radio">
+                <input type="radio" id="usingrefcode" name="option" [(ngModel)]="selected" (ngModelChange)="onChange($event)" value="usingrefcode" />
+                {{'label.activate.usingrefcode' | translate}} 
+                <span></span>
+            </label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <label for="debitcard" class="mt-radio">
+                <input type="radio" id="debitcard" name="option" [(ngModel)]="selected" (ngModelChange)="onChange($event)" value="debitcard" /> 
+                {{'label.activate.debitcard' | translate}} 
+                <span></span>
+            </label>
+        </div>
+    </div>
+    <!-- <div class="row">
+        <div class="col-md-12">
+            <label for="kkproducts" class="mt-radio">
+                <input type="radio" id="kkproducts" name="option" [(ngModel)]="selected" (ngModelChange)="onChange($event)" value="kkproducts" /> 
+                {{'label.activate.productkk' | translate}} 
+                <span></span>
+            </label>
+        </div>
+    </div> -->
+</div>
+<div class="form-actions"> 
+    <div class="row">
+        <div class="col-sm-offset-3 col-sm-9">
+            <button type="button" class="btn btn-outline kkppurple button-next" (click)="onClick()">{{'button.next'|translate}}&nbsp;<i class="fa fa-angle-right"></i></button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+<ol class="breadcrumb pull-left" *ngIf="style === constants.STYLE_PIB_WEB">
+
+    
+    <li *ngFor="let item of data; let i = index" [ngClass]="{ 'active' : selected == item.menuCode }">
+        <a href="javascript:;" *ngIf="selected != item.menuCode && item.isClick" (click)="goToPage(item.menuCode)">{{item.name[curlang]}}</a>
+        <span  *ngIf="selected != item.menuCode && !item.isClick">{{item.name[curlang]}}</span>
+
+        <span *ngIf="selected == item.menuCode">{{item.name[curlang]}}</span>
+    </li>
+</ol>
+
+<div class="page-bar" *ngIf="style === constants.STYLE_RIB_WEB">
+    <ul class="page-breadcrumb">
+        <li *ngFor="let item of data;trackBy: trackById; let i = index" [ngClass]="{ 'active' : item.isClick }">
+            <a href="javascript:;" *ngIf="selected != item.menuCode && item.isClick" (click)="goToPage(item.menuCode)">{{item.name[curlang]}}</a>
+            <span                  *ngIf="selected != item.menuCode && !item.isClick">{{item.name[curlang]}}</span>
+            <i *ngIf="i < data.length - 1" class="fa fa-circle"></i>
+            <span *ngIf="selected == item.menuCode">{{item.name[curlang]}}</span>
+        </li>
+    </ul>
+    <div class="page-toolbar">
+    </div>
+</div>
+
+
+
+
+<!--
+<ol class="breadcrumb pull-left" *ngIf="style === constants.STYLE_PIB_WEB">
+    <li *ngFor="let item of data; let i = index" [ngClass]="{ 'active' : selected == item.menuCode }">
+        <a href="javascript:;" *ngIf="selected != item.menuCode && item.isClick" (click)="goToPage(item.menuCode)">{{item.name[curlang]}}</a>
+        <a href="javascript:;" *ngIf="selected != item.menuCode && !item.isClick">{{item.name[curlang]}}</a>
+
+        <span *ngIf="selected == item.menuCode">{{item.name[curlang]}}</span>
+    </li>
+</ol>-->

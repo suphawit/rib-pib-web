@@ -1,0 +1,15 @@
+<div *ngIf="accounts?.length > 0" class="portlet light bordered">
+    <div class="table-scrollable table-scrollable-borderless" style="margin:0!important;">
+	    <table class="table table-hover table-light">
+		    <tbody>
+                <tr [class.highlight]="isHighlighted(account, currentAccount)" *ngFor="let account of accounts;trackBy: trackById" (click)="onSelectChanged(account)">
+				    <td>
+					    <a *ngIf ="translate.currentLang ==  'en'" aria-expanded="false" class="primary-link">{{ account?.promptpayLabelEn }}</a>
+                    	<a *ngIf ="translate.currentLang ==  'th'" aria-expanded="false" class="primary-link">{{ account?.promptpayLabelTh }}</a>
+					    <br>({{ account?.anyIDValue }})
+				    </td>
+			    </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

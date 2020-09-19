@@ -1,0 +1,54 @@
+<form class="form-horizontal" [formGroup]="activateAccountForm" (ngSubmit)="onSubmit()" novalidate>
+    <div class="form-group" formControlValidator [control]="activateAccountForm.controls.username" [submitted]="submitted">
+        <label>{{'input.username'|translate}} <span class="required">*</span></label>
+        <div class="row">
+            <div class="col-md-5"> 
+                <input type="text" class="form-control" id="username" placeholder="" formControlName="username" [maxLength]="20" autocomplete="off" />
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="isShowSuggest" class="form-group">
+        <label>{{'label.usernameSuggestion' | translate}}: </label>
+        <div class="row">
+            <div class="col-md-5">
+                <ul style="padding-left: 25px; list-style-type: none;">
+                    <li *ngFor="let nameEach of nameSuggestionList; let i = index">
+                        <label class="mt-radio">
+                            <input type="radio" value="{{nameEach}}" (click)="onclickNameSuggestion(nameEach)" name="username" [checked]="i === 0" />
+                            {{nameEach}} 
+                            <span></span>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="form-group" formControlValidator [control]="activateAccountForm.controls.password" [submitted]="submitted">
+        <label>{{'input.password'|translate}} <span class="required">*</span></label>
+        <div class="row">
+            <div class="col-md-5"> 
+                <input type="password" class="form-control" id="password" placeholder="" formControlName="password" [maxLength]="20" autocomplete="off" />
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group" [ngClass]="{'has-error' : activateAccountForm.hasError('mismatchedPasswords')}">
+        <label>{{'input.confirmPassword'|translate}} <span class="required">*</span></label>
+        <div class="row">
+            <div class="col-md-5"> 
+                <input type="password" class="form-control" id="confirmPassword" placeholder="" formControlName="confirmPassword" [maxLength]="20" autocomplete="off" />
+                <div class="help-block with-errors"></div>
+                <div class="help-block with-errors" *ngIf="activateAccountForm.hasError('mismatchedPasswords')">{{'validation.compareTo'|translate}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="form-actions"> 
+        <div class="row">
+            <div class="col-md-offset-3 col-md-9">
+                <!--<button type="button" class="btn btn-outline btn-default" (click)="onBack()"><i class="fa fa-angle-left"></i> {{ 'button.back' | translate}}</button>-->
+                <button type="submit" class="btn btn-outline kkppurple button-next">{{'button.next'|translate}}&nbsp;<i class="fa fa-angle-right"></i></button>
+            </div>
+        </div>
+    </div>
+</form>

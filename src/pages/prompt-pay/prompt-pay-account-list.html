@@ -1,0 +1,81 @@
+<div *ngIf="!FromDashBoardOptions.isFromDashBoard">
+    <div class="clearfix"></div>
+    <h3 class="page-title">{{'label.promptpayServiceHeader'|translate}}</h3>
+    <div class="row">
+        <div class="col-md-12">
+            <alert-message #alertMessage [type]="alertConfig.type" [message]="alertConfig.message"></alert-message>
+        </div>
+    </div>
+</div>
+<!-- BEGIN PORTLET-->
+<div *ngIf="isShowRegisterKKPromptPayLink">
+    {{alertConfig.message}}
+    <a (click)="permissionChangeRoute.changeRoute('KK_PRODUCT_SERVICE.REGISTER_KK_PROMPT_PAY')">
+    {{'btn.clickToRegisterKK'|translate}}</a>			
+</div> 
+<div class="col-md-5 col-sm-5">
+<div class="portlet light bordered " [hidden]="accountLists.length < 1">
+    <div class="table-scrollable table-scrollable-borderless" style="margin: 0px !important;
+        max-height: 240px;
+        overflow-x: hidden;
+        overflow-y: auto;">
+        <table class="table table-hover table-light">
+            <thead>
+            </thead>
+            <tr [class.highlight]="isHighlighted(account, currentAccount)" class="line-bottom" *ngFor="let account of accountLists" (click)="onClickSelectAccount(account)">
+                <td>
+                    <a *ngIf ="translateService.currentLang ==  'en'" aria-expanded="false" class="primary-link">{{ account?.promptpayLabelEn }}</a>
+                    <a *ngIf ="translateService.currentLang ==  'th'" aria-expanded="false" class="primary-link">{{ account?.promptpayLabelTh }}</a>
+                    <br>({{ account?.anyIDValue }})
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+</div>
+<!-- END PORTLET-->
+<!-- BEGIN PORTLET-->
+<div class="col-md-7 col-sm-7">
+<div class="portlet light bordered" [hidden]="currentAccount.anyIDValue==undefined">
+    <div class="portlet-title">
+        <div class="caption">
+            {{'lbl.accountSummary' | translate}}
+        </div>
+        <div class="actions">
+            <a class="btn btn-circle btn-default" (click)="viewPromptpayAccountDetail()">
+                {{'label.moreinfo' | translate}}
+            </a>
+        </div>		
+    </div>
+    <div class="portlet-body">
+        <table class="table table-light">
+            <tr>
+                <td style="width: 40%;">
+                    <span class="bold font-purple">{{'lbl.KKPromptPayID'|translate}}</span>
+                </td>														
+                <td align="">
+                    <span>{{currentAccount?.anyIDValue}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="">
+                    <span class="bold font-purple">{{'label.type'|translate}}</span> 
+                </td>															
+                <td align="">
+                    <span *ngIf ="translateService.currentLang ==  'en'" >{{currentAccount.promptpayLabelEn}}</span>
+                    <span *ngIf ="translateService.currentLang ==  'th'" >{{currentAccount.promptpayLabelTh}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="">
+                    <span class="bold font-purple">{{'label.accNumber'|translate}}</span> 
+                </td>															
+                <td align="">
+                    <span>{{currentAccount?.accountNo}}</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+</div>
+<!-- END PORTLET-->

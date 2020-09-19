@@ -1,0 +1,70 @@
+rtp-from-account-list {
+    .table-scrollable {
+        margin: 0px!important;
+        max-height: 240px;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+}
+
+rib-add-rtp-step1, pib-add-rtp-step1{
+    .row .wizard-step-title {
+        padding-left: 0!important;
+        padding-right: 0!important;
+    }
+
+    .wizard-step-title .col-md-12 {
+        padding-top: 0!important;
+        padding-bottom: 0!important;
+    }
+
+    .wizard-step-title .portlet.light {
+        padding:0!important; 
+        margin-bottom: 0!important
+    }
+
+    .wizard-step-title .portlet.light .portlet-title {
+        padding-top: 0!important;
+        padding-bottom: 0!important;
+        min-height: 0!important;
+        padding-left: 15px!important;
+    }
+    .hide-overflow{
+        overflow-x: hidden;
+    }
+    .removeDatePicker .datepicker__float__left > button {
+        visibility: hidden;
+    }
+}
+
+rtp-to-account-list{
+    .icon-c20:before {
+        line-height: 31px;
+        margin-left: 2px;
+    }
+}
+
+rib-add-rtp-step2, pib-add-rtp-step2 {
+    .portlet.light.nopadding {
+        padding-top:0px!important;
+        padding-bottom:0px!important
+    }
+    .nopadding .portlet-title {
+        min-height:0!important; 
+        margin-bottom:0!important
+    }
+}
+
+rib-add-rtp-step3, pib-add-rtp-step3 {
+    .portlet.light.nopadding {
+        padding-top:0px!important;
+        padding-bottom:0px!important
+    }
+    .nopadding .portlet-title {
+        min-height:0!important; 
+        margin-bottom:0!important
+    }
+    .btn-large {
+        width:auto!important
+    }
+}

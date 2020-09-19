@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="col-md-12">
+        <form #loginFrom="ngForm" id="form1" class="">
+
+            <div id="pnlAuthen" class="">
+                <div class=" row">
+
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="form-group">
+
+                            <div class="col-md-9">
+                                <div class="form-inline">
+
+                                    <div class="form-group">
+
+                                        <input type="text" [(ngModel)]="firstName" name="first2" id="first" />
+                                        <input type="text" [(ngModel)]="password" name="firsdt2" id="first2" />
+
+                                        <input type="button" (click)="loginBtn()" class="btn btn-purple btn-small" value="login">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </form>
+    </div>
+</div>

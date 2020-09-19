@@ -1,0 +1,11 @@
+my-account-list, my-account-list-mobile {
+    .table-scrollable {
+        margin: 0px !important;
+        max-height: 240px;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+    .portlet.light {
+        padding: 10px !important;
+    }
+}

@@ -1,0 +1,24 @@
+<!-- BEGIN PORTLET-->
+<div class="portlet light bordered " *ngIf="accountLists && accountLists.length > 0">
+    <div class="table-scrollable table-scrollable-borderless">
+        <table class="table table-hover table-light">
+            <thead>
+            </thead>
+            <tr [class.highlight]="isHighlighted(account, currentAccount)" class="line-bottom" *ngFor="let account of accountLists | accountType: accountFilter;trackBy: trackByFn" (click)="onClickSelectAccount(account)">
+                <td class="fit">
+                    <div class="icon-circle">
+                        <img class="user-pic rounded" src="assets/images/banks/069.png?v={{BUILD_NUM}}" />
+                    </div>
+                </td>    
+                <td>
+                    <a class="primary-link">{{account.myAccountAliasName}}</a>
+                    <br>({{account.myAccountNumber}})
+                </td>
+                <td align="right">
+                    <span class="bold font-kkppurple">{{account.myAvailableBalance | number:'.2-2'}}</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<!-- END PORTLET-->

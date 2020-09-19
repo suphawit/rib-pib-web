@@ -1,0 +1,68 @@
+verify-otp {
+    ul {
+        list-style: none;
+        -webkit-padding-start: 0px;
+    }
+    .web-select {
+        width: 100% !important;
+        height: 25px !important;
+    }
+    .web-label {
+        float: left;
+        width: 150px;
+        padding-top: 4px;
+        font-weight: bold !important;
+    }
+    .web-input {
+        width: 100% !important;
+        height: 25px !important;
+        padding: 0px 5px !important;
+        padding-right: 30px !important;
+        font-size: 12px !important;
+    }
+    .web-btn1-default{
+        background: #009ac7;
+        border: 1px solid #6AC2DE;
+        color: #ffffff;
+        height: 25px;
+        width: 100%;
+        margin-right: 20px;
+        margin-bottom: 10px;
+    }
+    .web-btn1-default-only-color {
+        background: #009ac7;
+        border: 1px solid #6AC2DE;
+        height: 25px;
+        color: #ffffff;
+        margin-right: 20px;
+        margin-bottom: 10px;
+    }
+    .otp-form {
+        overflow: hidden;
+        padding-right: .5em;
+    }
+    .pib-mobile {
+        .button-next {
+            width: 125px;
+        }
+        ion-input {
+            width: 55%;
+            line-height: 31px;
+            border-top: none;
+            border-bottom-width: 1px;
+            border-bottom-color: #999;
+            border-left-width: 0px;
+            border-right-width: 0px;
+            border-bottom-style: solid;
+            margin-left: 0!important;
+            float: left;
+        }
+        li {
+            padding-left: 1.6rem;
+            text-align: left;
+        }
+        li span:not(.font-color-kkblue){
+            color: gray;
+        }
+    }
+}

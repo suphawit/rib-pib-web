@@ -1,0 +1,52 @@
+<div class="row">
+	<div class="col">
+		<alert-message #alertMessage [type]="type" [message]="message"></alert-message>
+	</div>
+</div>
+<div class="row" *ngIf="userData">
+	<div class="col">
+		<strong style="margin-left: 45px;">{{'lbl.welcomeWithTermAndCond'|translate}}</strong>{{'lbl.welcomeWithTermAndCondDetail'|translate}}
+	</div>
+</div>
+<div class="row">
+	<div class="col">
+		<terms-and-conditions (responseService)="responseServiceChecked($event)" [termAction]="termAction"></terms-and-conditions>
+	</div>
+</div>
+<div *ngIf="userData && userData.newAccept" class="row">
+	<div class="im-centered">
+		<p>{{'lbl.acceptTermAndCond'|translate}}</p>
+		<table class="table table-condensed margin-top-15 margin-bottom-15">
+			<tbody>
+				<tr>
+					<td style="width: 150px;">{{'lbl.notifyEmail'|translate}}</td>
+					<td>{{userData.email}}</td>
+				</tr>
+				<tr>
+					<td style="width: 150px;">{{'lbl.mobileNumber'|translate}}</td>
+					<td>{{userData.mobileNo}}</td>
+				</tr>
+			</tbody>
+		</table>
+		<p>{{'lbl.warningTermAndCond'|translate}}</p>
+	</div>
+	<div class="row margin-lft">
+		<verify-otp [hidden]="!unChecked" [style]="verifyOTPStyle" [actionOTP]="verifyOTPAction" (otpPass)="getOtpPass($event)" (requestOTPChanged)="onRequestOTP($event)"
+		 (onClickSubmit)="onClickSubmitOtp($event)"></verify-otp>
+	</div>
+</div>
+<div *ngIf="Style == 'rib-web'" class="margin-top-bot"></div>
+<div [hidden]="isError" class="row">
+	<div class="row">
+		<div class="text-center">
+			<label>
+				<input type="checkbox" [(ngModel)]="unChecked" (ngModelChange)="agreementCheckedChanged($event)">
+				<span>{{'label.iAgreeToTheTerms'|translate}}</span> 
+			</label>
+			<button class="btn btn-medium" (click)="disAgree()" [ngClass]="{'btn-outline ': Style == constants.STYLE_RIB_WEB,  'btn-pib-rib': Style == constants.STYLE_PIB_WEB}">{{'button.disAgree'|translate}}</button>
+			<button *ngIf="userData" type="submit" class="btn btn-medium" [disabled]="!unChecked || (userData.newAccept && otpPass == '')" (click)="onSubmit()">{{'button.agree'|translate}}</button>
+			<button *ngIf="!userData" type="submit" class="btn btn-medium" [ngClass]="{'btn-outline ': Style == constants.STYLE_RIB_WEB, 'btn-pib-rib': Style == constants.STYLE_PIB_WEB}"
+			 	[disabled]="!unChecked || (isRequestOtp && otpPass == '')" (click)="onSubmit()">{{'button.agree'|translate}}</button>
+		</div>
+	</div>
+</div>

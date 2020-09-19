@@ -1,0 +1,67 @@
+<div class="portlet" [style.padding.px]="5">
+    <form-header [stepwizOption]="formHeader.stepwizOption" [alertMsgOption]="formHeader.alertMsgOption" [title]="formHeader.title"></form-header>
+	<div class="row">
+        <div class="col-md-12">
+            <div class="portlet light ">
+                <div class="portlet-title">
+                    <form-step-caption class="caption" [data]="stepCaptionData.step" [title]="stepCaptionData.title"></form-step-caption>
+                </div>
+				<div class="portlet-body form">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form class="form-horizontal" [formGroup]="myForm" (ngSubmit)="onSubmit()">
+                                <div class="row form-group" formControlValidator [control]="myForm.controls.currentUsername" [submitted]="submitted" >
+                                    <label style="padding-top: 10px;" class="  col-sm-2" >{{'label.currentUsername'|translate}}  <span class="required">*</span></label>
+                                    <div class=" col-sm-5 control-label "> 
+                                        <input type="text" class="form-control" id="currentUsername" formControlName="currentUsername" [disabled]="true"  />
+                                           <div class="help-block with-errors"></div>
+                                     </div>
+                                </div>
+                                <div *ngIf="nameSuggestionList.length > 0" class="form-group">
+                                    <label>{{'label.usernameSuggestion' | translate}}: </label>
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <ul style="padding-left: 25px; list-style-type: none;">
+                                                <li *ngFor="let nameEach of nameSuggestionList; let i = index">
+                                                    <label class="mt-radio">
+                                                        <input type="radio" value="{{nameEach}}" (click)="onclickNameSuggestion(nameEach)" name="username" [checked]="i === 0" />
+                                                        {{nameEach}} 
+                                                        <span></span>
+                                                    </label>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row form-group"  formControlValidator [control]="myForm.controls.newUsername" [submitted]="submitted" >
+                                    <label style="padding-top: 10px;" class="  col-sm-2">{{'label.newUsername'|translate}}  <span class="required">*</span></label>
+                                    <div class="col-sm-5 "> 
+                                        <input type="text" class="form-control" id="newUsername"  formControlName="newUsername"  />
+                                        <div class="help-block with-errors"></div>
+                                        <div style="min-width: max-content;">- {{'lbl.msgInvalidSpecialChar' | translate}}</div>
+                                        <div>- {{'lbl.msgInvalidLengthChar' | translate}}</div>
+                                    </div>
+                                </div>
+                                <div class="row form-group" formControlValidator [control]="myForm.controls.confirmUsername" [submitted]="submitted"  >
+                                <label style="padding-top: 10px;" class="col-sm-2" >{{'label.confirmUsername'|translate}}  <span class="required">*</span></label>
+                                <div class="col-sm-5 control-label "> 
+                                    <input type="text" class="form-control" id="confirmUsername"  formControlName="confirmUsername"  />
+                                    <div class="help-block with-errors"></div>
+                                        <div class="help-block with-errors"    style="color: #e73d4a;" *ngIf="myForm.hasError('mismatchedUsername')" >{{'validation.compareUsernameTo'|translate}}</div>
+                                </div>
+                                </div>
+                                <div class="form-actions"></div>
+                                <div class="row form-group "> 
+                                    <div class="col-sm-offset-4 col-sm-8">
+                                        <button type="submit" class="btn btn-outline kkppurple button-next">{{'button.confirm'|translate}}&nbsp;<i class="fa fa-angle-right"></i></button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+</div>
+<bs-modal-message #messageModal [body]="messageModalData.body" [title]="messageModalData.title" [size]="messageModalData.size" [config]="messageModalData.config" (onHidden)="onModalHidden($event)"></bs-modal-message>

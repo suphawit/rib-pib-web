@@ -1,0 +1,17 @@
+<div *ngIf="accounts?.length > 0" class="portlet light bordered">
+    <div class="table-scrollable table-scrollable-borderless" style="margin:0!important;">
+	    <table class="table table-hover table-light">
+		    <tbody>
+                <tr [class.highlight]="isHighlighted(account, currentAccount)" *ngFor="let account of accounts;trackBy: trackById" (click)="onSelectChanged(account)">
+				    <td>
+					    <a aria-expanded="false" class="primary-link">{{ account.aliasName }}</a>
+					    <br>({{ account.accNo }})
+				    </td>
+					<td align="right">
+					    <span class="bold font-purple">{{ account.balance | formatCurrency }}</span>
+				    </td>
+			    </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

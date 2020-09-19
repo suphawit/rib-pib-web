@@ -1,0 +1,58 @@
+<div class="clearfix"></div>
+<h3 class="page-title">{{'lbl.billerDetail'|translate}}</h3>
+<div class="row">
+    <div class="col-md-12">
+        <alert-message #alertMessage [type]="alertConfig.type" [message]="alertConfig.message"></alert-message>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-8 col-sm-8">
+        <!--start Detail -->
+        <div class="portlet-body">
+            <table class="table table-light">
+                <tr>
+                    <td class="">
+                        <span class="bold font-purple">{{'lbl.billerAliasName'|translate}}</span>
+                    </td>													
+                    <td align="">
+                        <span>{{billerProfileDetail.aliasName}}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="">
+                        <span class="bold font-purple">{{'lbl.billerName'|translate}}</span> 
+                    </td>															
+                    <td align="" >
+                        <span *ngIf="translate.currentLang == 'th'">{{billerProfileDetail.billerNameTh}}</span>
+                        <span *ngIf="translate.currentLang == 'en'">{{billerProfileDetail.billerNameEn}}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="">
+                        <span class="bold font-purple">{{'lbl.categoryName'|translate}}</span> 
+                    </td>															
+                    <td align="" >
+                        <span *ngIf="translate.currentLang == 'th'">{{billerProfileDetail.categoryTh}}</span>
+                        <span *ngIf="translate.currentLang == 'en'">{{billerProfileDetail.categoryEn}}</span>
+                    </td>
+                </tr>
+                <tr *ngFor="let billerRefNo of billerProfileDetail.refNoList; trackBy: trackById; let i = index ">
+                    <td class="" *ngIf="!isEDonationCategory(billerProfileDetail.categoryId) || i !== 1">
+                        <span class="bold font-purple" *ngIf="translate.currentLang == 'th'">{{billerRefNo.refTextTh}}</span>
+                        <span class="bold font-purple" *ngIf="translate.currentLang == 'en'">{{billerRefNo.refTextEn}}</span>
+                    </td>															
+                    <td align="" *ngIf="!isEDonationCategory(billerProfileDetail.categoryId) || i !== 1">
+                        <span>{{billerRefNo.value}}</span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!--end Detail -->
+    </div>
+    <div class="col-md-4 col-sm-4">
+        <portlets-menu (OnMenuClick)="onMenuClick($event)" [isEDonateCategory]="isEDonationCategory(billerProfileDetail.categoryId)" [config]="(billerProfileDetail.isFavourite === 'Y' ? 'fa-star' : 'fa-star-o')"></portlets-menu>
+    </div>
+</div>
+
+<bs-modal-message-delete-biller-request-to-pay #bsModalMessage [body]="messageModalData.body" [title]="messageModalData.title" [config]="messageModalData.config" [size]="messageModalData.size" 
+    [billerProfile]="messageModalData.billerProfileDetail" (onEmit)="onEmit($event)" (onHidden)="onModalHidden($event)"></bs-modal-message-delete-biller-request-to-pay>

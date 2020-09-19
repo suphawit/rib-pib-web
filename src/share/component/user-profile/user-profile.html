@@ -1,0 +1,66 @@
+<div class="page-header navbar">
+<div class="top-menu">
+<ul class="nav navbar-nav pull-right" *ngIf="isLogin">
+
+
+     <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
+     
+                   <!--<a href="#" class="dropdown-toggle" dropdown-menu-hover="" data-toggle="dropdown" data-close-others="true">
+                            <i class="icon-bell"></i>
+                            <span  class="badge badge-default"> {{badgeMenu}} </span>
+                    </a>-->
+                     <ul class="dropdown-menu">
+                            <li>
+                                <div class="slimScrollDiv " style="height: 300px;">
+                                    <ul infiniteScroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="300" [scrollWindow]="false" (scrolled)="onScrollDown()"
+                                        class="dropdown-menu-list scroller" style="height: 300px; overflow-y: scroll; width: auto;"
+                                        data-handle-color="#637283" data-initialized="1">
+                                        <li class="" *ngFor="let notification of notificationListReverse;  let i= index" [ngClass]="{ 'notification-highlight': notification.isRead === false }"
+                                            (click)="onclickNotification(notification,i)">
+                                            <a href="javascript:;">
+                                                <!--<span class="time">just now </span>-->
+                                                <span class="time" *ngIf="translate.currentLang == 'en'">{{notification.createDate | amLocale:'en' | amTimeAgo:true }}</span>
+                                                <span class="time" *ngIf="translate.currentLang == 'th'">{{notification.createDate | amLocale:'th' | amTimeAgo:true }}</span>
+                                                <span class="details">
+                                        <span class="{{notification.icons.bg}}">
+                                                <i class="{{notification.icons.icons}}"></i>
+                                        </span>
+                                                <span *ngIf="translate.currentLang == 'en'">{{notification.msgEn}} {{notification.createDate }}</span>
+                                                <span *ngIf="translate.currentLang == 'th'">{{notification.msgTh}}  {{notification.createDate }}</span>
+                                                </span>
+                                            </a>
+                                        </li>
+
+                                    </ul>
+                                    <div class="slimScrollBar" style="background: rgb(99, 114, 131); width: 7px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 171.429px;"></div>
+                                    <div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(234, 234, 234); opacity: 0.2; z-index: 90; right: 1px;"></div>
+                                </div>
+                            </li>
+                           
+                              <div  *ngIf="notiLoading"  class="noti-loading"><img src="assets/img/loading-spinner-grey.gif" /></div>
+                        </ul>
+     
+     </li>
+
+
+    <li>
+        <a>
+        <i class="icon-user active"></i><span>{{ nameDisplay }}</span>
+        </a>
+    </li>
+    <li>
+        <a style="cursor:pointer;" id="lnkLogout" (click)="confirmLogout()">
+            <i class="icon-logout"></i>{{ 'button.logout'|translate }}
+        </a>
+    </li>
+   
+</ul>
+</div>
+
+</div>
+
+
+<bs-modal-message #messageModal [body]="messageModalData.body" [title]="messageModalData.title" [size]="messageModalData.size"
+    [config]="messageModalData.config" (onHidden)="onModalHidden($event)" (onEmit)="onEmit($event)"></bs-modal-message>
+
+    <timeline-modal-message #myTimelineModal [title]="timelineModalData.title" [type]="timelineModalData.type" [key]="timelineModalData.key" [size]="timelineModalData.size" [config]="timelineModalData.config"></timeline-modal-message>

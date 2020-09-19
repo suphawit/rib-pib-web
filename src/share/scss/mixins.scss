@@ -1,0 +1,20 @@
+/* -- box show generator mixin */
+@mixin box-shadow($ver-size, $hzl-size , $br-radius , $spread, $color ){
+	-webkit-box-shadow: $ver-size $hzl-size $br-radius $spread $color;
+	-moz-box-shadow:   $ver-size $hzl-size $br-radius $spread $color;
+	box-shadow: $ver-size $hzl-size $br-radius $spread $color;
+}
+
+@mixin border-radius($topleft: 0px, $topright: 0px, $bottomright: 0px, $bottomleft: 0px){
+	-webkit-border-radius: $topleft $topright $bottomright $bottomleft;
+	-moz-border-radius: $topleft $topright $bottomright $bottomleft;
+	border-radius: $topleft $topright $bottomright $bottomleft;
+}
+
+/** gradient generator Mixin **/
+@mixin gradient-radial( $start-color, $end-color , $start-percent: 0%, $end-percent: 100%) {
+  	background: #45484d; /* Old browsers */
+	background: -moz-radial-gradient(center, ellipse cover, $start-color $start-percent, $end-color $end-percent);
+	background: -webkit-radial-gradient(center, ellipse cover,  $start-color $start-percent, $end-color $end-percent);
+	background: radial-gradient(ellipse at center, $start-color $start-percent, $end-color $end-percent);
+}

@@ -1,0 +1,52 @@
+<div class="portlet" [style.padding.px]="5">
+    <div class="clearfix"></div>
+    <h3 class="page-title">{{'lbl.rtpBlockListMenu'|translate}}</h3>
+    <div class="row">
+        <div class="col-md-12">
+            <alert-message #alertMessage [type]="alertConfig.type" [message]="alertConfig.message"></alert-message>
+        </div>
+    </div>
+    <div class="panel card panel-default" *ngIf="!isHidden">
+        <div class="panel-heading card-header">
+            <div class="panel-title card-title">
+            <div class="accordion-toggle" >
+                <div>{{'lbl.RTPBlockList'|translate}}</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="table-scrollable table-scrollable-borderless">
+            <table class="table table-hover table-light">
+                <span style="padding-left: 15px;" *ngIf="accountLists?.length == 0">{{'lbl.noBlockList'|translate}}</span>
+                <thead>
+                </thead>
+                <tbody>
+                    <tr class="line-bottom" *ngFor="let account of accountLists">
+                        <td class="fit" *ngIf="account?.anyIDType !== 'BILLERID'" >
+                            <div class="fit icon-circle" *ngIf="account?.anyIDType !== 'BILLERID'" style.background-color="{{ account.anyIDType?.iconObj?.iconColor }}">
+                                <img src="{{ account.anyIDType?.iconObj?.icon }}" title="{{ account.anyIDType?.desc }}" alt="{{ account.anyIDType?.desc }}" 
+                                    onerror="this.style.display='none';" class="user-pic rounded" />
+                            </div>
+                        </td>
+                        <td class="fit" *ngIf="account?.anyIDType === 'BILLERID'">
+                            <biller-image
+                                [srcpath]= "utilService.getDefaultBillerIconPath()"
+                                [defaultpath]="utilService.getDefaultBillerIconPath()">
+                            </biller-image>
+                        </td>
+                        <td>
+                            <span class="primary-link">{{ account?.accountAliasName }} ( {{account?.anyIDValue}} )</span>
+                            <a style="float: right;" (click)="unBlockAccount(account)" class="btn btn-circle btn-default">
+                                {{'btn.unBlock'|translate}}
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div> 
+<modal-rtp-block-list #messageModal [body]="messageModalData.body" [title]="messageModalData.title" [size]="messageModalData.size" [config]="messageModalData.config"
+[accountAliasName]="messageModalData.accountAliasName" [accountNumber]="messageModalData.accountNumber" (onEmit)="onEmit($event)"></modal-rtp-block-list>
+
+

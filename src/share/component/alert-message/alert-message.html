@@ -1,0 +1,7 @@
+<div class="note note-{{messageType}}" *ngIf="isShow">
+    <h3>
+        {{ messageTitle | translate}}
+        <span class="close" (click)="hide()"></span>
+    </h3>
+    <p>{{messageBody | translate: option }}</p>
+</div>

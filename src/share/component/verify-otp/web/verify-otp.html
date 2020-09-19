@@ -1,0 +1,30 @@
+
+<div class="col-md-offset-2 col-sm-offset-2 col-md-6 col-sm-6">
+    <div class="portlet-body bg-default bg-font-default">
+        <div class="well">
+            <h5>{{'input.otp' | translate}}</h5>
+            <form class="form-inline ng-pristine ng-valid" role="form" [formGroup]="verifyOtpForm">
+                <div class="form-group {{styleMode}}">
+                    <input type="password" id="txtOtpPass" class="form-control" onlyNumber="true" [maxLength]="6" placeholder="{{'enter.otp' | translate}}" (keyup)="onkeyupInputOtpPass()" formControlName="otpPass" /> 
+                </div>
+                <button type="button" class="btn btn-outline kkppurple button-otp" (click)="requestOTP()" [disabled]="isDisableRequestOtpBtn">{{'button.requestOtp' | translate}}</button>    
+            </form>
+            <div class="clearfix"></div>
+            <div *ngIf="isShowRespOTP">
+                <h5>
+                    <span>{{'label.OtpRefcode' | translate}}</span> <b>{{otpRefcode}}</b>
+                </h5>
+    
+                <h6>
+                    {{'label.OtpMobilenumber' | translate}}
+                    <span class="font-color-kkppurple"> <b>{{mobileNumber}}</b></span>
+                    <span>{{'label.OtpExpireIn' | translate}}</span>
+                </h6>  
+                    
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-offset-4 col-sm-offset-4 col-md-6 col-sm-6">
+    <button type="button" *ngIf="showSubmitButton" class="btn btn-outline kkppurple button-next" [disabled]="(!isRequestOTP || verifyOtpForm.value.otpPass == '')" (click)="onSubmit()"> {{'button.next' | translate}} <i class="fa fa-angle-right"></i></button>
+</div>

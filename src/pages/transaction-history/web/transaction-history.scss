@@ -1,0 +1,40 @@
+transaction-history {
+	.select-list {
+        width:auto!important;
+        max-height:200px!important; 
+        overflow:auto!important
+    }
+}
+
+transaction-history-sub-menu{
+    .circle {
+        border-radius: 50%;
+        width: 56px;
+        height: 56px;
+        background: #fff;
+        border: 3px solid #009ac7;
+        color: #009ac7;
+        font-size: 32px;
+        line-height: 50px;
+    }
+    .icon {
+        // width: 56px;
+        // height: 56px;
+        // background: #fff;
+        // border: 3px solid $color-pib-purple;
+        // color:$color-pib-purple;
+        font-size: 32px;
+        line-height: 50px;
+    }
+    .grid-center{
+        float: left;
+        width: 33%;
+        padding: 10px;
+        text-align: center;
+        border-width: thin;
+        border-color: #e0e0e0;
+        height: 37vw;
+        border-style: solid;
+        background-color: #fff;
+    }
+}

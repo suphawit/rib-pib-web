@@ -1,0 +1,114 @@
+terms-and-conditions-modal {
+    button {
+        background-color:$color-kk-blue
+    }
+
+    .modalStyle {
+        z-index:10000!important
+    }
+
+    .user-info-box {
+        background:red
+    }
+
+    .text-align {
+        text-align:center
+    }
+
+    .modal .modal-header .close {
+        margin-top:-17px!important
+    }
+
+    .z-index {
+        z-index:20000!important
+    }
+
+    .margin-right {
+        margin-right:10px
+    }
+
+    .scroll-bar {
+        // overflow-x:scroll;
+        overflow-y:auto!important;
+        max-height:400px
+    }
+
+    .border-space {
+        margin-top:20px;
+        margin-bottom:20px
+    }
+}
+
+accept-terms-and-conditions, pib-mobile-accept-terms-and-conditions {
+    .text-center {
+        text-align:center
+    }
+
+    .margin-top-bot {
+        margin-top:10px;
+        margin-bottom:10px
+    }
+
+    .margin-bottom {
+        margin-bottom:10px
+    }
+
+    .im-centered {
+        margin:auto;
+        max-width:410px
+    }
+
+    .margin-top-15 {
+        margin-top:15px!important
+    }
+
+    .margin-bottom-15 {
+        margin-bottom:15px!important
+    }
+
+    .margin-lft {
+        margin-left:11%
+    }
+}
+
+accept-terms-and-conditions {
+    .well {
+        border:1px solid #e3e3e3!important;
+        height:400px;
+        overflow-y:scroll;
+        text-align:justify
+    }
+
+    verify-otp {
+        .well {
+            height:auto!important;
+            overflow:auto!important;
+            border:0!important
+        }
+    }
+}
+
+pib-mobile-accept-terms-and-conditions {
+    .panel-input-width {
+        width:90%!important;
+    }
+
+    verify-otp {
+        .well {
+            width:98%!important
+        }
+    }
+
+    // .header-pannel {
+    //     padding-left:14px;
+    //     padding-right:14px
+    // }
+
+    h4 {
+        color:$color-pib-purple!important
+    }
+
+    p,ul {        
+        color:$color-gray!important
+    }
+}

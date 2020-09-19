@@ -1,0 +1,122 @@
+<h3 class="page-title ng-scope">{{'label.changeterm'|translate}}</h3>
+<div class="row ">
+	<div class="col-md-12">
+		<alert-message #alertMessage [type]="alertConfig.type" [message]="alertConfig.message"></alert-message>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<step-wizard [data]="stepWizard.input.data" [style]="stepWizard.input.style" [step]="stepWizard.input.step"></step-wizard>
+	</div>
+</div>
+<div class="portlet light ">
+	<div class="portlet-title margin-top-25">
+		<div class="caption">
+			<i class=" icon-layers font-kkppurple"></i>
+			<span class="caption-subject font-kkppurple sbold uppercase">{{ changeTermStep | translate}}</span>
+		</div>
+	</div>
+
+	<div *ngIf="isSuccessChangeTerm" class="status-gap col-md-offset-2 col-md-9 ">
+		<div class="mt-element-step">
+			<div class="row step-no-background-thin">
+				<div class="col-lg-4 mt-step-col active">
+					<div class="mt-step-number bg-white font-grey"><i class="icon-check"></i></div>
+					<div class="mt-step-title uppercase font-grey-cascade">{{'lbl.status' | translate}}</div>
+					<div class="mt-step-content font-grey-cascade">{{'label.Success'|translate}}</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div *ngIf="isFailChangeTerm" class="status-gap col-md-offset-2 col-md-9">
+		<div class="mt-element-step">
+			<div class="row step-no-background-thin">
+				<div class="status-gap col-lg-4 mt-step-col error">
+					<div class="bg-white font-grey mt-step-number"><i class="icon-close"></i></div>
+					<div class="mt-step-title uppercase font-grey-cascade">{{'lbl.status' | translate}}</div>
+					<div class="mt-step-content font-grey-cascade">{{'lbl.anyIDStatus.fail'|translate}}</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div>
+		<div class="row margin-top">
+			<div class="col-md-12">
+				<div class="web-panel-heading"><span></span></div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="margin-top-row row">
+					<div class="portlet-body margin-left">
+						<div class="table-scrollable table-scrollable-borderless">
+							<table class="table table-light">
+								<tbody>
+									<tr>
+										<td class="width-gap">
+											<span class="bold font-kkppurple">{{'label.tdAliasName'|translate}}</span>
+										</td>
+										<td align="">
+											<span>{{selectedCurrentAccount.myAccountAliasName}} </span>
+										</td>
+									</tr>
+									<tr>
+										<td class="">
+											<span class="bold font-kkppurple">{{'label.accNumber'|translate}}</span>
+										</td>
+										<td align="">
+											<span>{{selectedCurrentAccount.myAccountNumber}}</span>
+										</td>
+									</tr>
+									<tr>
+										<td class="">
+											<span class="bold font-kkppurple">{{'label.accType'|translate}}</span>
+										</td>
+										<td align="">
+											<span>{{selectedCurrentAccount.myAccountType}}</span>
+										</td>
+									</tr>
+									<tr>
+										<td class="">
+											<span class="bold font-kkppurple">{{'label.accStatus'|translate}}</span>
+										</td>
+										<td align="">
+											<span>{{selectedCurrentAccount.accountStatus}}</span>
+										</td>
+									</tr>
+									<tr>
+										<td class="">
+											<span class="bold font-kkppurple">{{'label.productName'|translate}}</span>
+										</td>
+										<td align="">
+											<span>{{selectedCurrentAccount.productDes}}</span>
+										</td>
+									</tr>
+									<tr>
+										<td class="">
+											<span class="bold font-kkppurple">{{'tableHead.availableBalance'|translate}}</span>
+										</td>
+										<td align="">
+											<span>{{selectedCurrentAccount.myAvailableBalance | number:'.2-2' }} {{'label.currency'|translate}}</span>
+										</td>
+									</tr>
+									<tr>
+										<td class="">
+											<span class="bold font-kkppurple">{{'lbl.currentBalance'|translate}}</span>
+										</td>
+										<td align="">
+											<span>{{selectedCurrentAccount.myLedgerBalance | number:'.2-2'}} {{'label.currency'|translate}}</span>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<router-outlet></router-outlet>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

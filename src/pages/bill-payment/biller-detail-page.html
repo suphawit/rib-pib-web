@@ -1,0 +1,60 @@
+<div class="clearfix"></div>
+<h3 class="page-title">{{ 'lbl.billerDetail' | translate }}</h3>
+<div class="row">
+    <div class="col-md-12">
+        <alert-message #alertMessage [type]="alertConfig.type" [message]="alertConfig.message"></alert-message>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-8 col-sm-12">
+        <!--start Detail -->
+        <div class="portlet-body">
+        <table class="table table-light">
+            <tr>
+                <td class="">
+                    <span class="bold font-purple">{{'lbl.billerAliasName'|translate}}</span>
+                </td>													
+                <td align="">
+                    <span>{{billerDetail.billerAliasName}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="">
+                    <span class="bold font-purple">{{'lbl.billerName'|translate}}</span> 
+                </td>															
+                <td align="" >
+                    <span>{{billerDetail.billerName}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="">
+                    <span class="bold font-purple">{{'label.billRefNo1'|translate}}</span> 
+                </td>															
+                <td align="">
+                    <span>{{billerDetail.ref1}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="">
+                    <span class="bold font-purple">{{'label.billRefNo2'|translate}}</span> 
+                </td>															
+                <td align="">
+                    <span>{{billerDetail.ref2}}</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+        <!--end Detail -->
+    </div>
+    <div class="col-md-4 col-sm-12">
+        <portlets-menu (OnMenuClick)="OnMenuClick($event)"></portlets-menu>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+
+    </div>
+</div>
+
+<bs-modal-message-delete-biller #bsModalMessage [body]="messageModalData.body" [title]="messageModalData.title" [config]="messageModalData.config" [size]="messageModalData.size" 
+    [billerAliasName]="messageModalData.billerAliasName" [ref1]="messageModalData.ref1" [ref2]="messageModalData.ref2" (onEmit)="onEmit($event)" (onHidden)="onModalHidden($event)"></bs-modal-message-delete-biller>

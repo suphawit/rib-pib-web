@@ -1,0 +1,30 @@
+<div class="portlet light bordered" >
+<div class="portlet-title">
+        <div class="caption" >
+           {{'label.promptpayServiceHeader'|translate}}
+        </div>
+        <div class="actions">
+            <a *ngIf="promptPayUrl !== '#'" class="btn btn-circle btn-default" [href]="promptPayUrl" target="_blank">
+                {{'label.moreinfo'|translate}}
+            </a>
+            <a *ngIf="promptPayUrl === '#'" class="btn btn-circle btn-default">
+                {{'label.moreinfo'|translate}}
+            </a>
+        </div>	
+        <div class="actions">
+            <a class="btn btn-circle btn-default" (click)="selectMenuList('registerKKPromptPay')">
+            {{'lbl.register'|translate}}
+            </a>
+        </div>		
+    </div>
+    <div class="portlet-body">
+        <div class="row">
+            <div class="col col-sm-3 col-md-3">
+                <img style="width: 100%;" src="./assets/images/kk_promptpay_banner.png?v={{BUILD_NUM}}">
+            </div>
+            <div class="col col-sm-9 col-md-9">
+                <span>{{'label.promptpayInfo'|translate}}</span>
+            </div>
+        </div>
+    </div>
+</div>

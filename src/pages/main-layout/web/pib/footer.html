@@ -1,0 +1,35 @@
+<div id="footer">
+    <div class="detail">
+        {{'lbl.footerDetail'|translate}}
+    </div>
+    <div class="clearfix"></div>
+    <div class="pull-left">
+        <div class="info">
+            <ul class="nav-footer">
+                <li><a (click)="showContactUs()">{{'lbl.menu.contactus'|translate}}</a></li>
+                <li><i class="icon-dot"></i><a (click)="showPrivacy()">{{'lbl.menu.privacypolicy'|translate}}</a></li>
+                <li><i class="icon-dot"></i><a (click)="showDisclaimer()">{{'lbl.menu.disclaimer'|translate}}</a></li>
+                <li><i class="icon-dot"></i><a (click)="showTermAndCondition()">{{'lbl.menu.termandcon'|translate}}</a></li>
+                <!--<li><i class="icon-dot"></i><a onclick="ShowModalPage('AGREEMENT', this); return false;">Terms &amp; Conditions</a></li>-->
+                <!--<li><i class="icon-dot"></i><a target="_top" (click)="openInTab()"> {{"lbl.newsAndUpdate"|translate}} </a></li>-->
+                <li><i class="icon-dot"></i>
+                    <a *ngIf="newsAndUpdateUrl !== '#'" [href]="newsAndUpdateUrl" target="_blank">
+                        {{"lbl.newsAndUpdate"|translate}}
+                    </a>
+                    <a *ngIf="newsAndUpdateUrl === '#'">
+                        {{"lbl.newsAndUpdate"|translate}}
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="copyright">
+            &copy; 2016 Kiatnakin Phatra Bank Public Company Limited {{"lbl.version"|translate}} {{appVersion}} {{"lbl.buildNumber"|translate}} {{buildNumber}}
+        </div>
+    </div>
+    <div class="pull-right">
+        <div id="logo-kkb" title="Kiatnakin Public Company Limited"></div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+
+<bs-modal-message #messageModal [body]="messageModalData.body" [title]="messageModalData.title" [size]="messageModalData.size" [config]="messageModalData.config" (onHidden)="onModalHidden($event)"></bs-modal-message>

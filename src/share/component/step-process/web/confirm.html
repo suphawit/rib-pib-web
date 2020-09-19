@@ -1,0 +1,160 @@
+<div class="portlet light nopadding">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class=" icon-layers font-kkppurple"></i>
+            <span class="caption-subject font-kkppurple sbold uppercase">{{ 'lbl.fundTransferSecondStep' | translate }}</span>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <form #form="ngForm" novalidate>
+            <div class="row">                
+			    <div class="col-md-offset-2 col-sm-offset-2 col-md-7 col-sm-7">
+				     <div class="portlet-body">
+                        <div class="table-scrollable table-scrollable-borderless">
+                            <table class="table table-light">
+                                <tbody>
+                                    <tr>
+                                        <td> {{ 'lbl.transferFrom' | translate }} </td>
+                                            <td>
+                                                <table>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="fit">
+                                                                <div class="icon-circle" style.background-color="{{ transferObj.srcAccount?.bank?.imgObj?.color }}">
+                                                                    <img src="{{ constants.BANK_IMAGE_PATH + transferObj.srcAccount?.bank?.imgObj?.url }}" title="{{ transferObj.destAccount?.bank?.bankName }}" 
+                                                                        alt="{{ transferObj.destAccount?.bank?.bankName }}" onerror="this.style.display='none';" class="user-pic rounded" />
+                                                                </div>
+                                                            </td>
+                                                            <td style="padding-left:5px!important"
+                                                                [innerHTML]="transferObj.srcAccount?.getAccountDisplay() 
+                                                                    + '<br />' + ('lbl.availableBalance' | translate)
+                                                                    + '&nbsp;' + (transferObj.srcAccount?.balance | formatCurrency) 
+                                                                    + '&nbsp;' + ('lbl.baht' | translate) | sanitizeHtml" >
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td> {{ 'lbl.transferTo' | translate }} </td>
+                                            <td>
+                                                <table>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="fit">
+                                                                <div *ngIf="transferObj.destAccount?.anyIDType?.anyIDType === constants.ANYID_TYPE_BANK_ACCOUNT" class="icon-circle" style.background-color="{{ transferObj.destAccount?.bank?.imgObj?.color }}" >
+                                                                    <img src="{{ constants.BANK_IMAGE_PATH + transferObj.destAccount?.bank?.imgObj?.url }}" title="{{ transferObj.destAccount?.bank?.bankName }}" 
+                                                                        alt="{{ transferObj.destAccount?.bank?.bankName }}" onerror="this.style.display='none';" class="user-pic rounded" />
+                                                                </div>
+                                                                <div *ngIf="transferObj.destAccount?.anyIDType?.anyIDType !== constants.ANYID_TYPE_BANK_ACCOUNT" class="icon-circle" style.background-color="{{ transferObj.destAccount?.anyIDType?.iconObj?.iconColor }}">
+                                                                    <img src="{{ transferObj.destAccount?.anyIDType?.iconObj?.icon }}" title="{{ transferObj.destAccount?.anyIDType?.desc }}" alt="{{ transferObj.destAccount?.anyIDType?.desc }}" 
+                                                                        onerror="this.style.display='none';" class="user-pic rounded" />
+                                                                </div>
+                                                            </td>
+                                                            <td [innerHTML]="(transferObj.destAccount?.getAccountDisplay() + '<br />' + transferObj.destAccount?.accName) | sanitizeHtml" style="padding-left:5px!important">
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td> {{ 'lbl.amount' | translate }} </td>
+                                            <td> {{ transferObj.transferAmount | formatCurrency }} &nbsp; {{ 'lbl.baht' | translate }} </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td> {{ 'lbl.transactionDate' | translate }} </td>
+                                            <td> {{ transferObj?.txnDate | dateFormat }} </td>
+                                            <td></td>
+                                        </tr>
+                                        <!--<tr>
+                                            <td> {{ 'lbl.transferDate' | translate }} </td>
+                                            <td> {{ transferObj?.getEffDateDisplay() | dateFormat }} </td>
+                                            <td></td>
+                                        </tr>-->
+                                        <tr *ngIf="transferObj?.rtpReferenceNo !== ''">
+                                            <td> {{ 'lbl.RTPRefCode' | translate }} </td>
+                                            <td> {{ transferObj?.rtpReferenceNo }} </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr *ngIf="transferObj?.recurringType === constants.RECURRING_TYPE_YES">
+                                            <td> {{ 'lbl.recurringType' | translate }} </td>
+                                            <td> {{ transferObj?.scheduleType?.desc }}&#44;&nbsp;{{ transferObj?.recurringTime?.desc }} </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td> {{ 'lbl.notifyReceiver' | translate }} </td>
+                                            <td> 
+                                                <span *ngIf="transferObj.notifyEmail != ''" class="wordwrap">{{ 'lbl.notifyEmailAddress' | translate }} : {{ transferObj.notifyEmail }}</span>
+                                                <span *ngIf="transferObj.notifyMobileNo != ''" class="form-control-static">
+                                                    {{ 'lbl.notifySMS' | translate }} : {{ transferObj.notifyMobileNo }}<br />
+                                                    {{ 'lbl.notifyLanguage' | translate }} : {{ transferObj.getNotifyLangDisplay() | translate }}
+                                                </span>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td> {{ 'lbl.note' | translate }} </td>
+                                            <td> {{ transferObj.note }} </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td> {{ 'lbl.feeAmount' | translate }} </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table class="table table-striped table-bordered table-advance table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>{{ 'lbl.option' | translate }}</th>
+                                            <th>{{ 'lbl.debitDate' | translate }}</th>
+                                            <th>{{ 'lbl.transferDate' | translate }}</th>
+                                            <th>{{ 'lbl.fee' | translate }}</th>															
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let decision of transferObj?.transferDecisionList;trackBy: trackById; let i = index">
+                                            <td>
+                                                <label class="mt-radio">
+                                                    <input type="radio" name="transferMethod" [value]="decision?.RIBTransferTypeCode" [(ngModel)]="model.transferMethod" />
+                                                    <span></span>  {{ decision.desc }}
+                                                </label>
+                                                </td>
+                                            <td> {{ decision.getDebitDateTimeDisplay() | dateFormat }} </td>
+                                            <td> {{ decision.getCreditTimeDisplay() | dateFormat }}, {{ decision.creditTime?.name }} </td>
+                                            <td> {{ decision.feeAmount | formatCurrency }} &nbsp; {{ 'lbl.baht' | translate }} </td>
+                                        </tr>
+                                        <tr *ngIf="transferObj?.transferDecisionList === null || transferObj?.transferDecisionList?.length === 0">
+                                            <td colspan="4" class="text-center">{{ 'msg.noRecordsFound' | translate }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>																				
+                        </div>
+                    </div>					
+                    <div class="portlet-body">
+                        <div class="table-scrollable table-scrollable-borderless">
+                            <h6><strong>{{ 'msg.feeDetail' | translate }}</strong></h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div [hidden]="!isRequireOTP">
+                <verify-otp [style]="verifyOTPStyle" [actionOTP]="verifyOTPAction" [verifyTransactionId]="transferObj?.verifyTxnID" [responseCodeMainService]="responseCodeMainService" (requestOTPChanged)="onRequestOTP($event)" (otpPass)="onOtpChanged($event)" [options]="verifyOTPOptions"></verify-otp>
+            </div>
+    
+            <div class="row">
+                <div class="col-md-offset-2 col-sm-offset-2 col-md-7 col-sm-7">
+                    <a href="javascript:;" (click)="goToPrevStep()" class="btn btn-outline btn-default">
+                         <i class="fa fa-angle-left"></i> {{ 'btn.back' | translate }}
+                    </a>
+                    <button class="btn btn-outline kkppurple button-next" (click)="goToNextStep(form.value)" [disabled]="isRequireOTP && (!isRequestOTP || model.otpPin == '')"> 
+                        {{ 'btn.confirm' | translate }} <i class="fa fa-angle-right"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,95 @@
+<div class="portlet" [style.padding.px]="5">
+    <div class="clearfix"></div>
+    <h3 class="page-title">{{ labelTitle | translate }}</h3>
+	<div class="row">
+		<div class="col-md-12">
+			<alert-message #alertMessage [type]="alertConfig.type" [message]="alertConfig.message"></alert-message>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+            <step-wizard [data]="stepWizard.input.data" [style]="stepWizard.input.style" [step]="stepWizard.input.step"></step-wizard>
+		</div>
+	</div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="portlet light " id="form_wizard_1">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class=" icon-layers font-kkppurple"></i>
+                        <span class="caption-subject font-kkppurple sbold uppercase" *ngIf="isAdd">{{'label.stepAddBiller1' | translate}}</span>
+                        <span class="caption-subject font-kkppurple sbold uppercase" *ngIf="!isAdd">{{'label.stepEditBiller1' | translate}}</span>
+                    </div>
+                </div>
+                <div class="portlet-body form">
+                    <div class="col-md-12">
+                        <form class="form-horizontal" [formGroup]="billPaymentAddEditForm">
+                            <div class="form-group" formControlValidator [control]="billPaymentAddEditForm.controls.billerAliasName" [submitted]="submitted">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label>{{'lbl.billerAliasName' | translate}}
+                                            <span class="required" aria-required="true"> * </span>
+                                        </label>
+                                        <input type="text" class="form-control input-xlarge" placeholder="" autocomplete="off"
+                                            minlength="1" maxlength="20" id="billerAliasName" formControlName="billerAliasName"/>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label>
+                                            {{'lbl.billerName'|translate}}
+                                        </label>
+                                        <div>
+                                            <div class="icon-circle" style="background-color: #594F74;">
+                                                <img class="user-pic rounded" src="assets/images/banks/069.png?v={{BUILD_NUM}}" />
+                                            </div>
+                                            <strong><span class="padding-left10px">{{'label.kiatnakin'|translate}}</span></strong><br>
+                                            <span class="padding-left10px">{{'label.kkAutoLoan'|translate}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group" formControlValidator [control]="billPaymentAddEditForm.controls.ref1" [submitted]="submitted">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label>{{'label.billRefNo1' | translate}}
+                                            <span class="required" aria-required="true"> * </span>
+                                        </label>
+                                        <input type="text" class="form-control input-xlarge" placeholder=""
+                                                minlength="1" maxlength="20" id="ref1" formControlName="ref1" autocomplete="off" />
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div  class="form-group" formControlValidator [control]="billPaymentAddEditForm.controls.ref2" [submitted]="submitted">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label>{{'label.billRefNo2' | translate}}
+                                            <span class="required" aria-required="true"> * </span>
+                                        </label>
+                                        <input type="text" class="form-control input-xlarge" placeholder=""
+                                                minlength="1" maxlength="20" id="ref2" formControlName="ref2" autocomplete="off" />
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <div class="row">
+                                    <div class="col-md-offset-3 col-md-9">
+                                        <button type="button" class="btn btn-default" (click)="navigateBack()"><i class="fa fa-angle-left"></i> {{'button.back'|translate}} </button>
+                                        <button type="submit" class="btn btn-outline kkppurple button-next" (click)="onSubmitBillpaymentAddEdit()" > {{'button.next' | translate}} <i class="fa fa-angle-right"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+	    </div>
+    </div>
+</div>

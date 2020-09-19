@@ -1,0 +1,47 @@
+
+    <userAgentInfo (info)="thisUserAgent($event)"></userAgentInfo>
+    <div *ngIf="loader?.isLoading" class="loading-container">
+		<div class="loading-backdrop">
+			<div class="loading-position">
+				<div class="sk-circle">
+                    <div class="sk-circle1 sk-child"></div>
+                    <div class="sk-circle2 sk-child"></div>
+                    <div class="sk-circle3 sk-child"></div>
+                    <div class="sk-circle4 sk-child"></div>
+                    <div class="sk-circle5 sk-child"></div>
+                    <div class="sk-circle6 sk-child"></div>
+                    <div class="sk-circle7 sk-child"></div>
+                    <div class="sk-circle8 sk-child"></div>
+                    <div class="sk-circle9 sk-child"></div>
+                    <div class="sk-circle10 sk-child"></div>
+                    <div class="sk-circle11 sk-child"></div>
+                    <div class="sk-circle12 sk-child"></div>
+                </div>
+			</div>
+	    </div>
+	</div>
+
+    <div class="page-header-fixed page-footer-fixed page-sidebar-closed-hide-logo page-content-white page-md">
+            <header-web-rib></header-web-rib>
+            <div class="clearfix"> </div>
+            <div class="page-container">
+                <main-menu-rib></main-menu-rib>
+              
+                <div class="page-content-wrapper">
+                    <div class="page-content">
+                        <div class="page-bar">
+                               <breadcrumbs [data]="breadcrumb.input.data" [style]="breadcrumb.input.style" [selected]="breadcrumb.input.selected"></breadcrumbs>
+                        </div>
+                        <router-outlet></router-outlet>
+                    </div>
+            
+                </div>
+                <a href="javascript:;" class="page-quick-sidebar-toggler">
+                    <i class="icon-login"></i>
+                </a>
+              
+            </div>
+            <footer-rib></footer-rib>
+        </div>
+    
+<bs-modal-message #messageModal [body]="messageModalData.body" [title]="messageModalData.title" [size]="messageModalData.size" [config]="messageModalData.config" (onHidden)="onModalHidden($event)" (onEmit)="onEmit($event)"></bs-modal-message>

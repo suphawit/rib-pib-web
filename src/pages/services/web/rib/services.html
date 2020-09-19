@@ -1,0 +1,14 @@
+<div class="portlet" [style.padding.px]="5">
+    <div class="clearfix"></div>
+    <h3 class="page-title">{{ 'label.services' | translate }}</h3>
+    <div class="row">
+        <div class="col-md-12">
+            <alert-message #alertMessage [type]="alertConfig.type" [message]="alertConfig.message"></alert-message>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div [innerHTML]="result"></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,72 @@
+<div>
+	<h3 class="margin-bottom">{{'lbl.KKPromptPay'|translate}}</h3> 
+	<div class="row">
+		<div lass="col-md-12">
+			<alert-message #alertMessage [type]="type" [message]="message"></alert-message>
+		</div>
+	</div>
+    <div class="row">	
+        <div class="col">
+            <step-wizard [data]="stepWizard.input.data" [style]="stepWizard.input.style" [step]="stepWizard.input.step"></step-wizard>	
+        </div>
+    </div>
+   
+<div class="portlet light margin-top">
+	<div class="portlet-title">
+			<div class="caption">
+				<i class=" icon-layers font-kkppurple"></i>
+				<span class="caption-subject font-kkppurple sbold uppercase">{{'label.registerPromptPayThrStep'|translate}}</span>
+			</div>
+		</div>
+		 <div [hidden]="!isSuccessRegisterKkPromptPay" class="form-actions col-md-offset-2 col-md-12">
+	<div class="mt-element-step">
+		<div class="row step-no-background-thin">
+			<div style="margin-top: 15px;margin-bottom: 15px;" class="col-lg-4 mt-step-col active">
+				<div class="mt-step-number bg-white font-grey"><i class="icon-check"></i></div>
+				<div class="mt-step-title uppercase font-grey-cascade">{{'label.status'|translate}}</div>
+				<div class="mt-step-content font-grey-cascade">{{'label.Success'|translate}}</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div [hidden]="!isFailRegisterKkPromptPay" class="form-actions col-md-offset-2 col-md-12">
+	<div class="mt-element-step">
+		<div class="row step-no-background-thin">
+			<div style="margin-top: 15px;margin-bottom: 15px;" class="col-lg-4 mt-step-col error">
+				<div class="bg-white font-grey mt-step-number"><i class="icon-close"></i></div>
+				<div class="mt-step-title uppercase font-grey-cascade">{{'label.status'|translate}}</div>
+				<div class="mt-step-content font-grey-cascade">{{'lbl.anyIDStatus.fail'|translate}}</div>
+			</div>
+		</div>
+	</div>
+</div>
+		<div class="portlet-body form">
+            <div class="blog-post-content">
+				<div class="portlet-body">
+					<div class="table-scrollable table-scrollable-borderless">
+						<table class="table table-light">
+							<tbody>
+								<tr>
+									<td class="col-md-3"> {{'lbl.connectBy'|translate}}</td>
+                                    <td>{{confirmRegisterAnyID.typeAnyResult}} - {{confirmRegisterAnyID.typeAnyValue}}</td>
+								</tr>
+								<tr>
+									<td class="col-md-3">{{'lbl.account'|translate}}</td>
+									<td>{{confirmRegisterAnyID.anyIDAliasName}} - {{confirmRegisterAnyID.anyIDMyAccountNumber}}</td>
+                                </tr>
+                                <tr>
+									<td class="col-md-3"> {{'lbl.status'|translate}}</td>
+									<td *ngIf ="errorMsg != undefined">{{errorMsg}}</td>
+								</tr>								
+	 						</tbody>
+						</table>
+					</div>
+				</div>
+			</div>				
+		</div>
+		<div class="col-md-offset-3 col-md-9" style="margin-bottom: 20px;">
+			<a (click)="gotoKKProduct('newProduct')" class="btn btn-default" [ngClass]="{'btn-outline ': stepwizardStyle == 'rib-web'}"><i class="fa fa-cross"></i>{{'btn.close'|translate}} </a>
+			<a (click)="gotoKKProduct('promptPay')" class="btn btn-default" [ngClass]="{'btn-outline ': stepwizardStyle == 'rib-web'}">{{'lbl.newRegisterKK'|translate}} <i class="fa fa-plus"></i></a>
+		</div>
+	</div>      
+</div>

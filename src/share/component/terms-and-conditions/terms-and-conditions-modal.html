@@ -1,0 +1,23 @@
+<div bsModal (onHide)="onHide()" #childModal="bs-modal" class="modal fade  modalStyle z-index" tabindex="-1" role="dialog"
+  aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title  text-align">{{'label.termAndCondition'|translate}}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="disAgree()"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <alert-message #alertMessage [type]="type" [message]="message" [option]="option"></alert-message>
+      <div class="scroll-bar modal-body" [innerHTML]="result"></div>
+      <div *ngIf="isLogin && !isError" class="row border-space">
+        <div class="row text-center">
+          <label class="margin-right">
+            <input type="checkbox" name="isCheck" [(ngModel)]="isCheck">
+            <span>{{'label.iAgreeToTheTerms'|translate}}</span> 
+          </label>
+          <button class="btn  kkppurple button-next btn-outline" (click)="disAgree()">{{'button.disAgree'|translate}}</button>
+          <button type="submit" class="btn  kkppurple button-next btn-outline" [disabled]="isCheck == false" (click)="onSubmit()">{{'button.agree'|translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

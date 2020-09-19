@@ -1,0 +1,98 @@
+<div class="portlet" [style.padding.px]="5">
+    <div class="clearfix"></div>
+    <h3 class="page-title">{{ 'label.locateUs' | translate }}</h3>
+    <div class="row">
+        <div class="col-md-12">
+            <alert-message #alertMessage [type]="alertConfig.type" [message]="alertConfig.message"></alert-message>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="text-blue text-bold" >{{'label.locateUsSpecify' | translate}}</div>
+			<div class="row">
+				<div class=" locateUs-table col-md-4 ">
+					<div class="branch-search" style="z-index: 1">
+						<input  type="text" [(ngModel)]="stringFilter.title" class="ui-autocomplete-input input-width" placeholder="{{'input.Search'| translate}}" > 
+					</div>
+					<ul class= "list-group pre-scrollable list-height  ">
+						<li class = "list-group-item " (click)="onSelect(item)" *ngFor="let item of result | filterBy: stringFilter">
+							<div> <a href = "javascript:void(0);">{{ item.title }}</a></div>
+							<div>{{ item.province }}</div>
+						</li>
+					</ul>
+				</div>
+				<div class="col-md-8"> 
+					<sebm-google-map [latitude]="centerLat"
+									[longitude]="centerLng"
+									[disableDefaultUI]="false"
+									[zoomControl]="true" 
+									[zoom] = "zoom"
+									(mapClick)="mapClicked($event)"> 
+						<sebm-google-map-marker 
+								[longitude]="lngMaker" 
+								[latitude]="latMaker"
+								[iconUrl] =  "'./assets/images/locateUs/map-icon.png'"     
+								[openInfoWindow] = "true">
+
+							<sebm-google-map-info-window [disableAutoPan]="true" [isOpen]="isOpen">
+								<strong>{{detailMaker}}</strong>
+							</sebm-google-map-info-window>
+						</sebm-google-map-marker>	
+					</sebm-google-map>
+					<table style="width:100%" border="0">
+						<tr>
+							<td align="center">
+								<table style="width:100%" border="0">
+									<tr>
+										<td>
+											<!-- KKP Contact Center -->
+											<div class="google-bar-toggle">
+												<div class="col-xs-12 col-sm-12 col-md-12">
+													<span> <img src="./assets/images/locateUs/Contact_US.png?v={{BUILD_NUM}}" class="locateUs-img" align="middle"></span> 
+													<span class="locateUs-content">{{'label.contactUsCenter' | translate}}</span>
+												</div>
+											</div>						
+											<div class="locateUs-content-padding">
+												<span> {{'message.kkCustomerCenterService' | translate}}</span>
+												<br /> <br />
+												<a href="https://media.kkpfg.com/document/2018/Feb/kk-contact-center-ivr-menu.pdf" target="blank"><span>{{'message.kkCustomerCenterMenuClick' | translate}}</span></a> 
+											</div>
+											
+											<!-- KKP e-Banking -->
+											<div class="google-bar-toggle">
+												<div class="col-xs-12 col-sm-12 col-md-12">
+													<span> <img src="./assets/images/locateUs/b2.png?v={{BUILD_NUM}}" class="locateUs-img"></span>
+													<span class="locateUs-content"> {{'menu.kkpebanking' | translate}}</span>
+												</div>
+											</div>								
+											<div class="locateUs-content-padding"> 
+												<span>{{'message.personalBank' | translate}}</span><a (click)="nevigateService()"><span>{{'message.personalBankMoreDetail' | translate}}</span></a>
+												<br/> <br /><a (click)="nevigateLogin()"><span>{{'message.logKKPebanking' | translate}}</span></a>
+											</div>
+											
+											
+											<!-- KKP e-Banking -->
+											<div class="google-bar-toggle">
+												<div class="col-xs-12 col-sm-12 col-md-12">
+													<span> <img src="./assets/images/locateUs/b4.png?v={{BUILD_NUM}}" class="locateUs-img"></span> 
+													<span class="locateUs-content">{{'label.kkppartner' | translate}}</span>
+												</div>
+											</div>	
+											<div class="locateUs-content-padding">
+												<span>{{'message.ChannelBusinessPartner' | translate}}</span><br><br>	
+												<img src="./assets/images/locateUs/CounterService8.jpg?v={{BUILD_NUM}}">&nbsp;&nbsp;<span>{{'message.carQuickCash' | translate}}</span><br><br>
+												<img src="./assets/images/locateUs/b-quick.png?v={{BUILD_NUM}}">&nbsp;&nbsp;<span>{{'message.carQuickCredit' | translate}}</span>
+											</div>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</table>
+
+				</div>
+			</div>
+        </div>
+    </div>
+</div>
+

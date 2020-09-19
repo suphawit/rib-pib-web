@@ -1,0 +1,75 @@
+<table class="table table-striped table-bordered table-hover table-checkable order-column" id="sample_2">
+	<thead>
+		<tr>
+			<th class="col-md-2 text-align">{{'lbl.depositNoTD'|translate}}</th>
+			<th>{{'lbl.valueDateTD'|translate}}</th>
+			<th>{{'lbl.maturityDate'|translate}}</th>
+			<th>{{'lbl.term'|translate}}</th>
+			<th>{{'lbl.amount'|translate}}</th>
+			<th>{{'lbl.interestRate'|translate}}</th>
+			<th>{{'lbl.interestCondition'|translate}}</th>
+			<th>{{'label.benefitAccount'|translate}}</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let deposit_item of deposit_item" (click)="toggleDisplayRows(deposit_item)">
+			<td class="text-align"> {{deposit_item.depNo}}</td>
+			<td> {{deposit_item.dateOpen}}</td>
+			<td> {{deposit_item.dateMaturity}} </td>
+			<td> {{deposit_item.term_description}} </td>
+			<td> {{deposit_item.balAvailable | number:'.2-2'}} {{'label.currency'|translate}} </td>
+			<td> {{deposit_item.interest}} % </td>
+			<td> {{deposit_item.freqIntPay}} </td>
+			<td>
+				<div class="float-left">{{deposit_item.benefitAcc}}</div>
+				<div>
+					<i class="arrow-up-down glyphicon glyphicon-triangle-bottom" *ngIf="!isToggleRows"></i>
+				</div>
+			</td>
+		</tr>
+		<tr *ngIf="deposit_item === undefined || deposit_item?.length === 0">
+			<td colspan="7" class="text-center">{{ 'msg.noRecordsFound' | translate }}</td>
+		</tr>
+	</tbody>
+</table>
+
+<div [hidden]="isError || deposit_item === undefined || deposit_item?.length === 0" class="margin-left form-group col-md-6">
+	<label class="margin-left-10">{{'lbl.drpSelect'|translate}}</label>
+	<div>
+		<div class="row">
+			<div class="col-md-6">
+				<label>{{'lbl.term'|translate}}</label>
+			</div>
+			<div class="col-md-6">
+				<label>{{'lbl.interestCondition'|translate}}</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<div>
+					<select class="form-control" [(ngModel)]="ft_td_data.term" (change)="detectTermChange(ft_td_data.term)">
+						<option [selected]="ft_td_data.term === options.term" value="{{options.term}}" *ngFor ="let options  of fcconTdTermTypes;trackBy: trackById">{{getTermName(options)}}</option>
+						{{ft_td_data.term}}
+					</select>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div>
+					<select class="form-control" [(ngModel)]="ft_td_data.period">
+						<option [selected]="ft_td_data.period === option" value="{{option}}" *ngFor ="let option of periodArray;trackBy: trackById;" >{{option}}</option>
+						{{ft_td_data.period}}
+					</select>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div [hidden]="isError || deposit_item === undefined || deposit_item?.length === 0" class="form-actions col-md-12 padding-border">
+	<div class="row">
+		<div class="col-md-offset-3">
+			<button class="btn btn-outline kkppurple button-next" (click)="navigateToSwitchTermConfirm(ft_td_data.term)" *ngIf="deposit_item !== undefined && deposit_item?.length !== 0" [disabled]="isError">{{'button.next'|translate}}
+				<i class="fa fa-angle-right"></i>
+			</button>
+		</div>
+	</div>
+</div>

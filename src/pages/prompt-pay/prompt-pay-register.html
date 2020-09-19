@@ -1,0 +1,83 @@
+<div class="clearfix"></div>
+<h3 class="page-title">{{ 'lbl.KKPromptPay' | translate }}</h3>
+<div class='webstyle'>
+	<div class="row">
+		<div lass="col-md-12">
+			<alert-message #alertMessage [type]="type" [message]="message" [option]="option"></alert-message>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col">
+			<step-wizard [data]="stepWizard.input.data" [style]="stepWizard.input.style" [step]="stepWizard.input.step"></step-wizard>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="portlet light ">
+				<div class="portlet-title margin-top">
+					<div class="caption">
+						<i class=" icon-layers font-kkppurple"></i>
+						<span class="caption-subject font-kkppurple sbold uppercase">{{'label.registerPromptPayFrstStep'|translate}}</span>
+					</div>
+				</div>
+				<div class="portlet-body form">
+					<form class="form-group" [formGroup]="registerPromptPayFormGroup" (ngSubmit)="onSubmit()">
+
+						<div class="form-group margin-left" formControlValidator [control]="registerPromptPayFormGroup.controls.anyIDType" [submitted]="submitted">
+							<label>
+									{{'lbl.connectBy'|translate}}
+									<span class="required" aria-required="true"> * </span>
+								</label>
+							<div>
+								<select class="form-control input-xlarge" formControlName="anyIDType" (change)="onChange()"> 
+									<option value="" [selected]="registerPromptPayFormGroup.value.anyIDType === value">{{'lbl.drpSelect'|translate}}</option>
+									<option  value="{{resultAnyID.anyIDType}}" *ngFor="let resultAnyID of resultAnyIDInfo; let i = index">
+										<span *ngIf="currentLang == constants.CULTURE_SHORTNAME_ENGLISH" >{{resultAnyID.descriptionEN}}</span>
+										<span *ngIf="currentLang == constants.CULTURE_SHORTNAME_THAI" >{{resultAnyID.descriptionTH}}</span>
+									</option>
+									</select>
+								<div *ngIf="anyIDTypeNameSelected != ''">{{anyIDTypeNameSelected}}</div>
+								<div class="help-block with-errors"></div>
+							</div>
+
+						</div>
+
+						<div class="form-group margin-left" formControlValidator [control]="registerPromptPayFormGroup.controls.account" [submitted]="submitted">
+							<label>{{'lbl.account'|translate}}
+									<span class="required" aria-required="true"> * </span>
+								</label>
+							<div>
+								<select class="form-control input-xlarge" formControlName="account">
+										<option value=""  [selected]="registerPromptPayFormGroup.value.account === value">{{'lbl.drpSelect'|translate}}</option>
+										<option value="{{resultMyAccount[i].myAccountID}}" [selected]="registerPromptPayFormGroup.value.account == resultMyAccount[i].myAccountID" *ngFor="let account of myAccountList; let i = index">{{account}}</option>
+									</select>
+								<div class="help-block with-errors"></div>
+							</div>
+						</div>
+						<div class="form-group form-group-control">
+							<div class="row">
+								<div class="col-md-6  offset-md-3 margin-left">
+									<input formControlName="isAgree" name="IsAgree" type="checkbox" value="true">
+									<a (click)="openTermsAndConditionsModal()">{{'lbl.agree'|translate}}</a>
+								</div>
+							</div>
+						</div>
+						<div class="form-actions">
+							<div class="row">
+								<div class="col-md-Zoffset-3 col-md-9 text-align">
+									<button type="button" class="btn btn-default" (click)="navigateback()" [ngClass]="{'btn-outline ': pageStyle == 'rib-web'}">
+											<i class="fa fa-angle-left"></i> {{'button.back'|translate}} 
+										</button>
+									<button type="submit" class="btn btn-outline kkppurple button-next" [disabled]="!registerPromptPayFormGroup.value.isAgree || !registerPromptPayFormGroup.valid">
+										{{'button.next'|translate}}&nbsp;<i class="fa fa-angle-right"></i>
+									</button>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<terms-and-conditions-modal #anyIDTermsAndCondition [termAction]="'anyid_term_and_con'" [modalType]="'anyID'"></terms-and-conditions-modal>

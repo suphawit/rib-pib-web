@@ -1,0 +1,295 @@
+@font-face {
+    font-family: 'Kiatnakin';
+    /*src: url($base_url+'/assets/fonts/kiatnakin/kiatnakin.otf');*/
+    src: url($base_url+'/assets/fonts/kiatnakin/Quark-Light.eot?') format('eot'), 
+    url($base_url+'/assets/fonts/kiatnakin/Quark-Light.woff') format('woff'), 
+    url($base_url+'/assets/fonts/kiatnakin/Quark-Light.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.icon-btn {
+    background-color:$color-kkp-purple!important;
+    border-color:$color-kkp-purple!important;
+    max-width:75px;
+    overflow:hidden;
+    min-height:65px;
+    &:hover {
+        background-color:$color-kkp-purple-over!important;
+        border-color:$color-kkp-purple-over!important;
+        text-shadow:0 0 0 #fff!important
+    }
+}
+
+.btn.kk-blue:not(.btn-outline) {
+    color:#FFF;
+    background-color:$color-kk-blue;
+    border-color:$color-kk-blue
+}
+
+.btn.btn-outline.kkblue {
+    border-color:$color-kk-blue;
+    color:$color-kk-blue;
+    background:none
+}
+
+.btn.btn-outline.kkblue:hover,.btn.btn-outline.kkblue:active,.btn.btn-outline.kkblue:active:hover,.btn.btn-outline.kkblue:active:focus,.btn.btn-outline.kkblue:focus,.btn.btn-outline.kkblue.active {
+    border-color:$color-kk-blue;
+    color:#FFF;
+    background-color:$color-kk-blue
+}
+
+.btn.kkppurple,
+.btn.btn-outline.kkppurple {
+    border-color:$color-kkp-purple;
+    color:$color-kkp-purple;
+    background:none;
+}
+
+.btn.btn-outline.kkppurple:hover,.btn.btn-outline.kkppurple:active,.btn.btn-outline.kkppurple:active:hover,.btn.btn-outline.kkppurple:active:focus,.btn.btn-outline.kkppurple:focus,.btn.btn-outline.kkppurple.active {
+    border-color:$color-kkp-purple;
+    color:#FFF;
+    background-color:$color-kkp-purple;
+}
+
+.btn.btn-outline.kkppurple:hover,.btn.btn-outline.kkppurple:active,.btn.btn-outline.kkppurple:active:hover,.btn.btn-outline.kkppurple:active:focus,.btn.btn-outline.kkppurple:focus,.btn.btn-outline.kkppurple.active {
+    border-color:$color-kkp-purple;
+    color:#FFF;
+    background-color:$color-kkp-purple;
+}
+
+.mt-element-step {
+    .step-line {
+        .active {
+            .mt-step-number,
+            .mt-step-title,
+            .mt-step-content,
+            .mt-step-title:before {
+                color:$color-kkp-purple!important;
+            }
+            .mt-step-number {
+                border-color:$color-kkp-purple!important
+            }
+            .mt-step-title:before,
+            .mt-step-title:after {
+                background-color:$color-kkp-purple!important;
+            }
+        }
+    }
+}
+
+.font-green {
+    color:$color-kk-blue!important
+}
+
+.font-purple {
+    color:$color-kkp-purple!important
+}
+
+h1,h2,h3,.portlet > .portlet-title > .caption,.title,.mt-step-title {
+    font-family:Kiatnakin,Tahoma,'Arial',Thonburi,Helvetica!important;
+    /*font-family:Tahoma,'Arial',Thonburi,Helvetica!important;*/
+}
+
+/*.title{
+    font-size: 1.8rem;
+}*/
+
+body {
+    font-family:Tahoma,'Arial',Thonburi,Helvetica!important;
+}
+
+.table.table-light > tbody > tr > td a {
+    text-decoration:none!important;
+    cursor:pointer
+}
+
+
+.table.table-light.table-hover > tbody > tr > td,
+.table.table-light.table-hover > tbody > tr > th {
+    cursor:pointer;
+    background-color: #e3e1ec !important;
+    color: #594F74;
+}
+
+.table.table-light.table-hover > tbody > tr > td:hover,
+.table.table-light.table-hover > tbody > tr > th:hover,
+.table.table-light.table-hover > tbody > tr:hover > td {
+    background-color: #c0b9cb !important;
+}
+
+.table.table-light.table-hover > tbody > tr > td:active,
+.table.table-light.table-hover > tbody > tr > th:active,
+.table.table-light.table-hover > tbody > tr:active > td {
+    background-color: #c0b9cb !important;
+}
+
+.table tbody tr.highlight td {
+    background-color:#e7f3fb!important
+}
+
+.primary-link {
+    color: #594F74 !important;
+    &:hover {
+        color: #3a2967 !important;
+    }
+}
+.portlet.light {
+    padding:12px 10px 15px!important
+}
+
+.timeline .timeline-badge {
+    text-align: center;
+}
+timeline .timeline .timeline-text {
+    padding-left: 0px;
+}
+
+.font-green-haze,.btn.btn-outline.green {
+    color:$color-kk-blue!important;
+    border-color:$color-kk-blue!important
+}
+.timeline .timeline-text
+,.timeline-body-alerttitle
+ {
+    color:$color-kkp-purple!important;
+    border-color:$color-kkp-purple!important
+}
+
+.btn.btn-outline.green:hover {
+    color:#fff!important;
+    background-color:$color-kk-blue!important;
+    border-color:$color-kk-blue!important
+}
+
+.btn.btn-outline.green-haze:hover,.btn.btn-outline.green-haze:active,.btn.btn-outline.green-haze:active:hover,.btn.btn-outline.green-haze:active:focus,.btn.btn-outline.green-haze:focus,.btn.btn-outline.green-haze.active {
+    border-color:$color-kk-blue!important;
+    background-color:$color-kk-blue!important;
+    color:#fff!important
+}
+
+.btn.btn-outline.green-haze {
+    border-color:$color-kk-blue!important;
+    color:$color-kk-blue!important
+}
+
+.font-kkblue {
+    color:$color-kk-blue!important
+}
+
+.font-kkppurple {
+    color:$color-kkp-purple!important
+}
+
+.row {
+    margin-left:0
+}
+
+.note.note-success {
+    background-color:#e0efd8!important;
+    border-color:#b4d9a5!important
+}
+
+.datepicker__calendar__nav__arrow {
+    height:auto!important
+}
+
+.input-group-btn:last-child > .btn,.input-group-btn:last-child > .btn-group {
+    z-index:2;
+    margin-left:0!important
+}
+
+.page-header.navbar .top-menu .navbar-nav > li.dropdown .dropdown-toggle:hover {
+    background-color:transparent
+}
+
+.page-header.navbar .top-menu .navbar-nav > li.dropdown-user .dropdown-toggle {
+    padding-top:10px;
+    padding-bottom:15px;
+    text-align:right;
+    background-color:transparent!important
+}
+
+.datepicker__input {
+    width:250px!important
+}
+
+.input-group-btn button {
+    border-bottom-left-radius:0!important;
+    border-top-left-radius:0!important;
+    border-top-right-radius:4px!important;
+    border-bottom-right-radius:4px!important
+}
+
+.table-scrollable {
+    overflow:none!important;
+    overflow-x:auto!important;
+    display:block!important
+}
+
+.float-left {
+    float:left!important
+}
+
+.float-right {
+    float:right!important
+}
+
+.clear {
+    clear:both!important
+}
+
+.text-wrap {
+    display:inline-block;
+    max-width:250px;
+    white-space:nowrap;
+    overflow:hidden!important;
+    text-overflow:ellipsis
+}
+.dropdown-header {
+    font-weight: bold;
+    background-color: #eeeeee;
+}
+.dropdown-menu > li > a{
+    padding: 8px 16px 8px 30px !important;
+    border-bottom-style: solid;
+    border-bottom-color: #eeeeee;
+    border-bottom-width: 1px;
+}
+
+
+typeahead-container.dropdown > .dropdown-menu {
+    width: auto;
+    min-width: 420px;
+    max-height: 24vh;
+    overflow-y: auto;
+    margin-top: 3px;
+}
+
+typeahead-container > .dropdown-menu > .dropdown-header {
+    padding: 3px 10px;
+}
+
+typeahead-container > .dropdown-menu > li > a {
+    padding: 5px 10px 5px 10px !important;
+}
+
+textarea {
+    resize:none!important
+}
+
+.mt-element-step .step-no-background-thin .active .mt-step-number,
+.mt-element-step .step-no-background-thin .active .mt-step-title,
+.mt-element-step .step-no-background-thin .active .mt-step-content {
+    color:$color-kkp-purple!important
+}
+
+.panel-default > .panel-heading {
+    background-color: $color-kkp-purple;
+    border-color: $color-kkp-purple;
+}
+
+.label-success {
+    background-color: $color-kkp-purple; }
+    .label-success[href]:hover, .label-success[href]:focus {
+      background-color: $color-kkp-purple-over; }

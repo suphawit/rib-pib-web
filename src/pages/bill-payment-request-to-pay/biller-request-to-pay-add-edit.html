@@ -1,0 +1,124 @@
+<div class="clearfix"></div>
+<h3 class="page-title">{{ titlePageBiller | translate}}</h3>
+<div class="portlet" [style.padding.px]="5">
+	<div class="row">
+		<div class="col-md-12">
+			<alert-message #alertMessage [type]="alertConfig.type" [message]="alertConfig.message"></alert-message>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+            <step-wizard [data]="stepWizard.input.data" [style]="stepWizard.input.style" [step]="stepWizard.input.step"></step-wizard>
+		</div>
+	</div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="portlet light " id="form_wizard_1">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class=" icon-layers font-kkppurple"></i>
+                        <span class="caption-subject font-kkppurple sbold uppercase">{{ stepPageBiller | translate}}</span>
+
+                    </div>
+                </div>
+                <div class="portlet-body form">
+                    <div class="col-md-12">
+                        <form class="form-horizontal" #form="ngForm" novalidate>
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <label>
+                                            {{ 'label.accAliasName' | translate}}
+                                        </label>
+                                        <span class="required" aria-required="true"> * </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12" [ngClass]="{ 'has-error': aliasName.errors && (aliasName.dirty || aliasName.touched || submitted) }">
+                                        <input type="text" class="form-control input-xlarge"  id="aliasName" name="aliasName" placeholder="" [(ngModel)]="model.aliasName" #aliasName="ngModel" maxlength="20" required autocomplete="off"/>
+                                        <span *ngIf="aliasName.errors && (aliasName.dirty || aliasName.touched || submitted)" class="help-block">
+                                            <label *ngIf="aliasName.errors.required">
+                                                {{ 'label.Required' | translate }}
+                                            </label>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div *ngIf="!isAdd">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-sm-12 ">
+                                            <label>
+                                                {{ 'label.rightPanelbillerList' | translate}}
+                                            </label>
+                                            <span class="required" aria-required="true"> * </span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="input-group input-xlarge">
+                                                <input class="form-control" [(ngModel)]="model.asyncSelected"
+                                                    name="asyncSelected" [disabled]="true"
+                                                    #asyncSelected="ngModel" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" *ngIf="showBillerCategory">
+                                    <div class="row">
+                                        <div class="col-sm-12 ">
+                                            <label>
+                                                {{ 'label.billerCategory' | translate}}
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12 ">
+                                            <div class="input-group input-xlarge">
+                                                <input *ngIf="translate.currentLang == 'th'" class="form-control" value="{{selectedBillerProfile.categoryTh}}" disabled />
+                                                <input *ngIf="translate.currentLang == 'en'" class="form-control" value="{{selectedBillerProfile.categoryEn}}" disabled />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" *ngFor="let billerRefNo of selectedBillerProfile.refNoList; let i = index">
+                                    <div class="row" *ngIf="!isEDonationCategory(selectedBillerProfile.categoryId) || i !== 1">
+                                        <div class="col-sm-12 ">
+                                            <label *ngIf="translate.currentLang == 'th'">
+                                                {{ billerRefNo.refTextTh }}
+                                            </label>
+                                            <label *ngIf="translate.currentLang == 'en'">
+                                                {{ billerRefNo.refTextEn }}
+                                            </label>
+                                            <span class="required" aria-required="true"> * </span>
+                                        </div>
+                                    </div>
+                                    <div class="row" *ngIf="!isEDonationCategory(selectedBillerProfile.categoryId) || i !== 1">
+                                        <div class="col-sm-12 ">
+                                            <input type="text" class="form-control input-xlarge" autofocus name="refNo{{i}}" placeholder="" [(ngModel)]="billerRefNo.value" #refNo{{i}}="ngModel" [disabled]="true"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <div class="row">
+                                    <div class="col-md-offset-3 col-sm-offset-3 col-md-9 col-sm-9">
+                                        <button type="button" class="btn btn-outline btn-default"  (click)="onClickBack()"><i class="fa fa-angle-left"></i> {{ 'button.back' | translate}}</button>
+                                        <button type="submit" class="btn btn-outline kkppurple button-next" (click)="onClickSubmit(form.value, form.valid)"> {{'button.next' | translate}} <i class="fa fa-angle-right"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+	    </div>
+    </div>
+
+</div>

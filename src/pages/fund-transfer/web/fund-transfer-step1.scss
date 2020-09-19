@@ -1,0 +1,28 @@
+.row .wizard-step-title {
+    padding-left: 0!important;
+    padding-right: 0!important;
+}
+
+.wizard-step-title .col-md-12 {
+    padding-top: 0!important;
+    padding-bottom: 0!important;
+}
+
+.wizard-step-title .portlet.light {
+    padding:0!important; 
+    margin-bottom: 0!important
+}
+
+.wizard-step-title .portlet.light .portlet-title {
+    padding-top: 0!important;
+    padding-bottom: 0!important;
+    min-height: 0!important;
+}
+
+.wizard-step-title.rib-web .portlet.light .portlet-title {
+    padding-left: 15px!important;
+}
+
+.row {
+    margin-right: -13px!important
+}

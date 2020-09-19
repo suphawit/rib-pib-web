@@ -1,0 +1,40 @@
+<div class="page-sidebar navbar-collapse collapse" style="z-index: 2">
+    
+    <ul class="page-sidebar-menu  page-header-fixed " data-keep-expanded="false" data-keep-expanded="false" data-auto-scroll="false" data-slide-speed="200" >
+        <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
+        <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+        <!--<li class="sidebar-toggler-wrapper hide">
+            <div class="sidebar-toggler">
+                <span></span>
+            </div>
+        </li>-->
+        <li class="sidebar-search-wrapper" *ngIf="!isLogin || !isTermAndCon">
+            <div *ngIf="isDesktop" class="sidebar-search  sidebar-search-bordered {{language}}">
+                <div class="form-group">
+                    <label class="kk-font">{{'input.username'|translate}}</label>
+                    <div class="input-icon">
+                        <i class="fa fa-user font-purple"></i>
+                        <input type="text" [(ngModel)]="username" name="credentialUser" class="form-control" placeholder="{{'input.username'|translate}}" (keypress)="enterLogin($event)" autocomplete="off" #focusUsername>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="kk-font">{{'input.password'|translate}}</label>
+                    <div class="input-icon">
+                        <i class="fa fa-key font-purple"></i>
+                        <input type="password" [(ngModel)]="password" name="pwd" class="form-control" placeholder="{{'input.password'|translate}}" (keypress)="enterLogin($event)">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <input type="button" (click)="loginBtn()" class="btn btn-outline kkppurple" value="{{'button.login'|translate}}">
+                </div>
+                <div *ngIf="isError" [style.color]="'#f53d3d'" [style.marginTop.px]="10">{{errorMessage | translate}}</div>
+            </div>
+            <!-- END RESPONSIVE QUICK SEARCH FORM -->
+        </li>
+    </ul>
+ <ul main-menu-tree [treeData]="menuList" [notificationList]="notificationList" class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" >
+ </ul>
+
+</div>
+<terms-and-conditions-modal #firstLoginAcceptTermModal [termAction]="'rib_term_and_con'" [modalType]="'firstlogin'" [Style]="'rib-web'" (onClickSubmit)="onClickSubmit($event)"></terms-and-conditions-modal>

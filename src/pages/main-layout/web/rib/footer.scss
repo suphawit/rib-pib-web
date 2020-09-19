@@ -1,0 +1,17 @@
+footer-rib{
+    .page-footer,.page-footer a {
+        color:$color-white
+    }
+
+    .right {
+        float:right
+    }
+
+    .padd-right {
+        padding-right:10px
+    }
+
+    .page-footer-fixed .page-footer {
+        background-color:$color-kk-blue!important
+    }
+}

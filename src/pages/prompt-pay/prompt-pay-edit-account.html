@@ -1,0 +1,72 @@
+<div class="clearfix"></div>
+<h3 class="page-title">{{'lbl.editKKpromptPay'|translate}}</h3>
+<div class='webstyle'>
+	<div class="row">
+		<div lass="col-md-12">
+			<alert-message #alertMessage [type]="alertMessageForm.type" [message]="alertMessageForm.message" [option]="alertMessageForm.option"></alert-message>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col">
+			<step-wizard [data]="stepWizard.input.data" [style]="stepWizard.input.style" [step]="stepWizard.input.step"></step-wizard>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="portlet light ">
+				<div class="portlet-title margin-top">
+					<div class="caption">
+						<i class=" icon-layers font-kkppurple"></i>
+						<span class="caption-subject font-kkppurple sbold uppercase">{{'lbl.editKKPromptPaystep1of3'|translate}}</span>
+					</div>
+				</div>
+				<div class="portlet-body form">
+					<form class="form-group" [formGroup]="EditPromptPayFormGroup" (ngSubmit)="onSubmit()">
+						<div class="form-group" >
+							<label>{{'lbl.connectBy'|translate}}<span class="required" disabled="true" aria-required="true"></span></label>
+							<div>
+								<input type="text" class="form-control input-xlarge" [disabled]="true"
+								placeholder="{{currentRegistedPromptPay.anyIDType.desc}} : {{currentRegistedPromptPay.anyIDValue}}"  />
+							</div>
+						</div>
+						<div class="form-group" >
+							<label>{{'lbl.currentKKPromptPayAccount'|translate}}<span class="required" disabled="true" aria-required="true"></span></label>
+							<div>
+								<input type="text" class="form-control input-xlarge" [disabled]="true"
+								placeholder="{{currentRegistedPromptPay.accountName}} | {{currentRegistedPromptPay.accountNo}}" />
+							</div>
+						</div>
+						<div class="form-group" formControlValidator [control]="EditPromptPayFormGroup.controls.account">
+							<label>{{'lbl.newKKPromptPayAccount'|translate}}<span class="required" aria-required="true"> * </span></label>
+							<div>
+								<select class="form-control input-xlarge" id="account" formControlName="account">
+									<option value="">{{'lbl.drpSelect'|translate}}</option>
+									<option value="{{account.myAccountNumber}}" *ngFor="let account of myAccountList; let i = index">{{account.myAccountAliasName}} | {{account.myAccountNumber}}</option>
+								</select>
+								<div class="help-block with-errors"></div>
+							</div>
+						</div>
+						<div class="form-group form-group-control">
+							<div class="row">
+								<div class="col-md-6  offset-md-3 margin-left">
+									<input formControlName="isAgree" type="checkbox" value="true">
+									<a (click)="openTermsAndConditionsModal()">{{'lbl.agree'|translate}}</a>
+								</div>
+							</div>
+						</div>
+						<div class="form-actions">
+							<div class="row">
+								<div class="col-md-Zoffset-3 col-md-9 text-align">
+									<button type="submit" class="btn btn-outline kkppurple button-next" [disabled]="!EditPromptPayFormGroup.value.isAgree || !EditPromptPayFormGroup.valid">
+										{{'button.next'|translate}}&nbsp;<i class="fa fa-angle-right"></i>
+									</button>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<terms-and-conditions-modal #anyIDTermsAndCondition [termAction]="'anyid_term_and_con'" [modalType]="'anyID'"></terms-and-conditions-modal>

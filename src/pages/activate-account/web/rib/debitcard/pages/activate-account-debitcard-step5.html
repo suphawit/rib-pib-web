@@ -1,0 +1,20 @@
+<div class="portlet" [style.padding.px]="5">
+    <form-header [stepwizOption]="formHeader.stepwizOption" [alertMsgOption]="formHeader.alertMsgOption" [title]="formHeader.title"></form-header>
+	<div class="row">
+        <div class="col-md-12">
+            <div class="portlet light ">
+                <div class="portlet-title">
+                    <form-step-caption class="caption" [data]="stepCaptionData.step" [title]="stepCaptionData.title"></form-step-caption>
+                </div>
+				<div class="portlet-body form">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <activate-account-form [suggest]="activateAccountForm.suggest" (onClicked)="activateAccountForm.onClicked($event)"></activate-account-form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+</div>
+<bs-modal-message #messageModal [body]="messageModalData.body" [title]="messageModalData.title" [size]="messageModalData.size" [config]="messageModalData.config" (onHidden)="onModalHidden($event)"></bs-modal-message>

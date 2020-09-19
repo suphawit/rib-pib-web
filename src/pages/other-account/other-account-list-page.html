@@ -1,0 +1,20 @@
+<div class="{{pageStyle}}">
+    <div class="clearfix"></div>
+    <h3 class="page-title">{{ 'label.otherAccounts' | translate }}</h3>
+    <div class="button-panel">
+        <div *ngIf="permissionManage.add == true" class="toggler">
+            <a class="btn btn-circle btn-default btn-pib-rib" (click)="gotoAddOtherAccountPage()"><i class="fa fa-plus"></i> <span translate="btn.addAccount">{{'btn.addAccount' | translate}}</span>
+                </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <alert-message #alertMessage [title]="alertConfig.title" [type]="alertConfig.type" [message]="alertConfig.message" [option]="alertConfig.option"></alert-message>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <other-account-accordian (onGetStatus)="onStatus($event)"></other-account-accordian>
+        </div>
+    </div>
+</div>

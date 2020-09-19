@@ -1,0 +1,92 @@
+<!-- BEGIN PORTLET-->
+<div class="portlet light" [ngClass]="{ 'bordered' : isShowBorder }" *ngIf="selectAccount.myAccountNumber">
+    <div class="portlet-title" *ngIf="!isHideMenu">
+        <div class="caption">
+            {{'lbl.accountSummary' | translate}}
+        </div>
+        <div class="actions" *ngIf="permissionManage.moreInfo">
+            <a class="btn btn-circle btn-default" (click)="onGetData('moreinfo')">
+                {{'label.moreinfo' | translate}}
+            </a>
+        </div>		
+        <div class="actions" *ngIf="selectAccount.allowPayment && permissionManage.payment == true && selectAccount.statusCode === '1'">
+            <a class="btn btn-circle btn-default" (click)="goto('PAY_BILL')">
+                {{'label.payment' | translate}}
+            </a>
+        </div>
+        <div class="actions" *ngIf="selectAccount.allowTransfer && permissionManage.transfer && selectAccount.statusCode === '1'">
+            <a class="btn btn-circle btn-default" (click)="goto('FUND_TRANSFER')">
+                {{'lbl.transfer' | translate}}
+            </a>
+        </div>
+    </div>
+    <div class="portlet-body">
+        <table class="table table-light">
+            <tr>
+                <td style="width: 40%;">
+                    <span class="bold font-kkppurple">{{'label.tdAliasName'|translate}}</span>
+                </td>														
+                <td align="">
+                    <span>{{selectAccount.myAccountAliasName}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="">
+                    <span class="bold font-kkppurple">{{'label.accNumber'|translate}}</span> 
+                </td>															
+                <td align="">
+                    <span>{{selectAccount.myAccountNumber}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="">
+                    <span class="bold font-kkppurple">{{'label.accType'|translate}}</span>
+                </td>															
+                <td align="">
+                    <span>{{selectAccount.myAccountType}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="">
+                    <span class="bold font-kkppurple">{{'label.accStatus'|translate}}</span>
+                </td>															
+                <td align="">
+                    <span>{{selectAccount.accountStatus | capitalize:true}}</span>
+                </td>
+            </tr>
+            <tr *ngIf="isNotTdAccount()">
+                <td class="">
+                    <span class="bold font-kkppurple">{{'label.productName'|translate}}</span> 
+                </td>															
+                <td align="">
+                    <span>{{selectAccount.productDes}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="">
+                    <span class="bold font-kkppurple">{{'tableHead.availableBalance'|translate}}</span> 
+                </td>															
+                <td align="">
+                    <span>{{selectAccount.myAvailableBalance | number:'.2-2'}}&nbsp;{{'lbl.baht' | translate}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="">
+                    <span class="bold font-kkppurple">{{'lbl.currentBalance'|translate}}</span> 
+                </td>															
+                <td align="">
+                    <span>{{selectAccount.myLedgerBalance | number:'.2-2'}}&nbsp;{{'lbl.baht' | translate}}</span>
+                </td>
+            </tr>
+            <tr *ngIf="selectAccount.accountType === constants.ACCOUNT_TYPE_SA || selectAccount.accountType === constants.ACCOUNT_TYPE_CA">
+                <td class="">
+                    <span class="bold font-kkppurple">{{'label.overdraftFunds'|translate}}</span>
+                </td>															
+                <td align="">
+                    <span>{{selectAccount.odAmount | number:'.2-2'}}&nbsp;{{'lbl.baht' | translate}}</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<!-- END PORTLET-->

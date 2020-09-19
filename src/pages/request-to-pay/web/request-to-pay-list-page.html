@@ -1,0 +1,39 @@
+<div class="clearfix"></div>
+<h3 class="page-title">{{'label.manage.requestToPay' | translate}}</h3>
+<div class="row">
+    <div class="col-md-12">
+        <div class="button-panel">
+			<div *ngIf="permissionService.getMenuName()==='MY_RTP' && permissionService.getActionCode().CREATE_RTP" class="toggler">
+				<a class="btn btn-circle btn-default btn-pib-rib" (click)="gotoAddRequestToPayPage()"><i class="fa fa-plus"></i> <span translate="btn.addAccount">{{'btn.addRTP' | translate}}</span></a>
+			</div>
+    	</div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <alert-message #alertMessage [type]="alertConfig.type" [message]="alertConfig.message" ></alert-message>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light portlet-fit bordered">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="fa fa-calendar font-purple"></i>
+                    <span class="caption-subject bold font-purple uppercase">{{ ((permissionService.getMenuName()==='RTP_RECEIVE') ? 'label.myrequestToPay' : 'label.requestToPay') | translate }}</span>
+				</div>
+			</div>
+			<div class="portlet-body">
+				<div class="tab-content">
+					<div class="tab-pane active in">
+                        <rtp-timeline [data]="timeline.data" [title]="timeline.title" (onActions)="onActions($event)"></rtp-timeline>
+					</div>					
+				</div>
+			</div>
+		</div>
+    </div>
+</div>
+<modal-rtp-block-list #messageModalRTPBlockList [body]="messageModalRTPBlockListData.body" [title]="messageModalRTPBlockListData.title" [size]="messageModalRTPBlockListData.size" 
+[accountAliasName]="messageModalRTPBlockListData.accountAliasName" [config]="messageModalRTPBlockListData.config" [accountNumber]="messageModalRTPBlockListData.accountNumber" (onEmit)="onEmitRTPBlockList($event)"></modal-rtp-block-list>
+<modal-delete-rtp-incoming-list #messageModalDeleteRTPIncoming [body]="messageModalDeleteRTPData.body" [title]="messageModalDeleteRTPData.title" [size]="messageModalDeleteRTPData.size" 
+[data]="messageModalDeleteRTPData.data" (onEmit)="onEmitDeleteRTPIncoming($event)"></modal-delete-rtp-incoming-list>

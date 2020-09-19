@@ -1,0 +1,32 @@
+<div class="portlet" [style.padding.px]="5">
+    <div class="clearfix"></div>
+    <h3 class="page-title">{{ 'label.forgotusername' | translate }}</h3>
+    <div class="row">
+        <div class="col-md-12">
+            <alert-message #alertMessage [type]="alertConfig.type" [message]="alertConfig.message"></alert-message>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <step-wizard [data]="stepWizard.input.data" [style]="stepWizard.input.style" [step]="stepWizard.input.step"></step-wizard>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="portlet light ">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class=" icon-layers font-kkppurple"></i>
+                        <span class="caption-subject font-kkppurple sbold uppercase">{{'lbl.forgotUsernameStep' | translate}} {{stepWizard.input.step+1}} {{'label.of'| translate}} 4</span>
+                    </div>
+                </div>
+                <div class="portlet-body form">
+                     <div class="col-md-12">
+                         <router-outlet></router-outlet>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <template ngbModalContainer></template>
+</div>

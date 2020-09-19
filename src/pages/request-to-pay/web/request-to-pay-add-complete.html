@@ -1,0 +1,107 @@
+<div class="clearfix"></div>
+<h3 class="page-title">{{ 'btn.addRTP' | translate }}</h3>
+<alert-message #alertMessage [type]="type" [message]="message"></alert-message>
+<div class="portlet portlet-fit">
+    <div class="row">
+	    <div class="col-md-12 col-sm-12">
+            <div class="portlet portlet-fit">
+                <step-wizard [data]="stepWizard.input.data" [style]="stepWizard.input.style" [step]="stepWizard.input.step"></step-wizard>
+            </div>
+                <div class="portlet light nopadding">
+                    <div class="portlet-body form">
+                        <form #form="ngForm" novalidate>
+                            <div class="row">
+                                <div class="col-md-offset-2 col-sm-offset-2 col-md-7 col-sm-7">
+                                    <div class="mt-element-step">
+                                        <div class="row step-no-background-thin">
+                                            <div class="col-md-12 mt-step-col" class="active">
+                                                <div class="mt-step-number bg-white font-grey"><i class="icon-check"></i></div>
+                                                <div class="mt-step-title uppercase font-grey-cascade"> {{'lbl.status' | translate}} </div>
+                                                <div class="mt-step-content font-grey-cascade">{{'label.Success'|translate}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-offset-2 col-sm-offset-2 col-md-7 col-sm-7">
+                                    <div class="portlet-body">
+                                        <div class="table-scrollable table-scrollable-borderless">
+                                            <table class="table table-light">
+                                                <tbody>
+                                                    <tr>
+                                                        <td> {{ 'lbl.RequestTo' | translate }} </td>
+                                                        <td>
+                                                            <table>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="fit">
+                                                                           <div class="icon-circle" style.background-color="{{ createRTPObj.toAccount.anyIDType?.iconObj?.iconColor }}">
+                                                                                <img src="{{ createRTPObj.toAccount.anyIDType?.iconObj?.icon }}" title="{{ createRTPObj.toAccount.anyIDType?.desc }}" alt="{{ createRTPObj.toAccount.anyIDType?.desc }}" 
+                                                                                    onerror="this.style.display='none';" class="user-pic rounded" />
+                                                                            </div>
+                                                                        </td>
+                                                                        <td [innerHTML]="createRTPObj.toAccount.accDisplay" style="padding-left:5px!important">
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> {{ 'lbl.myPromptPay' | translate }} </td>
+                                                        <td>
+                                                            <table>
+                                                                 <tbody>
+                                                                    <tr>
+                                                                        <td class="fit">
+                                                                            <div class="icon-circle" style.background-color="{{ createRTPObj.fromAccount.anyIDType?.iconObj?.iconColor }}">
+                                                                                <img src="{{ createRTPObj.fromAccount.anyIDType?.iconObj?.icon }}" title="{{ createRTPObj.fromAccount.anyIDType?.desc }}" alt="{{ createRTPObj.fromAccount.anyIDType?.desc }}" 
+                                                                                    onerror="this.style.display='none';" class="user-pic rounded" />
+                                                                            </div>
+                                                                        </td>
+                                                                        <td style="padding-left:5px!important" 
+                                                                            [innerHTML]="createRTPObj.fromAccount.accDisplay" >
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> {{ 'lbl.amount' | translate }} </td>
+                                                        <td> {{ createRTPObj.amount }} &nbsp; {{ 'lbl.baht' | translate }} </td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> {{ 'lbl.RTPRefCode' | translate }} </td>
+                                                        <td> {{ createRTPObj.rtpRefNo }} </td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> {{ 'lbl.transactionDate' | translate }} </td>
+                                                        <td> {{ createRTPObj.transactionDate | dateFormat }} </td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> {{ 'lbl.note' | translate }} </td>
+                                                        <td> {{ createRTPObj.memo }} </td>
+                                                        <td></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>					
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-offset-3 col-sm-offset-3 col-md-12 col-sm-12 margin-top-10">
+                                    <a href="javascript:;" class="btn btn-outline btn-default" (click)="navigateTo(menuCode.dashboard)"><i class="fa fa-cross"></i> {{ 'btn.close' | translate }} </a>
+                                    <a *ngIf="authorized.newCreateRTP" href="javascript:;" class="btn btn-outline kkppurple button-next btn-large" (click)="navigateTo(menuCode.createRTP)"> {{ 'lbl.makeRTPRequest' | translate }} <i class="fa fa-plus"></i></a>
+                                    <!--<a class="btn btn-outline kkblue button-next btn-large" (click)="addToAccount(createRTPObj)">{{ 'lbl.addToAccount' | translate }} <i class="fa fa-plus"></i></a>-->
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+	    </div>
+    </div>
+</div>

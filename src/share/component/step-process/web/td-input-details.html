@@ -1,0 +1,72 @@
+<div class="portlet light nopadding">
+    <div class="portlet-body form">
+        <form class="input-details-form {{ settings.styleClass }}" #form="ngForm" novalidate>
+            <input type="hidden" name="notifyLanguage" [(ngModel)]="model.notifyLanguage" #notifyLanguage="ngModel" />
+            <div class="form-group col-md-12" [ngClass]="{ 'has-error': fromAccount.accNo === undefined && submitted }">
+			    <label>{{ 'lbl.transferFrom' | translate }} <span class="required"> * </span> </label>
+                <div>
+                    <input type="text" class="form-control" name="fromAccount" placeholder="{{ fromAccount.accNo !== undefined ? fromAccount.getShortDescDisplay() : '' }}" disabled="">
+                    <span *ngIf="fromAccount.accNo === undefined && submitted" class="help-block">{{ 'label.Required' | strformat:['lbl.transferFrom'] }}</span>
+                </div>
+            </div>
+	        <div class="form-group col-md-12" [ngClass]="{ 'has-error': toAccount.accNo === undefined && submitted }">
+			    <label>{{ 'lbl.transferTo' | translate }} <span class="required"> * </span> </label>
+			    <div>
+				    <input type="text" class="form-control" name="toAccount" placeholder="{{ toAccount.accNo !== undefined ? toAccount.getShortDescDisplay() : '' }}" disabled="">
+				    <span *ngIf="toAccount.accNo === undefined && submitted" class="help-block">{{ 'label.Required' | strformat:['lbl.transferTo'] }}</span> 
+				</div>
+		    </div>
+		    <div class="form-group col-md-12" [ngClass]="{ 'has-error': amount.errors && (amount.dirty || amount.touched || submitted) }">
+			    <label>{{ 'lbl.amount' | translate }} <span class="required"> * </span> </label>
+			    <div>
+			        <div class="input-group">
+					    <input type="text" id="amount" name="amount" class="form-control text-right" [(ngModel)]="model.amount" #amount="ngModel" [min]="0.01" (blur)="getTermTypes()" autocomplete="off" currencyFormatter required />
+					    <span class="input-group-addon">
+					        {{ 'lbl.baht' | translate }}
+						</span>
+				    </div>
+                    <span *ngIf="amount.errors && (amount.dirty || amount.touched || submitted)" class="help-block">
+                        <label *ngIf="amount.errors.required || amount.errors.min">
+                            {{ 'label.Required' | strformat:['lbl.amount'] }}
+                        </label>
+                    </span>
+		        </div>
+			</div>
+            <div *ngIf="termMonths()?.length != 0" class="form-group col-md-12">
+                <label>{{ 'lbl.term' | translate }}</label>
+                <div>
+                    <select class="form-control" name="term" [(ngModel)]="model.term" #term="ngModel" (ngModelChange)="getPeriods($event)">
+                        <option *ngFor="let termMonth of termMonths();trackBy: trackById" [value]="termMonth" [selected]="model.termMonth == termMonth">{{termTypes[termMonth][0].productTypeDescription}} - {{ termTypes[termMonth][0].getTermNameDisplay() }}</option>
+                    </select>
+                </div>
+            </div>    
+            <div *ngIf="periods?.length != 0" class="form-group col-md-12">
+                <label>{{ 'lbl.interestCondition' | translate }}</label>
+                <div>
+                    <select class="form-control" name="freqIntPay" [(ngModel)]="model.freqIntPay" #freqIntPay="ngModel">
+                        <option *ngFor="let termType of periods;trackBy: trackById" [value]="termType.freqIntPay" [selected]="model.freqIntPay == termType.freqIntPay">{{ termType.getFreqIntPayDescDisplay() }}</option>
+                    </select>
+                </div>
+            </div>   
+            <div class="form-group col-md-12">
+                <label>{{ 'lbl.recvDate' | translate }} </label>  
+                <div>
+                    {{ model.transferDate }}
+                </div>
+            </div>
+            <div class="form-group col-md-12" *ngIf="accountList?.length > 0">
+                <label>{{ 'label.benefitAccount' | translate }}</label>
+                <div>
+                    <select class="form-control" name="benefitAcc" [(ngModel)]="model.benefitAcc" #benefitAcc="ngModel">
+                        <option *ngFor="let account of accountList; trackBy: trackById" [value]="account" [selected]="model.benefitAcc == account">{{ account }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-offset-3 col-md-12">
+                <button class="btn btn-outline kkppurple button-next" (click)="goToNextStep(form.value, form.valid)"> {{ 'btn.next' | translate }}
+                    <i class="fa fa-angle-right"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

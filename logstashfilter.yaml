@@ -1,0 +1,32 @@
+input {
+  beats {
+    port => 5044
+  }
+}
+
+# The filter part of this file is commented out to indicate that it
+# is optional.
+# filter {
+#
+# }
+
+filter {
+  if [kubernetes] {
+            
+        if [kubernetes][namespace] == "rib-edge" {
+                json {
+                        source => "[message]"
+                        target => "docs"
+                        skip_on_invalid_json => true
+                }
+            }
+        }
+
+}
+
+output {
+  elasticsearch {
+    hosts => "localhost:9200"
+
+  }
+}
